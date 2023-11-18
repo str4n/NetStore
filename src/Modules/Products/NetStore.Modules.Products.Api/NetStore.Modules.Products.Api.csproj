@@ -3,14 +3,11 @@
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\NetStore.Shared.Abstractions\NetStore.Shared.Abstractions.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+      <ProjectReference Include="..\NetStore.Modules.Products.Core\NetStore.Modules.Products.Core.csproj" />
     </ItemGroup>
 
 </Project>
