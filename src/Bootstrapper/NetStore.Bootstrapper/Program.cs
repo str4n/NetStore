@@ -2,9 +2,9 @@ using NetStore.Bootstrapper;
 using NetStore.Modules.Products.Api;
 using NetStore.Shared.Infrastructure;
 
-ModuleLoader.RegisterModule<ProductsModule>();
-
 var builder = WebApplication.CreateBuilder(args);
+
+ModuleLoader.Load<ProductsModule>();
 
 builder.Services
     .AddModules(builder.Configuration)

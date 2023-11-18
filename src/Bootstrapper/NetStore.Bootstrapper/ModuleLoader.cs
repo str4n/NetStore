@@ -6,7 +6,7 @@ public static class ModuleLoader
 {
     private static Dictionary<string, Module> _registeredModules = new();
 
-    public static void RegisterModule<TModule>() where TModule : Module
+    public static void Load<TModule>() where TModule : Module
     {
         var module = Activator.CreateInstance<TModule>();
         
