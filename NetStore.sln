@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStore.Bootstrapper", "src\Bootstrapper\NetStore.Bootstrapper\NetStore.Bootstrapper.csproj", "{2308EFC4-E2F1-49F2-89A2-5CCD84BB8AC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2D2E84B8-813D-4C83-BBD4-09CF9C0071B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4B781E85-7A08-4B15-90B6-D7FF8DE75E9A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bootstrapper", "Bootstrapper", "{23E5D7FE-AB0C-4BAB-9837-3D3E4D34AB5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{763342C3-8548-41F2-9655-0E80D2EB0E79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{6E1F8EB7-4060-4D95-9FF6-9125C616278F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStore.Shared.Abstractions", "src\Shared\NetStore.Shared.Abstractions\NetStore.Shared.Abstractions.csproj", "{84935168-BD82-4B1E-8BD4-BEDA4DC99DDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStore.Shared.Infrastructure", "src\Shared\NetStore.Shared.Infrastructure\NetStore.Shared.Infrastructure.csproj", "{4D5C14FD-78AE-45F4-A3AF-44579A0289E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2308EFC4-E2F1-49F2-89A2-5CCD84BB8AC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2308EFC4-E2F1-49F2-89A2-5CCD84BB8AC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2308EFC4-E2F1-49F2-89A2-5CCD84BB8AC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2308EFC4-E2F1-49F2-89A2-5CCD84BB8AC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84935168-BD82-4B1E-8BD4-BEDA4DC99DDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84935168-BD82-4B1E-8BD4-BEDA4DC99DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84935168-BD82-4B1E-8BD4-BEDA4DC99DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84935168-BD82-4B1E-8BD4-BEDA4DC99DDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D5C14FD-78AE-45F4-A3AF-44579A0289E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D5C14FD-78AE-45F4-A3AF-44579A0289E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D5C14FD-78AE-45F4-A3AF-44579A0289E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D5C14FD-78AE-45F4-A3AF-44579A0289E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{23E5D7FE-AB0C-4BAB-9837-3D3E4D34AB5C} = {2D2E84B8-813D-4C83-BBD4-09CF9C0071B7}
+		{763342C3-8548-41F2-9655-0E80D2EB0E79} = {2D2E84B8-813D-4C83-BBD4-09CF9C0071B7}
+		{6E1F8EB7-4060-4D95-9FF6-9125C616278F} = {2D2E84B8-813D-4C83-BBD4-09CF9C0071B7}
+		{2308EFC4-E2F1-49F2-89A2-5CCD84BB8AC3} = {23E5D7FE-AB0C-4BAB-9837-3D3E4D34AB5C}
+		{84935168-BD82-4B1E-8BD4-BEDA4DC99DDB} = {6E1F8EB7-4060-4D95-9FF6-9125C616278F}
+		{4D5C14FD-78AE-45F4-A3AF-44579A0289E7} = {6E1F8EB7-4060-4D95-9FF6-9125C616278F}
+	EndGlobalSection
+EndGlobal
