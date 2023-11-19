@@ -9,7 +9,7 @@ public static class Extensions
 {
     public static IServiceCollection AddCore(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddPostgres<ProductsDbContext>(configuration);
+        services.AddEF(configuration);
         
         return services;
     }
