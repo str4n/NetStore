@@ -11,7 +11,7 @@ internal sealed class Product
     private readonly HashSet<Category> _categories;
     public IEnumerable<Category> Categories => _categories;
     public Discount Discount { get; private set; }
-    private Price TruePrice { get; set; }
+    public Price TruePrice { get; private set; }
     public Price Price => GetPriceAfterDiscount();
 
     public Product(Guid? id, Name name, Description description, IEnumerable<Category> categories, Price truePrice, Discount discount = default)
@@ -22,6 +22,10 @@ internal sealed class Product
         _categories = categories?.Any() == true ? categories.ToHashSet() : new HashSet<Category>();
         TruePrice = truePrice;
         Discount = discount;
+    }
+
+    private Product()
+    {
     }
 
     private Price GetPriceAfterDiscount()

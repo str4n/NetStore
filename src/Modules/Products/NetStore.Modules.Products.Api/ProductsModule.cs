@@ -13,7 +13,7 @@ public sealed class ProductsModule : Module
     public override string Path => BasePath;
     public override void AddModule(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddCore();
+        services.AddCore(configuration);
     }
 
     public override void UseModule(WebApplication app)

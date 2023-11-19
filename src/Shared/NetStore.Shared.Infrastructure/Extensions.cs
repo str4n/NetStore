@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetStore.Shared.Infrastructure.Api;
 using NetStore.Shared.Infrastructure.Exceptions;
+using NetStore.Shared.Infrastructure.Postgres;
 
 [assembly: InternalsVisibleTo("NetStore.Bootstrapper")]
 namespace NetStore.Shared.Infrastructure;
@@ -13,6 +14,8 @@ internal static class Extensions
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddExceptionHandling();
+
+        services.ConfigurePostgres(configuration);
         
         services.AddControllers().ConfigureApplicationPartManager(manager =>
         {
@@ -29,5 +32,13 @@ internal static class Extensions
         app.UseRouting();
 
         return app;
+    }
+
+    public static T GetOptions<T>(this IConfiguration configuration, string sectionName) where T : class, new()
+    {
+        var options = new T();
+        configuration.GetSection(sectionName).Bind(options);
+
+        return options;
     }
 }
