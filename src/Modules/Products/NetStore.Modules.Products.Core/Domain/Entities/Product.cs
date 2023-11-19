@@ -6,7 +6,7 @@ namespace NetStore.Modules.Products.Core.Domain.Entities;
 internal sealed class Product
 {
     public Guid Id { get; private set; }
-    public Name Name { get; set; }
+    public Name Name { get; private set; }
     public Description Description { get; private set; }
     private readonly HashSet<Category> _categories;
     public IEnumerable<Category> Categories => _categories;
