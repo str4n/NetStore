@@ -2,11 +2,14 @@ using NetStore.Bootstrapper;
 using NetStore.Modules.Products.Api;
 using NetStore.Modules.Users.Api;
 using NetStore.Shared.Infrastructure;
+using NetStore.Shared.Infrastructure.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
 ModuleLoader.Load<ProductsModule>();
 ModuleLoader.Load<UsersModule>();
+
+builder.Host.UseLogging();
 
 builder.Services
     .AddInfrastructure(builder.Configuration)

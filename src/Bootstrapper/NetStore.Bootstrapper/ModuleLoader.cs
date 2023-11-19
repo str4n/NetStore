@@ -5,7 +5,7 @@ namespace NetStore.Bootstrapper;
 public static class ModuleLoader
 {
     private static readonly Dictionary<string, Module> RegisteredModules = new();
-    private static readonly ILogger _logger;
+    private static readonly ILogger Logger;
 
     static ModuleLoader()
     {
@@ -15,7 +15,7 @@ public static class ModuleLoader
             builder.AddDebug();
         });
 
-        _logger = loggerFactory.CreateLogger(typeof(ModuleLoader));
+        Logger = loggerFactory.CreateLogger(typeof(ModuleLoader));
     }
 
     public static void Load<TModule>() where TModule : Module
@@ -30,7 +30,7 @@ public static class ModuleLoader
         foreach (var module in RegisteredModules.Values)
         {
             module.AddModule(services, configuration);
-            _logger.LogInformation("Added {name} module!", module.Name);
+            Logger.LogInformation("Added {name} module!", module.Name);
         }
 
         return services;
