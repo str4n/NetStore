@@ -9,6 +9,8 @@ namespace NetStore.Modules.Products.Api;
 // ReSharper disable once ClassNeverInstantiated.Global
 public sealed class ProductsModule : Module
 {
+    public const string BasePath = "products-module";
+    public override string Path => BasePath;
     public override void AddModule(IServiceCollection services, IConfiguration configuration)
     {
         services.AddCore();
@@ -16,6 +18,5 @@ public sealed class ProductsModule : Module
 
     public override void UseModule(WebApplication app)
     {
-        
     }
 }
