@@ -7,13 +7,15 @@ var builder = WebApplication.CreateBuilder(args);
 ModuleLoader.Load<ProductsModule>();
 
 builder.Services
-    .AddModules(builder.Configuration)
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructure(builder.Configuration)
+    .AddModules(builder.Configuration);
 
 var app = builder.Build();
 
 app.UseModules();
 
 app.UseInfrastructure();
+
+app.MapControllers();
 
 app.Run();

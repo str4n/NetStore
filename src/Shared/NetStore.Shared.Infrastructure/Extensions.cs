@@ -25,10 +25,8 @@ internal static class Extensions
     public static WebApplication UseInfrastructure(this WebApplication app)
     {
         app.UseExceptionHandling();
-        
         app.UseHttpsRedirection();
         app.UseRouting();
-        app.MapControllers();
 
         return app;
     }
