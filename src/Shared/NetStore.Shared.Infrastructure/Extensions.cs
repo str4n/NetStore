@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NetStore.Shared.Infrastructure.Api;
 using NetStore.Shared.Infrastructure.Exceptions;
 using NetStore.Shared.Infrastructure.Postgres;
+using NetStore.Shared.Infrastructure.Services;
 
 [assembly: InternalsVisibleTo("NetStore.Bootstrapper")]
 namespace NetStore.Shared.Infrastructure;
@@ -16,6 +17,8 @@ internal static class Extensions
         services.AddExceptionHandling();
 
         services.ConfigurePostgres(configuration);
+
+        services.AddHostedService<DatabaseInitializer>();
         
         services.AddControllers().ConfigureApplicationPartManager(manager =>
         {
