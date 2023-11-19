@@ -33,13 +33,18 @@ internal sealed class ExceptionHandlerMiddleware : IMiddleware
         var (statusCode, error) = exception switch
         {
             NotFoundException => (HttpStatusCode.NotFound, 
-                new Error(exception.GetType().Name.Replace("Exception", string.Empty).Underscore(), exception.Message)),
+                CreateError(exception)),
             ApiException => (HttpStatusCode.BadRequest, 
-                new Error(exception.GetType().Name.Replace("Exception", string.Empty).Underscore(), exception.Message)),
-            _ => (HttpStatusCode.InternalServerError, new Error("error", "There was and server error."))
+                CreateError(exception)),
+            _ => (HttpStatusCode.InternalServerError, CreateError("error", "There was and server error."))
         };
 
         context.Response.StatusCode = (int)statusCode;
         await context.Response.WriteAsJsonAsync(error);
     }
+    
+    private static Error CreateError(Exception exception)
+        => new Error(exception.GetType().Name.Replace("Exception", string.Empty).Underscore(), exception.Message);
+
+    private static Error CreateError(string code, string reason) => new Error(code, reason);
 }
