@@ -32,6 +32,14 @@ internal sealed class ProductsController : BaseController
         return CreatedAtAction(nameof(Get), new { id = dto.Id }, default);
     }
 
+    [HttpPatch("{id:guid}")]
+    public async Task<ActionResult> Patch([FromRoute] Guid id, [FromBody] DiscountDto discount)
+    {
+        await _productsService.EditDiscountAsync(id, discount.Discount);
+
+        return NoContent();
+    }
+
     [HttpDelete("{id:guid}")]
     public async Task<ActionResult> Delete([FromRoute] Guid id)
     {

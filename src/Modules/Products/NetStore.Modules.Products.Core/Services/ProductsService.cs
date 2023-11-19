@@ -35,6 +35,20 @@ internal sealed class ProductsService : IProductsService
 
         await _repository.DeleteAsync(product);
     }
+    
+    public async Task EditDiscountAsync(Guid id, int discount)
+    {
+        var product = await _repository.GetAsync(id, true);
+
+        if (product is null)
+        {
+            throw new ProductNotFoundException(id);
+        }
+        
+        product.EditDiscount(discount);
+
+        await _repository.UpdateAsync(product);
+    }
 
     public async Task<ProductDto> GetAsync(Guid id)
     {
