@@ -31,6 +31,7 @@ internal sealed class DatabaseInitializer : IHostedService
             if (dbContext is not null)
             {
                 await dbContext.Database.MigrateAsync(cancellationToken);
+                _logger.LogInformation("{dbContext} initialized.", dbContext.GetType());
             }
         }
     }
