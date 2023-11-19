@@ -8,7 +8,7 @@ internal sealed class Product
     public Guid Id { get; private set; }
     public Name Name { get; private set; }
     public Description Description { get; private set; }
-    private readonly HashSet<Category> _categories;
+    private readonly List<Category> _categories = new();
     public IEnumerable<Category> Categories => _categories;
     public Discount Discount { get; private set; }
     public Price TruePrice { get; private set; }
@@ -19,7 +19,7 @@ internal sealed class Product
         Id = id ?? Guid.NewGuid();
         Name = name;
         Description = description;
-        _categories = categories?.Any() == true ? categories.ToHashSet() : new HashSet<Category>();
+        _categories = categories.ToList();
         TruePrice = truePrice;
         Discount = discount;
     }

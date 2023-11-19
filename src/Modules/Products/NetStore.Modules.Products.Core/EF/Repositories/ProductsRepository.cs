@@ -35,8 +35,8 @@ internal sealed class ProductsRepository : IProductsRepository
 
     public Task<Product> GetAsync(Guid id, bool tracking)
         => tracking is false
-            ? _products.AsNoTracking().Include(x => x.Categories).SingleOrDefaultAsync(x => x.Id == id)
-            : _products.Include(x => x.Categories).SingleOrDefaultAsync(x => x.Id == id);
+            ? _products.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id)
+            : _products.SingleOrDefaultAsync(x => x.Id == id);
 
     public async Task<IEnumerable<Product>> GetAllAsync(bool tracking)
         => tracking is false 

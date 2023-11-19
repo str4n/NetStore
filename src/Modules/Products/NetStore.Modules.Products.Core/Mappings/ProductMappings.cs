@@ -8,10 +8,10 @@ internal static class ProductMappings
 {
     public static Product ToEntity(this ProductDto dto)
         // ReSharper disable once SuspiciousTypeConversion.Global
-        => Product.Create(dto.Id, dto.Name, dto.Description, dto.Categories as IEnumerable<Category>,
+        => Product.Create(dto.Id, dto.Name, dto.Description, dto.Categories.Select(x => (Category)x),
             dto.Price, dto.Discount);
 
     public static ProductDto AsDto(this Product entity)
         // ReSharper disable once SuspiciousTypeConversion.Global
-        => new ProductDto(entity.Id, entity.Name, entity.Description, entity.Categories as IEnumerable<string>, entity.Price,entity.Discount);
+        => new ProductDto(entity.Id, entity.Name, entity.Description, entity.Categories.Select(x => (string)x), entity.Price,entity.Discount);
 }

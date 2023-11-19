@@ -19,7 +19,9 @@ internal sealed class ProductsService : IProductsService
     {
         if (dto is null) throw new ProductNullException();
 
-        await _repository.AddAsync(dto.ToEntity());
+        var product = dto.ToEntity();
+
+        await _repository.AddAsync(product);
     }
 
     public async Task DeleteAsync(Guid id)
