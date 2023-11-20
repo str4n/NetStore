@@ -30,7 +30,7 @@ internal static class ProductEndpoints
     private static async Task<IResult> GetAll(IProductsService productsService)
         => Results.Ok(await productsService.GetAllAsync());
     
-    private static async Task<IResult> Post([FromBody] ProductDto dto, IProductsService productsService, IHttpContextAccessor context)
+    private static async Task<IResult> Post([FromBody] ProductDto dto, IProductsService productsService)
     {
         dto = dto with { Id = Guid.NewGuid() };
         await productsService.AddAsync(dto);
