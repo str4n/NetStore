@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using NetStore.Shared.Abstractions.Time;
-using NetStore.Shared.Infrastructure.Api;
 using NetStore.Shared.Infrastructure.Auth;
 using NetStore.Shared.Infrastructure.Exceptions;
 using NetStore.Shared.Infrastructure.Postgres;
@@ -22,6 +21,8 @@ internal static class Extensions
 
         services.ConfigurePostgres(configuration);
 
+        services.AddEndpointsApiExplorer();
+
         services.AddHttpContextAccessor();
 
         services.AddHostedService<DatabaseInitializer>();
@@ -29,11 +30,8 @@ internal static class Extensions
         services.AddSingleton<IClock, UtcClock>();
 
         services.AddAuth(configuration);
-        
-        services.AddControllers().ConfigureApplicationPartManager(manager =>
-        {
-            manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
-        });
+
+        services.AddControllers();
 
         services.AddSwaggerGen(swagger =>
         {

@@ -19,7 +19,6 @@ public sealed class ProductsModule : Module
 
     public override void UseModule(WebApplication app)
     {
-        app.MapHomeEndpoints();
         app.MapProductEndpoints();
     }
 }
