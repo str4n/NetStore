@@ -17,7 +17,8 @@ internal static class Extensions
         
         var options = configuration.GetOptions<AuthOptions>(SectionName);
 
-        services.AddSingleton<IAuthenticator, Authenticator>().AddAuthentication(opt =>
+        services.AddSingleton<IAuthenticator, Authenticator>()
+            .AddAuthentication(opt =>
         {
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
