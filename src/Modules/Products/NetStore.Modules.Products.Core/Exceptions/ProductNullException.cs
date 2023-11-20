@@ -4,7 +4,7 @@ namespace NetStore.Modules.Products.Core.Exceptions;
 
 internal sealed class ProductNullException : ApiException
 {
-    public ProductNullException() : base("Product model cannot be null.")
+    public ProductNullException() : base("Product model cannot be null.", ExceptionCategory.ValidationError)
     {
     }
 }

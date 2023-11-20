@@ -2,7 +2,16 @@
 
 public abstract class ApiException : Exception
 {
-    protected ApiException(string message) : base(message)
+    public ExceptionCategory ExceptionCategory { get; }
+    protected ApiException(string message, ExceptionCategory exceptionCategory) : base(message)
     {
+        ExceptionCategory = exceptionCategory;
     }
+}
+
+public enum ExceptionCategory
+{
+    ValidationError,
+    NotFound,
+    AlreadyExists
 }
