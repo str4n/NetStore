@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using NetStore.Shared.Abstractions.Time;
 using NetStore.Shared.Infrastructure.Api;
+using NetStore.Shared.Infrastructure.Auth;
 using NetStore.Shared.Infrastructure.Exceptions;
 using NetStore.Shared.Infrastructure.Postgres;
 using NetStore.Shared.Infrastructure.Services;
+using NetStore.Shared.Infrastructure.Time;
 
 [assembly: InternalsVisibleTo("NetStore.Bootstrapper")]
 namespace NetStore.Shared.Infrastructure;
@@ -20,6 +23,10 @@ internal static class Extensions
         services.ConfigurePostgres(configuration);
 
         services.AddHostedService<DatabaseInitializer>();
+
+        services.AddSingleton<IClock, UtcClock>();
+
+        services.AddAuth(configuration);
         
         services.AddControllers().ConfigureApplicationPartManager(manager =>
         {
