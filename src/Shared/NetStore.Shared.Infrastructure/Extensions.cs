@@ -22,6 +22,8 @@ internal static class Extensions
 
         services.ConfigurePostgres(configuration);
 
+        services.AddHttpContextAccessor();
+
         services.AddHostedService<DatabaseInitializer>();
 
         services.AddSingleton<IClock, UtcClock>();

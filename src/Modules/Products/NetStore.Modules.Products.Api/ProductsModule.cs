@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NetStore.Modules.Products.Api.Endpoints;
 using NetStore.Modules.Products.Core;
 using NetStore.Shared.Abstractions.Modules;
 
@@ -18,5 +19,7 @@ public sealed class ProductsModule : Module
 
     public override void UseModule(WebApplication app)
     {
+        app.MapHomeEndpoints();
+        app.MapProductEndpoints();
     }
 }
