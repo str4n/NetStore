@@ -25,15 +25,12 @@ internal static class Extensions
 
         services.ConfigurePostgres(configuration);
 
-        services
-            .AddCommands()
-            .AddQueries();
-
         services.AddEndpointsApiExplorer();
 
         services.AddHttpContextAccessor();
 
         services.AddSingleton<IContextFactory, ContextFactory>();
+        services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
 
         services.AddHostedService<DatabaseInitializer>();
 
@@ -42,6 +39,10 @@ internal static class Extensions
         services.AddAuth(configuration);
 
         services.AddControllers();
+        
+        services
+            .AddCommands()
+            .AddQueries();
 
         services.AddSwaggerGen(swagger =>
         {
@@ -67,9 +68,13 @@ internal static class Extensions
             options.DocumentTitle = "NetStore API";
             options.SpecUrl("/swagger/v1/swagger.json");
         });
+
+        app.UseAuthentication();
         
         app.UseHttpsRedirection();
         app.UseRouting();
+
+        app.UseAuthorization();
 
         return app;
     }
