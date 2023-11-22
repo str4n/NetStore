@@ -17,10 +17,18 @@ internal sealed class UsersRepository : IUsersRepository
     }
 
     public Task<User> GetByUsernameAsync(Username username)
-        => _users.SingleOrDefaultAsync(x => x.Username == username);
+    {
+        username = username.Value.ToLowerInvariant();
+        
+        return _users.SingleOrDefaultAsync(x => x.Username == username);
+    }
 
     public Task<User> GetByEmailAsync(Email email)
-        => _users.SingleOrDefaultAsync(x => x.Email == email);
+    {
+        email = email.Value.ToLowerInvariant();
+        
+        return _users.SingleOrDefaultAsync(x => x.Email == email);
+    }
 
     public Task<User> GetAsync(Guid id)
         => _users.SingleOrDefaultAsync(x => x.Id == id);

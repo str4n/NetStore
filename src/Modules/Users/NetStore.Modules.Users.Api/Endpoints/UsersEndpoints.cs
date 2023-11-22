@@ -25,7 +25,7 @@ internal static class UsersEndpoints
         app.MapPost(Route + "/sign-up", SignUp);
         app.MapPost(Route + "/sign-in", SignIn);
 
-        app.MapDelete(Route + "/{id:guid}", Delete);
+        app.MapDelete(Route + "/{id:guid}", Delete).RequireAuthorization();
 
         return app;
     }
