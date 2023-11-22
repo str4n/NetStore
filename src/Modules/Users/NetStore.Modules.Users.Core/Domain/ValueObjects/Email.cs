@@ -7,7 +7,9 @@ internal sealed record Email
 {
     private static readonly Regex Regex =
         new(
-            @"^(?=.{1,256})(?=.{1,64}@.{1,255}$)(?=[^@]*[A-Za-z0-9!#$%&'*+/=?^_`{|}~-][^@]*$)(?=[^@]{0,64}@.{1,255}$)^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(\\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@([A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\\.)+[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?$\n");
+            @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
+            + "@"
+            + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
     
     public string Value { get; }
 
@@ -20,7 +22,7 @@ internal sealed record Email
 
         if (!Regex.IsMatch(value))
         {
-            throw new InvalidEmailException("Invalid value syntax");
+            throw new InvalidEmailException("Invalid email syntax");
         }
 
         Value = value;
