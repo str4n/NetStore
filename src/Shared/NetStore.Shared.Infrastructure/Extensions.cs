@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using NetStore.Shared.Abstractions.Contexts;
 using NetStore.Shared.Abstractions.Time;
 using NetStore.Shared.Infrastructure.Auth;
 using NetStore.Shared.Infrastructure.Commands;
+using NetStore.Shared.Infrastructure.Contexts;
 using NetStore.Shared.Infrastructure.Exceptions;
 using NetStore.Shared.Infrastructure.Postgres;
 using NetStore.Shared.Infrastructure.Queries;
@@ -30,6 +32,8 @@ internal static class Extensions
         services.AddEndpointsApiExplorer();
 
         services.AddHttpContextAccessor();
+
+        services.AddSingleton<IContextFactory, ContextFactory>();
 
         services.AddHostedService<DatabaseInitializer>();
 
