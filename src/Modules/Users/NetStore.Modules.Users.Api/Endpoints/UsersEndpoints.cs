@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using NetStore.Modules.Users.Core.CQRS.Commands;
 using NetStore.Modules.Users.Core.CQRS.Queries;
+using NetStore.Modules.Users.Core.Domain.ValueObjects;
 using NetStore.Modules.Users.Core.DTO;
 using NetStore.Shared.Abstractions.Auth;
 using NetStore.Shared.Abstractions.Commands;
@@ -23,6 +25,8 @@ internal static class UsersEndpoints
         app.MapPost(Route + "/sign-up", SignUp);
         app.MapPost(Route + "/sign-in", SignIn);
 
+        app.MapDelete(Route + "/{id:guid}", Delete);
+
         return app;
     }
 
@@ -32,12 +36,7 @@ internal static class UsersEndpoints
 
         var result = await queryDispatcher.SendAsync<GetUser, UserDto>(new GetUser(id));
 
-        if (result is null)
-        {
-            return Results.NotFound();
-        }
-
-        return Results.Ok(result);
+        return result is null ? Results.NotFound() : Results.Ok(result);
     }
 
     private static async Task<IResult> SignUp([FromBody]SignUp command, [FromServices]ICommandDispatcher commandDispatcher)
@@ -53,5 +52,15 @@ internal static class UsersEndpoints
         var token = tokenStorage.Get();
         
         return Results.Ok(token);
+    }
+
+    [Authorize(Roles = Role.Admin)]
+    private static async Task<IResult> Delete([FromRoute]Guid id, [FromServices]ICommandDispatcher commandDispatcher)
+    {
+        var command = new DeleteUser(id);
+
+        await commandDispatcher.SendAsync(command);
+
+        return Results.NoContent();
     }
 }

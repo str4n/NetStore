@@ -1,4 +1,5 @@
-﻿using NetStore.Modules.Users.Core.Exceptions;
+﻿using NetStore.Modules.Users.Core.Domain.Entities;
+using NetStore.Modules.Users.Core.Exceptions;
 using NetStore.Modules.Users.Core.Repositories;
 using NetStore.Modules.Users.Core.Services;
 using NetStore.Shared.Abstractions.Auth;
@@ -33,6 +34,11 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
         if (!_passwordManager.Validate(command.Password, user.Password))
         {
             throw new InvalidCredentialsException();
+        }
+        
+        if (user.UserState is UserState.Deleted)
+        {
+            throw new UserNotActiveException(user.Username);
         }
 
         var jwt = _authenticator.CreateToken(user.Id, user.Role, user.Email);

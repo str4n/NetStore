@@ -1,5 +1,5 @@
 @url = https://localhost:7240/users-module/users
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4MTZmODAwZi1jNzNiLTQ2OTMtODQ5OS1mOGU1MDA4MDQzYjAiLCJ1bmlxdWVfbmFtZSI6IjgxNmY4MDBmLWM3M2ItNDY5My04NDk5LWY4ZTUwMDgwNDNiMCIsImVtYWlsIjoidGVzdG93eTFAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsIm5iZiI6MTcwMDY2ODc3OSwiZXhwIjoxNzAwNzU1MTc5LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.uD-d0bpKjCAyXSenJbNcmWwjdzP9JqEycwliZh7lx0k
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4MTZmODAwZi1jNzNiLTQ2OTMtODQ5OS1mOGU1MDA4MDQzYjAiLCJ1bmlxdWVfbmFtZSI6IjgxNmY4MDBmLWM3M2ItNDY5My04NDk5LWY4ZTUwMDgwNDNiMCIsImVtYWlsIjoidGVzdG93eTFAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJuYmYiOjE3MDA2NzA2NzQsImV4cCI6MTcwMDc1NzA3NCwiaXNzIjoibmV0c3RvcmUiLCJhdWQiOiJuZXRzdG9yZSJ9.08BE-6L_8KomDLdPi6zfOWDT-Ug7PL5VoOwW2eMWbFY
 
 POST {{url}}/sign-up
 Content-Type: application/json
@@ -23,4 +23,10 @@ Content-Type: application/json
 ###
 
 GET {{url}}
+Authorization: Bearer {{jwt}}
+
+
+###
+
+DELETE {{url}}/816f800f-c73b-4693-8499-f8e5008043b0
 Authorization: Bearer {{jwt}}
