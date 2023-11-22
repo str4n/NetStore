@@ -5,8 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using NetStore.Shared.Abstractions.Time;
 using NetStore.Shared.Infrastructure.Auth;
+using NetStore.Shared.Infrastructure.Commands;
 using NetStore.Shared.Infrastructure.Exceptions;
 using NetStore.Shared.Infrastructure.Postgres;
+using NetStore.Shared.Infrastructure.Queries;
 using NetStore.Shared.Infrastructure.Services;
 using NetStore.Shared.Infrastructure.Time;
 
@@ -20,6 +22,10 @@ internal static class Extensions
         services.AddExceptionHandling();
 
         services.ConfigurePostgres(configuration);
+
+        services
+            .AddCommands()
+            .AddQueries();
 
         services.AddEndpointsApiExplorer();
 
