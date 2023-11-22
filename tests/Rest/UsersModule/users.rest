@@ -1,0 +1,26 @@
+@url = https://localhost:7240/users-module/users
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4MTZmODAwZi1jNzNiLTQ2OTMtODQ5OS1mOGU1MDA4MDQzYjAiLCJ1bmlxdWVfbmFtZSI6IjgxNmY4MDBmLWM3M2ItNDY5My04NDk5LWY4ZTUwMDgwNDNiMCIsImVtYWlsIjoidGVzdG93eTFAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsIm5iZiI6MTcwMDY2ODc3OSwiZXhwIjoxNzAwNzU1MTc5LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.uD-d0bpKjCAyXSenJbNcmWwjdzP9JqEycwliZh7lx0k
+
+POST {{url}}/sign-up
+Content-Type: application/json
+
+{
+    "email": "testowy1@gmail.com",
+    "username": "test5",
+    "password": "test"
+}
+
+###
+
+POST {{url}}/sign-in
+Content-Type: application/json
+
+{
+    "username": "test5",
+    "password": "test"
+}
+
+###
+
+GET {{url}}
+Authorization: Bearer {{jwt}}

@@ -1,0 +1,40 @@
+@url = https://localhost:7240/products-module
+@id = 922e8f24-f466-4d30-8864-6d1acf15a5dd
+
+GET {{url}}/home
+
+###
+
+GET {{url}}/products
+
+###
+
+POST {{url}}/products
+Content-Type: application/json
+
+{
+    "Name": "Intel i9-11900k",
+    "Description": "A series of microprocessors based on the x64 architecture",
+    "Categories": [
+         "computer-part" 
+    ],
+    "Price": 1900,
+    "Discount": 20
+}
+
+###
+
+GET {{url}}/products/{{id}}
+
+###
+
+PATCH {{url}}/products/{{id}}
+Content-Type: application/json
+
+{
+    "Discount": 11
+}
+
+###
+
+DELETE {{url}}/products/{{id}}
