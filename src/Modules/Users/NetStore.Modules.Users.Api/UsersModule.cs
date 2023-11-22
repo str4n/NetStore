@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NetStore.Modules.Users.Api.Endpoints;
 using NetStore.Modules.Users.Core;
 using NetStore.Shared.Abstractions.Modules;
 
@@ -18,5 +19,6 @@ public sealed class UsersModule : Module
 
     public override void UseModule(WebApplication app)
     {
+        app.MapUsersEndpoints();
     }
 }
