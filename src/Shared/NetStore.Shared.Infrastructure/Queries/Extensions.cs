@@ -9,8 +9,10 @@ internal static class Extensions
     {
         services.AddSingleton<IQueryDispatcher, QueryDispatcher>();
         
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName!.Contains("NetStore"));
+        
         services.Scan(s =>
-            s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
+            s.FromAssemblies(assemblies)
                 .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)))
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());

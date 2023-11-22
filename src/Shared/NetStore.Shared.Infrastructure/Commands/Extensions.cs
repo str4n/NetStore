@@ -8,9 +8,11 @@ internal static class Extensions
     public static IServiceCollection AddCommands(this IServiceCollection services)
     {
         services.AddSingleton<ICommandDispatcher, CommandDispatcher>();
+        
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName!.Contains("NetStore"));
 
         services.Scan(s =>
-            s.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
+            s.FromAssemblies(assemblies)
             .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)))
             .AsImplementedInterfaces()
             .WithScopedLifetime());
