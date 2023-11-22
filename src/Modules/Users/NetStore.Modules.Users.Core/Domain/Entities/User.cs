@@ -13,7 +13,7 @@ internal sealed class User
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
-    public User(Guid id, Email email, Username username, string password, Role role, UserState userState, DateTime createdAt, DateTime updatedAt)
+    public User(Guid id, Email email, Username username, string password, Role role, UserState userState, DateTime createdAt)
     {
         Id = id;
         Email = email;
@@ -22,7 +22,6 @@ internal sealed class User
         Role = role;
         UserState = userState;
         CreatedAt = createdAt;
-        UpdatedAt = updatedAt;
     }
 }
 
