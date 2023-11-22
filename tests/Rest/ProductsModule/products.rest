@@ -1,9 +1,6 @@
 @url = https://localhost:7240/products-module
-@id = 922e8f24-f466-4d30-8864-6d1acf15a5dd
-
-GET {{url}}/home
-
-###
+@id = 797d056d-85ec-468a-b7e5-8330df78e411
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNzM2MDEyMi0wMWM1LTRkMmUtOGQ3Ny1hZTU3ODVkMGIwYWUiLCJ1bmlxdWVfbmFtZSI6ImM3MzYwMTIyLTAxYzUtNGQyZS04ZDc3LWFlNTc4NWQwYjBhZSIsImVtYWlsIjoidGVzdG93eUBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMDY3MzQxOCwiZXhwIjoxNzAwNzU5ODE4LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.bex7lPLmC3C9BagI4oWBtZhWWZrabfz4VpopgsqV27o
 
 GET {{url}}/products
 
@@ -11,6 +8,7 @@ GET {{url}}/products
 
 POST {{url}}/products
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {
     "Name": "Intel i9-11900k",
@@ -30,6 +28,7 @@ GET {{url}}/products/{{id}}
 
 PATCH {{url}}/products/{{id}}
 Content-Type: application/json
+Authorization: Bearer {{jwt}}
 
 {
     "Discount": 11
@@ -38,3 +37,4 @@ Content-Type: application/json
 ###
 
 DELETE {{url}}/products/{{id}}
+Authorization: Bearer {{jwt}}

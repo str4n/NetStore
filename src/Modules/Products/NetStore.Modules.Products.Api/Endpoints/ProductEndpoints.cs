@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using NetStore.Modules.Products.Core.DTO;
 using NetStore.Modules.Products.Core.Services;
+using NetStore.Shared.Abstractions.SharedTypes.ValueObjects;
 
 namespace NetStore.Modules.Products.Api.Endpoints;
 
@@ -16,10 +18,10 @@ internal static class ProductEndpoints
         app.MapGet(Route + "/{id:guid}", Get);
         app.MapGet(Route, GetAll);
 
-        app.MapPost(Route, Post);
-        app.MapPatch(Route + "/{id:guid}", Patch);
+        app.MapPost(Route, Post).RequireAuthorization();
+        app.MapPatch(Route + "/{id:guid}", Patch).RequireAuthorization();
 
-        app.MapDelete(Route + "/{id:guid}", Delete);
+        app.MapDelete(Route + "/{id:guid}", Delete).RequireAuthorization();
         
         return app;
     }
@@ -30,6 +32,7 @@ internal static class ProductEndpoints
     private static async Task<IResult> GetAll(IProductsService productsService)
         => Results.Ok(await productsService.GetAllAsync());
     
+    [Authorize(Roles = Role.Admin)]
     private static async Task<IResult> Post([FromBody] ProductDto dto, IProductsService productsService)
     {
         dto = dto with { Id = Guid.NewGuid() };
@@ -38,6 +41,7 @@ internal static class ProductEndpoints
         return Results.Created($"https://localhost:7240/{Route}/{dto.Id}", default);
     }
     
+    [Authorize(Roles = Role.Admin)]
     private static async Task<IResult> Patch([FromRoute] Guid id, [FromBody] DiscountDto discount, IProductsService productsService)
     {
         await productsService.EditDiscountAsync(id, discount.Discount);
@@ -45,6 +49,7 @@ internal static class ProductEndpoints
         return Results.NoContent();
     }
     
+    [Authorize(Roles = Role.Admin)]
     private static async Task<IResult> Delete([FromRoute] Guid id, IProductsService productsService)
     {
         await productsService.DeleteAsync(id);

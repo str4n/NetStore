@@ -4,6 +4,7 @@ using NetStore.Modules.Users.Core.Exceptions;
 using NetStore.Modules.Users.Core.Repositories;
 using NetStore.Modules.Users.Core.Services;
 using NetStore.Shared.Abstractions.Commands;
+using NetStore.Shared.Abstractions.SharedTypes.ValueObjects;
 using NetStore.Shared.Abstractions.Time;
 
 namespace NetStore.Modules.Users.Core.CQRS.Commands.Handlers;

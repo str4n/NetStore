@@ -1,8 +1,8 @@
-using NetStore.Modules.Users.Core.Domain.Exceptions;
+using NetStore.Shared.Abstractions.SharedTypes.Exceptions;
 
-namespace NetStore.Modules.Users.Core.Domain.ValueObjects;
+namespace NetStore.Shared.Abstractions.SharedTypes.ValueObjects;
 
-internal sealed record Role
+public sealed record Role
 {
     private static readonly string[] AvailableRoles = { Admin, User };
     

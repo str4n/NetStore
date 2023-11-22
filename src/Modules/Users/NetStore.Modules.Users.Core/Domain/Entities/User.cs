@@ -1,4 +1,5 @@
 ﻿using NetStore.Modules.Users.Core.Domain.ValueObjects;
+using NetStore.Shared.Abstractions.SharedTypes.ValueObjects;
 
 namespace NetStore.Modules.Users.Core.Domain.Entities;
 
