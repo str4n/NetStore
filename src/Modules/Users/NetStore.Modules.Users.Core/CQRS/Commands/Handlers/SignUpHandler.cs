@@ -1,4 +1,6 @@
-﻿using NetStore.Modules.Users.Core.Domain.Entities;
+﻿using System.Text.RegularExpressions;
+using NetStore.Modules.Users.Core.Domain.Entities;
+using NetStore.Modules.Users.Core.Domain.Exceptions;
 using NetStore.Modules.Users.Core.Domain.ValueObjects;
 using NetStore.Modules.Users.Core.Exceptions;
 using NetStore.Modules.Users.Core.Repositories;
@@ -11,6 +13,7 @@ namespace NetStore.Modules.Users.Core.CQRS.Commands.Handlers;
 
 internal sealed class SignUpHandler : ICommandHandler<SignUp>
 {
+    private static readonly Regex Regex = new(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
     private readonly IUsersRepository _usersRepository;
     private readonly IPasswordManager _passwordManager;
     private readonly IClock _clock;
@@ -23,19 +26,29 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
     }
     public async Task HandleAsync(SignUp command)
     {
-        if (await _usersRepository.GetByEmailAsync(command.Email) is not null)
+        var id = command.Id;
+        var email = new Email(command.Email);
+        var username = new Username(command.Username);
+        var password = new Password(command.Password);
+
+        if (!Regex.IsMatch(password))
         {
-            throw new UserAlreadyExistsException($"User with email: {command.Email} already exists");
+            throw new InvalidPasswordSyntaxException("Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character.");
+        }
+        
+        if (await _usersRepository.GetByEmailAsync(email) is not null)
+        {
+            throw new UserAlreadyExistsException($"User with email: {email} already exists");
         }
 
-        if (await _usersRepository.GetByUsernameAsync(command.Username) is not null)
+        if (await _usersRepository.GetByUsernameAsync(username) is not null)
         {
-            throw new UserAlreadyExistsException($"User with username: {command.Username} already exists");
+            throw new UserAlreadyExistsException($"User with username: {username} already exists");
         }
 
-        var securedPassword = _passwordManager.Secure(command.Password);
+        var securedPassword = _passwordManager.Secure(password);
 
-        var user = new User(command.Id, command.Email.ToLowerInvariant(), command.Username, securedPassword, Role.User, UserState.Active, _clock.Now());
+        var user = new User(id, email.Value.ToLowerInvariant(), username, securedPassword, Role.User, UserState.Active, _clock.Now());
 
         await _usersRepository.AddAsync(user);
     }
