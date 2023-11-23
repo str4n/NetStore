@@ -8,13 +8,13 @@ internal sealed class User
     public Guid Id { get; set; }
     public Email Email { get; set; }
     public Username Username { get; set; }
-    public string Password { get; set; }
+    public Password Password { get; set; }
     public Role Role { get; set; }
     public UserState UserState { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
-    public User(Guid id, Email email, Username username, string password, Role role, UserState userState, DateTime createdAt)
+    public User(Guid id, Email email, Username username, Password password, Role role, UserState userState, DateTime createdAt)
     {
         Id = id;
         Email = email;
