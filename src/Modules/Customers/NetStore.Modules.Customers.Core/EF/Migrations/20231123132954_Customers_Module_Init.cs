@@ -1,12 +1,13 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace NetStore.Modules.Customers.Core.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class Customer_Module_Init : Migration
+    public partial class Customers_Module_Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,12 +31,13 @@ namespace NetStore.Modules.Customers.Core.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Addresses",
+                name: "Address",
                 schema: "customers",
                 columns: table => new
                 {
                     CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Country = table.Column<string>(type: "text", nullable: true),
                     City = table.Column<string>(type: "text", nullable: true),
                     Street = table.Column<string>(type: "text", nullable: true),
@@ -43,9 +45,9 @@ namespace NetStore.Modules.Customers.Core.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Addresses", x => x.CustomerId);
+                    table.PrimaryKey("PK_Address", x => new { x.CustomerId, x.Id });
                     table.ForeignKey(
-                        name: "FK_Addresses_Customers_CustomerId",
+                        name: "FK_Address_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalSchema: "customers",
                         principalTable: "Customers",
@@ -58,7 +60,7 @@ namespace NetStore.Modules.Customers.Core.EF.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Addresses",
+                name: "Address",
                 schema: "customers");
 
             migrationBuilder.DropTable(

@@ -34,18 +34,6 @@ internal sealed class Customer
     public void AddAddress(Address address) => _addresses.Add(address);
     public void RemoveAddress(Address address) => _addresses.Add(address);
 
-    public void EditAddress(Guid id, Address address)
-    {
-        var oldAddress = _addresses.SingleOrDefault(x => x.Id == id);
-
-        if (oldAddress is null)
-        {
-            return;
-        }
-        
-        oldAddress = address;
-    }
-
     public void UpdateFirstName(Name firstname) => FirstName = firstname;
     public void UpdateLastName(Name lastname) => LastName = lastname;
 }

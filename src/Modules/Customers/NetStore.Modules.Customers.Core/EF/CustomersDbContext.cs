@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetStore.Modules.Customers.Core.Domain.Entities;
+using NetStore.Modules.Customers.Core.Domain.ValueObjects;
 
 namespace NetStore.Modules.Customers.Core.EF;
 
 internal sealed class CustomersDbContext : DbContext
 {
     public DbSet<Customer> Customers { get; set; }
-    public DbSet<Address> Addresses { get; set; }
 
     public CustomersDbContext(DbContextOptions<CustomersDbContext> dbContextOptions) : base(dbContextOptions)
     {

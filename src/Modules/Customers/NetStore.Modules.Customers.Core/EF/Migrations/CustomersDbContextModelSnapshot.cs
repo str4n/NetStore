@@ -23,34 +23,6 @@ namespace NetStore.Modules.Customers.Core.EF.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Entities.Address", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("City")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Addresses", "customers");
-                });
-
             modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Entities.Customer", b =>
                 {
                     b.Property<Guid>("Id")
@@ -72,17 +44,39 @@ namespace NetStore.Modules.Customers.Core.EF.Migrations
                     b.ToTable("Customers", "customers");
                 });
 
-            modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Entities.Address", b =>
-                {
-                    b.HasOne("NetStore.Modules.Customers.Core.Domain.Entities.Customer", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Entities.Customer", b =>
                 {
+                    b.OwnsMany("NetStore.Modules.Customers.Core.Domain.ValueObjects.Address", "Addresses", b1 =>
+                        {
+                            b1.Property<Guid>("CustomerId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer");
+
+                            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b1.Property<int>("Id"));
+
+                            b1.Property<string>("City")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Country")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("PostalCode")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Street")
+                                .HasColumnType("text");
+
+                            b1.HasKey("CustomerId", "Id");
+
+                            b1.ToTable("Address", "customers");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerId");
+                        });
+
                     b.Navigation("Addresses");
                 });
 #pragma warning restore 612, 618
