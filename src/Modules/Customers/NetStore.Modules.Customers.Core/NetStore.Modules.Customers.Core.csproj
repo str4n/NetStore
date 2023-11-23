@@ -8,5 +8,9 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\NetStore.Shared.Infrastructure\NetStore.Shared.Infrastructure.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <InternalsVisibleTo Include="NetStore.Modules.Customers.Api"/>
+    </ItemGroup>
 
 </Project>

@@ -24,6 +24,10 @@ internal sealed class Customer
         _addresses.Add(address);
     }
 
+    private Customer()
+    {
+    }
+
     public Customer Create(Guid id, Name firstName, Name lastName, Email email, Address address)
         => new(id, firstName, lastName, email, address);
 
