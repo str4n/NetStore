@@ -8,6 +8,7 @@ using NetStore.Shared.Abstractions.Time;
 using NetStore.Shared.Infrastructure.Auth;
 using NetStore.Shared.Infrastructure.Commands;
 using NetStore.Shared.Infrastructure.Contexts;
+using NetStore.Shared.Infrastructure.Events;
 using NetStore.Shared.Infrastructure.Exceptions;
 using NetStore.Shared.Infrastructure.Postgres;
 using NetStore.Shared.Infrastructure.Queries;
@@ -43,6 +44,8 @@ internal static class Extensions
         services
             .AddCommands()
             .AddQueries();
+
+        services.AddEvents();
 
         services.AddSwaggerGen(swagger =>
         {
