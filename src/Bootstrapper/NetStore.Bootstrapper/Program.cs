@@ -1,4 +1,5 @@
 using NetStore.Bootstrapper;
+using NetStore.Modules.Customers.Api;
 using NetStore.Modules.Products.Api;
 using NetStore.Modules.Users.Api;
 using NetStore.Shared.Infrastructure;
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 ModuleLoader.Load<ProductsModule>();
 ModuleLoader.Load<UsersModule>();
+ModuleLoader.Load<CustomersModule>();
 
 builder.Host.UseLogging();
 
