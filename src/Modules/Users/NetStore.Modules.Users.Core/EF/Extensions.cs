@@ -12,6 +12,7 @@ internal static class Extensions
     {
         services.AddPostgres<UsersDbContext>(configuration);
         services.AddScoped<IUsersRepository, UsersRepository>();
+        services.AddUnitOfWork<IUsersUnitOfWork, UsersUnitOfWork>();
 
         return services;
     }

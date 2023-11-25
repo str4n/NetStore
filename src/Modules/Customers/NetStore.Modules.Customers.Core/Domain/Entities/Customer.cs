@@ -11,6 +11,7 @@ internal sealed class Customer
     public Email Email { get; private set; }
     public IEnumerable<Address> Addresses => _addresses;
     private List<Address> _addresses = new();
+    public Guid UserId { get; private set; }
 
     // TODO: Orders history
     // TODO: Payment methods
@@ -23,12 +24,19 @@ internal sealed class Customer
         Email = email;
         _addresses.Add(address);
     }
+    
+    public Customer(Guid id, Email email, Guid userId)
+    {
+        Id = id;
+        Email = email;
+        UserId = userId;
+    }
 
     private Customer()
     {
     }
 
-    public Customer Create(Guid id, Name firstName, Name lastName, Email email, Address address)
+    public static Customer Create(Guid id, Name firstName, Name lastName, Email email, Address address)
         => new(id, firstName, lastName, email, address);
 
     public void AddAddress(Address address) => _addresses.Add(address);

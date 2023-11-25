@@ -5,7 +5,9 @@ using NetStore.Modules.Users.Core.Domain.ValueObjects;
 using NetStore.Modules.Users.Core.Exceptions;
 using NetStore.Modules.Users.Core.Repositories;
 using NetStore.Modules.Users.Core.Services;
+using NetStore.Modules.Users.Shared.Events;
 using NetStore.Shared.Abstractions.Commands;
+using NetStore.Shared.Abstractions.Events;
 using NetStore.Shared.Abstractions.SharedTypes.ValueObjects;
 using NetStore.Shared.Abstractions.Time;
 
@@ -17,12 +19,14 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
     private readonly IUsersRepository _usersRepository;
     private readonly IPasswordManager _passwordManager;
     private readonly IClock _clock;
+    private readonly IEventDispatcher _eventDispatcher;
 
-    public SignUpHandler(IUsersRepository usersRepository, IPasswordManager passwordManager, IClock clock)
+    public SignUpHandler(IUsersRepository usersRepository, IPasswordManager passwordManager, IClock clock, IEventDispatcher eventDispatcher)
     {
         _usersRepository = usersRepository;
         _passwordManager = passwordManager;
         _clock = clock;
+        _eventDispatcher = eventDispatcher;
     }
     public async Task HandleAsync(SignUp command)
     {
@@ -51,5 +55,6 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
         var user = new User(id, email.Value.ToLowerInvariant(), username, securedPassword, Role.User, UserState.Active, _clock.Now());
 
         await _usersRepository.AddAsync(user);
+        await _eventDispatcher.PublishAsync(new UserCreated(user.Id, user.Email));
     }
 }

@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using NetStore.Shared.Abstractions.Contexts;
 using NetStore.Shared.Abstractions.Time;
 using NetStore.Shared.Infrastructure.Auth;
 using NetStore.Shared.Infrastructure.Commands;
@@ -41,11 +40,14 @@ internal static class Extensions
 
         services.AddControllers();
         
+        services.AddEvents();
+        
         services
             .AddCommands()
             .AddQueries();
 
-        services.AddEvents();
+        services.AddTransactionalDecorators();
+        
 
         services.AddSwaggerGen(swagger =>
         {

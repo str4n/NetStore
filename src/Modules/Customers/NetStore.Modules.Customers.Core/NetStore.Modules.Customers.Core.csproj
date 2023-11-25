@@ -7,10 +7,17 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\NetStore.Shared.Infrastructure\NetStore.Shared.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Users\NetStore.Modules.Users.Shared\NetStore.Modules.Users.Shared.csproj" />
     </ItemGroup>
     
     <ItemGroup>
         <InternalsVisibleTo Include="NetStore.Modules.Customers.Api"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Reference Include="NetStore.Modules.Users.Shared">
+        <HintPath>..\..\..\Bootstrapper\NetStore.Bootstrapper\bin\Debug\net7.0\NetStore.Modules.Users.Shared.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>
