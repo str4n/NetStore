@@ -12,5 +12,9 @@
     <ItemGroup>
         <InternalsVisibleTo Include="NetStore.Modules.Products.Api"/>
     </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Services\" />
+    </ItemGroup>
 
 </Project>

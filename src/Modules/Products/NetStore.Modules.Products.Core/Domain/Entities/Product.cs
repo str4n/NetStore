@@ -13,14 +13,17 @@ internal sealed class Product
     public Discount Discount { get; private set; }
     public Price TruePrice { get; private set; }
     public Price Price => GetPriceAfterDiscount();
+    public DateTime CreatedAt { get; private set; }
+    public DateTime UpdatedAt { get; private set; }
 
-    public Product(Guid? id, Name name, Description description, IEnumerable<Category> categories, Price truePrice, Discount discount = default)
+    public Product(Guid? id, Name name, Description description, IEnumerable<Category> categories, Price truePrice, DateTime createdAt, Discount discount = default)
     {
         Id = id ?? Guid.NewGuid();
         Name = name;
         Description = description;
         _categories = categories.ToList();
         TruePrice = truePrice;
+        CreatedAt = createdAt;
         Discount = discount;
     }
 
@@ -31,13 +34,42 @@ internal sealed class Product
     private Price GetPriceAfterDiscount()
         => TruePrice - (TruePrice * Discount / 100);
 
-    public static Product Create(Guid id, Name name, Description description, IEnumerable<Category> categories, Price price, Discount discount = default)
-        => new(id, name, description, categories, price, discount);
+    public static Product Create(Guid id, Name name, Description description, IEnumerable<Category> categories, Price price, DateTime createdAt ,Discount discount = default)
+        => new(id, name, description, categories, price, createdAt, discount);
 
-    public void EditName(Name name) => Name = name;
-    public void EditDescription(Description description) => Description = description;
-    public void EditPrice(Price price) => TruePrice = price;
-    public void EditDiscount(Discount discount) => Discount = discount;
-    public void AddCategory(Category category) => _categories.Add(category);
-    public void RemoveCategory(Category category) => _categories.Remove(category);
+    public void UpdateName(Name name, DateTime updatedAt)
+    {
+        Name = name;
+        UpdatedAt = updatedAt;
+    }
+
+    public void UpdateDescription(Description description, DateTime updatedAt)
+    {
+        Description = description;
+        UpdatedAt = updatedAt;
+    }
+
+    public void UpdatePrice(Price price, DateTime updatedAt)
+    {
+        TruePrice = price;
+        UpdatedAt = updatedAt;
+    }
+
+    public void UpdateDiscount(Discount discount, DateTime updatedAt)
+    {
+        Discount = discount;
+        UpdatedAt = updatedAt;
+    }
+
+    public void AddCategory(Category category, DateTime updatedAt)
+    {
+        _categories.Add(category);
+        UpdatedAt = updatedAt;
+    }
+
+    public void RemoveCategory(Category category, DateTime updatedAt)
+    {
+        _categories.Remove(category);
+        UpdatedAt = updatedAt;
+    }
 }

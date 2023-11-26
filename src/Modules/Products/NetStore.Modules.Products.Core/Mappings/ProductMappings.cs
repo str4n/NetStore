@@ -6,10 +6,10 @@ namespace NetStore.Modules.Products.Core.Mappings;
 
 internal static class ProductMappings
 {
-    public static Product ToEntity(this ProductDto dto)
-        // ReSharper disable once SuspiciousTypeConversion.Global
-        => Product.Create(dto.Id, dto.Name, dto.Description, dto.Categories.Select(x => (Category)x),
-            dto.Price, dto.Discount);
+    // public static Product ToEntity(this ProductDto dto)
+    //     // ReSharper disable once SuspiciousTypeConversion.Global
+    //     => Product.Create(dto.Id, dto.Name, dto.Description, dto.Categories.Select(x => (Category)x),
+    //         dto.Price, dto.Discount);
 
     public static ProductDto AsDto(this Product entity)
         // ReSharper disable once SuspiciousTypeConversion.Global
