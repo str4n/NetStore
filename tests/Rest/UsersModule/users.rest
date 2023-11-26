@@ -1,12 +1,12 @@
 @url = https://localhost:7240/users-module/users
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzYmQ0NmY5MS04NTM1LTQ2ZGYtYjM1Zi1iMjQyMjc1Y2E2NjkiLCJ1bmlxdWVfbmFtZSI6IjNiZDQ2ZjkxLTg1MzUtNDZkZi1iMzVmLWIyNDIyNzVjYTY2OSIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMDkyOTQyMCwiZXhwIjoxNzAxMDE1ODIwLCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.p1pNGVLsVgH7Y-EUChmO1-6E5qIYfyIL-fPeIGmG9HM
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOTU0N2IxYy05ZDgxLTRlOGEtOTRkYS00YjZjODhiNTYwMGEiLCJ1bmlxdWVfbmFtZSI6ImY5NTQ3YjFjLTlkODEtNGU4YS05NGRhLTRiNmM4OGI1NjAwYSIsImVtYWlsIjoidGVzdG93eTEyMzRAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsIm5iZiI6MTcwMTAyNTQzMSwiZXhwIjoxNzAxMTExODMxLCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.E05gJPxuMDwigO1dW3TuaOG5rkcxTend2C3a7SHGoNM
 
 POST {{url}}/sign-up
 Content-Type: application/json
 
 {
-    "email": "testowy123@gmail.com",
-    "username": "test123",
+    "email": "testowy1234@gmail.com",
+    "username": "test1234",
     "password": "Test123!"
 }
 
@@ -16,7 +16,7 @@ POST {{url}}/sign-in
 Content-Type: application/json
 
 {
-    "username": "test123",
+    "username": "test1234",
     "password": "Test123!"
 }
 

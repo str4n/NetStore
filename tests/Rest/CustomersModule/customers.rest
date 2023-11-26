@@ -1,5 +1,5 @@
 @url = https://localhost:7240/customers-module/customers
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzdhYWM4Mi0wNGFjLTRkMWMtOGM0Yy1jNzQ5YzY4MTI1MmUiLCJ1bmlxdWVfbmFtZSI6IjY3N2FhYzgyLTA0YWMtNGQxYy04YzRjLWM3NDljNjgxMjUyZSIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNzAxMDIxNjQyLCJleHAiOjE3MDExMDgwNDIsImlzcyI6Im5ldHN0b3JlIiwiYXVkIjoibmV0c3RvcmUifQ.6eaH7WaybS-LHVP9QKIzNGGogp2m0tvQjGkfbTISgAM
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOTU0N2IxYy05ZDgxLTRlOGEtOTRkYS00YjZjODhiNTYwMGEiLCJ1bmlxdWVfbmFtZSI6ImY5NTQ3YjFjLTlkODEtNGU4YS05NGRhLTRiNmM4OGI1NjAwYSIsImVtYWlsIjoidGVzdG93eTEyMzRAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsIm5iZiI6MTcwMTAyNTQzMSwiZXhwIjoxNzAxMTExODMxLCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.E05gJPxuMDwigO1dW3TuaOG5rkcxTend2C3a7SHGoNM
 
 PUT {{url}}
 Authorization: Bearer {{jwt}}
@@ -17,3 +17,8 @@ Content-Type: application/json
         }
     ]
 }
+
+###
+
+GET {{url}}
+Authorization: Bearer {{jwt}}
