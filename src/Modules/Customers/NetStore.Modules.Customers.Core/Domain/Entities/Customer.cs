@@ -11,6 +11,7 @@ internal sealed class Customer
     public Email Email { get; private set; }
     public IEnumerable<Address> Addresses => _addresses;
     private List<Address> _addresses = new();
+    public bool IsCompleted { get; private set; }
     public Guid UserId { get; private set; }
 
     // TODO: Orders history
@@ -41,6 +42,15 @@ internal sealed class Customer
 
     public void AddAddress(Address address) => _addresses.Add(address);
     public void RemoveAddress(Address address) => _addresses.Add(address);
+
+    public void CompleteInformation(Name firstName, Name lastName, IEnumerable<Address> addresses)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        _addresses.AddRange(addresses);
+
+        IsCompleted = true;
+    }
 
     public void UpdateFirstName(Name firstname) => FirstName = firstname;
     public void UpdateLastName(Name lastname) => LastName = lastname;

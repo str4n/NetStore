@@ -1,30 +1,29 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace NetStore.Modules.Customers.Core.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class Customers_Module_UserIdIntroduced : Migration
+    public partial class Customers_Module_CustomerInformationCompleting : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<Guid>(
-                name: "UserId",
+            migrationBuilder.AddColumn<bool>(
+                name: "IsCompleted",
                 schema: "customers",
                 table: "Customers",
-                type: "uuid",
+                type: "boolean",
                 nullable: false,
-                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
+                defaultValue: false);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "UserId",
+                name: "IsCompleted",
                 schema: "customers",
                 table: "Customers");
         }

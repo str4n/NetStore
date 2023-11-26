@@ -1,5 +1,5 @@
 @url = https://localhost:7240/users-module/users
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNzM2MDEyMi0wMWM1LTRkMmUtOGQ3Ny1hZTU3ODVkMGIwYWUiLCJ1bmlxdWVfbmFtZSI6ImM3MzYwMTIyLTAxYzUtNGQyZS04ZDc3LWFlNTc4NWQwYjBhZSIsImVtYWlsIjoidGVzdG93eUBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNzAwNjcyOTEyLCJleHAiOjE3MDA3NTkzMTIsImlzcyI6Im5ldHN0b3JlIiwiYXVkIjoibmV0c3RvcmUifQ.wwYLL0aa4FH6VnvhyDEh2KI253vlKo4q7cIEH_62tnA
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzYmQ0NmY5MS04NTM1LTQ2ZGYtYjM1Zi1iMjQyMjc1Y2E2NjkiLCJ1bmlxdWVfbmFtZSI6IjNiZDQ2ZjkxLTg1MzUtNDZkZi1iMzVmLWIyNDIyNzVjYTY2OSIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMDkyOTQyMCwiZXhwIjoxNzAxMDE1ODIwLCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.p1pNGVLsVgH7Y-EUChmO1-6E5qIYfyIL-fPeIGmG9HM
 
 POST {{url}}/sign-up
 Content-Type: application/json
@@ -16,7 +16,7 @@ POST {{url}}/sign-in
 Content-Type: application/json
 
 {
-    "username": "test",
+    "username": "test123",
     "password": "Test123!"
 }
 

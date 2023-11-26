@@ -19,5 +19,9 @@
         <HintPath>..\..\..\Bootstrapper\NetStore.Bootstrapper\bin\Debug\net7.0\NetStore.Modules.Users.Shared.dll</HintPath>
       </Reference>
     </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="EF\Migrations\" />
+    </ItemGroup>
 
 </Project>

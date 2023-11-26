@@ -1,0 +1,19 @@
+@url = https://localhost:7240/customers-module/customers
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzdhYWM4Mi0wNGFjLTRkMWMtOGM0Yy1jNzQ5YzY4MTI1MmUiLCJ1bmlxdWVfbmFtZSI6IjY3N2FhYzgyLTA0YWMtNGQxYy04YzRjLWM3NDljNjgxMjUyZSIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNzAxMDIxNjQyLCJleHAiOjE3MDExMDgwNDIsImlzcyI6Im5ldHN0b3JlIiwiYXVkIjoibmV0c3RvcmUifQ.6eaH7WaybS-LHVP9QKIzNGGogp2m0tvQjGkfbTISgAM
+
+PUT {{url}}
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+    "firstName": "Jack",
+    "LastName": "Sparrow",
+    "addresses": [
+        {
+            "Country": "Poland",
+            "City": "Krakow",
+            "Street": "Testowa",
+            "PostalCode": "80-180"
+        }
+    ]
+}

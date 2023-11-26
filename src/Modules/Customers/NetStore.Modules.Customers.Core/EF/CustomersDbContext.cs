@@ -7,6 +7,7 @@ namespace NetStore.Modules.Customers.Core.EF;
 internal sealed class CustomersDbContext : DbContext
 {
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<Address> Addresses { get; set; }
 
     public CustomersDbContext(DbContextOptions<CustomersDbContext> dbContextOptions) : base(dbContextOptions)
     {

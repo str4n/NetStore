@@ -27,5 +27,8 @@ internal sealed class CustomersRepository : ICustomersRepository
     }
 
     public Task<Customer> GetAsync(Guid id)
-        => _customers.SingleOrDefaultAsync(x => x.Id == id);
+        => _customers.Include(x => x.Addresses).SingleOrDefaultAsync(x => x.Id == id);
+
+    public Task<Customer> GetByUserId(Guid id)
+        => _customers.Include(x => x.Addresses).SingleOrDefaultAsync(x => x.UserId == id);
 }
