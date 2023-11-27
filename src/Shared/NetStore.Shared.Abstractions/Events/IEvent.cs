@@ -1,5 +1,7 @@
-﻿namespace NetStore.Shared.Abstractions.Events;
+﻿using NetStore.Shared.Abstractions.Messaging;
 
-public interface IEvent
+namespace NetStore.Shared.Abstractions.Events;
+
+public interface IEvent : IMessage
 {
 }

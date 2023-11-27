@@ -1,9 +1,11 @@
-﻿namespace NetStore.Shared.Abstractions.Queries;
+﻿using NetStore.Shared.Abstractions.Messaging;
 
-public interface IQuery
+namespace NetStore.Shared.Abstractions.Queries;
+
+public interface IQuery : IMessage
 {
 }
 
-public interface IQuery<TResult>
+public interface IQuery<TResult> : IQuery
 {
 }

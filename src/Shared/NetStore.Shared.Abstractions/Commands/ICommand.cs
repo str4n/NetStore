@@ -1,5 +1,7 @@
-﻿namespace NetStore.Shared.Abstractions.Commands;
+﻿using NetStore.Shared.Abstractions.Messaging;
 
-public interface ICommand
+namespace NetStore.Shared.Abstractions.Commands;
+
+public interface ICommand : IMessage
 {
 }
