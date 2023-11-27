@@ -1,36 +1,49 @@
 ﻿using System.Collections.Concurrent;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using NetStore.Shared.Abstractions.Events;
+using Newtonsoft.Json;
 
 namespace NetStore.Shared.Infrastructure.Events;
 
 internal sealed class EventDispatcher : IEventDispatcher, IHostedService, IDisposable
 {
     private readonly IServiceProvider _serviceProvider;
+    private readonly ILogger<EventDispatcher> _logger;
     private static readonly ConcurrentQueue<IEvent> Events = new();
+    private readonly SemaphoreSlim _semaphore = new(1, 1);
     private Timer _timer;
 
-    public EventDispatcher(IServiceProvider serviceProvider)
+    public EventDispatcher(IServiceProvider serviceProvider, ILogger<EventDispatcher> logger)
     {
         _serviceProvider = serviceProvider;
+        _logger = logger;
     }
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        _timer = new Timer(StartDispatcherAsync, default, TimeSpan.Zero, TimeSpan.FromSeconds(8));
+        _timer = new Timer(StartDispatcherAsync, default, TimeSpan.Zero, TimeSpan.FromSeconds(5));
     }
 
     private async void StartDispatcherAsync(object state)
     {
-        var eventsToDispatch = new List<Task>();
-
-        while (Events.TryDequeue(out var @event))
+        try
         {
-            eventsToDispatch.Add(DispatchAsync(@event));
-        }
+            await _semaphore.WaitAsync();
+            var eventsToDispatch = new List<Task>();
 
-        await Task.WhenAll(eventsToDispatch);
+            while (Events.TryDequeue(out var @event))
+            {
+                eventsToDispatch.Add(DispatchAsync(@event));
+            }
+
+            await Task.WhenAll(eventsToDispatch);
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
     }
 
     public Task StopAsync(CancellationToken cancellationToken)
@@ -52,6 +65,9 @@ internal sealed class EventDispatcher : IEventDispatcher, IHostedService, IDispo
 
     private async Task DispatchAsync<TEvent>(TEvent @event) where TEvent : class, IEvent
     {
+        var eventJson = JsonConvert.SerializeObject(@event, Formatting.Indented);
+        _logger.LogInformation("[EVENT DISPATCH]" + Environment.NewLine + @event.GetType().Name + Environment.NewLine + eventJson);
+        
         using var scope = _serviceProvider.CreateScope();
         var handlerType = typeof(IEventHandler<>).MakeGenericType(@event.GetType());
         var handlers = scope.ServiceProvider.GetServices(handlerType);
