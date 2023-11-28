@@ -1,20 +1,18 @@
-﻿using NetStore.Modules.Customers.Core.Domain.Exceptions;
+﻿using System.Text.RegularExpressions;
+using NetStore.Modules.Customers.Core.Domain.Exceptions;
 
 namespace NetStore.Modules.Customers.Core.Domain.Customer;
 
 internal sealed class Address
 {
-    public string Country { get; set; }
+    private static readonly Regex PostalCodeRegex = new("^[0-9]{2}-[0-9]{3}$");
+    
     public string City { get; set; }
     public string Street { get; set; }
     public string PostalCode { get; set; }
 
-    public Address(string country, string city, string street, string postalCode)
+    public Address(string city, string street, string postalCode)
     {
-        if (string.IsNullOrWhiteSpace(country))
-        {
-            throw new InvalidAddressException("Country cannot be empty.");
-        }
         
         if (string.IsNullOrWhiteSpace(city))
         {
@@ -30,8 +28,12 @@ internal sealed class Address
         {
             throw new InvalidAddressException("Postal code cannot be empty.");
         }
+
+        if (!PostalCodeRegex.IsMatch(postalCode))
+        {
+            throw new InvalidAddressException("Postal code is in invalid format. Correct format: XX-XXX");
+        }
         
-        Country = country;
         City = city;
         Street = street;
         PostalCode = postalCode;
