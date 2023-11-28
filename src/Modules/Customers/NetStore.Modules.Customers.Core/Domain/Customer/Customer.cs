@@ -14,7 +14,7 @@ internal sealed class Customer
     // TODO: Orders history
     // TODO: Payment methods
 
-    public Customer(Guid id, Name firstName, Name lastName, Email email, Address address)
+    private Customer(Guid id, Name firstName, Name lastName, Email email, Address address)
     {
         Id = id;
         FirstName = firstName;
@@ -23,7 +23,7 @@ internal sealed class Customer
         Address = address;
     }
     
-    public Customer(Guid id, Email email)
+    private Customer(Guid id, Email email)
     {
         Id = id;
         Email = email;
@@ -36,8 +36,6 @@ internal sealed class Customer
     public static Customer Create(Guid id, Name firstName, Name lastName, Email email, Address address)
         => new(id, firstName, lastName, email, address);
 
-    public void UpdateAddress(Address address) => Address = address;
-
     public void CompleteInformation(Name firstName, Name lastName, Address address)
     {
         FirstName = firstName;
@@ -47,6 +45,10 @@ internal sealed class Customer
         IsCompleted = true;
     }
 
+    public static Customer CreateFromUser(Guid id, Email email)
+        => new(id, email);
+
     public void UpdateFirstName(Name firstname) => FirstName = firstname;
     public void UpdateLastName(Name lastname) => LastName = lastname;
+    public void UpdateAddress(Address address) => Address = address;
 }

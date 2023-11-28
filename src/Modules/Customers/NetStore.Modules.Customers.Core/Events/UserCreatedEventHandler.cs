@@ -16,7 +16,7 @@ internal sealed class UserCreatedEventHandler : IEventHandler<UserCreated>
     
     public async Task HandleAsync(UserCreated @event)
     {
-        var customer = new Customer(@event.Id , @event.Email);
+        var customer = Customer.CreateFromUser(@event.Id, @event.Email);
 
         await _customersRepository.AddAsync(customer);
     }
