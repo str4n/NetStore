@@ -3,7 +3,7 @@ using NetStore.Modules.Customers.Core.Mappings;
 using NetStore.Modules.Customers.Core.Repositories;
 using NetStore.Shared.Abstractions.Queries;
 
-namespace NetStore.Modules.Customers.Core.CQRS.Queries.Handlers;
+namespace NetStore.Modules.Customers.Core.Queries.Handlers;
 
 internal sealed class GetCustomerHandler : IQueryHandler<GetCustomer, CustomerDto>
 {
@@ -15,5 +15,5 @@ internal sealed class GetCustomerHandler : IQueryHandler<GetCustomer, CustomerDt
     }
 
     public async Task<CustomerDto> HandleAsync(GetCustomer query)
-        => (await _customersRepository.GetByUserId(query.Id)).AsDto();
+        => (await _customersRepository.GetAsync(query.Id)).AsDto();
 }

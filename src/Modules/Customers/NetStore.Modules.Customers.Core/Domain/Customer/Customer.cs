@@ -1,7 +1,6 @@
-﻿using NetStore.Modules.Customers.Core.Domain.ValueObjects;
-using NetStore.Shared.Abstractions.SharedTypes.ValueObjects;
+﻿using NetStore.Shared.Abstractions.SharedTypes.ValueObjects;
 
-namespace NetStore.Modules.Customers.Core.Domain.Entities;
+namespace NetStore.Modules.Customers.Core.Domain.Customer;
 
 internal sealed class Customer
 {
@@ -9,10 +8,8 @@ internal sealed class Customer
     public Name FirstName { get; private set; }
     public Name LastName { get; private set; }
     public Email Email { get; private set; }
-    public IEnumerable<Address> Addresses => _addresses;
-    private List<Address> _addresses = new();
+    public Address Address { get; private set; }
     public bool IsCompleted { get; private set; }
-    public Guid UserId { get; private set; }
 
     // TODO: Orders history
     // TODO: Payment methods
@@ -23,14 +20,13 @@ internal sealed class Customer
         FirstName = firstName;
         LastName = lastName;
         Email = email;
-        _addresses.Add(address);
+        Address = address;
     }
     
-    public Customer(Guid id, Email email, Guid userId)
+    public Customer(Guid id, Email email)
     {
         Id = id;
         Email = email;
-        UserId = userId;
     }
 
     private Customer()
@@ -40,14 +36,13 @@ internal sealed class Customer
     public static Customer Create(Guid id, Name firstName, Name lastName, Email email, Address address)
         => new(id, firstName, lastName, email, address);
 
-    public void AddAddress(Address address) => _addresses.Add(address);
-    public void RemoveAddress(Address address) => _addresses.Add(address);
+    public void UpdateAddress(Address address) => Address = address;
 
-    public void CompleteInformation(Name firstName, Name lastName, IEnumerable<Address> addresses)
+    public void CompleteInformation(Name firstName, Name lastName, Address address)
     {
         FirstName = firstName;
         LastName = lastName;
-        _addresses.AddRange(addresses);
+        Address = address;
 
         IsCompleted = true;
     }

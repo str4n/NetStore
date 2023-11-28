@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NetStore.Modules.Customers.Core.EF.Migrations
 {
     [DbContext(typeof(CustomersDbContext))]
-    [Migration("20231126184630_Customers_Module_CustomerInformationCompleting")]
-    partial class Customers_Module_CustomerInformationCompleting
+    [Migration("20231128193106_Customers_Module_DomainFix")]
+    partial class Customers_Module_DomainFix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,35 +26,7 @@ namespace NetStore.Modules.Customers.Core.EF.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Entities.Address", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("City")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("text");
-
-                    b.Property<Guid?>("CustomerId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Street")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Addresses", "customers");
-                });
-
-            modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Customer.Customer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,16 +53,34 @@ namespace NetStore.Modules.Customers.Core.EF.Migrations
                     b.ToTable("Customers", "customers");
                 });
 
-            modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Entities.Address", b =>
+            modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Customer.Customer", b =>
                 {
-                    b.HasOne("NetStore.Modules.Customers.Core.Domain.Entities.Customer", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("CustomerId");
-                });
+                    b.OwnsOne("NetStore.Modules.Customers.Core.Domain.Customer.Address", "Address", b1 =>
+                        {
+                            b1.Property<Guid>("CustomerId")
+                                .HasColumnType("uuid");
 
-            modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Entities.Customer", b =>
-                {
-                    b.Navigation("Addresses");
+                            b1.Property<string>("City")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Country")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("PostalCode")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Street")
+                                .HasColumnType("text");
+
+                            b1.HasKey("CustomerId");
+
+                            b1.ToTable("Customers", "customers");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CustomerId");
+                        });
+
+                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }

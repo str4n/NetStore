@@ -1,10 +1,9 @@
 ﻿using NetStore.Modules.Customers.Core.Domain.Exceptions;
 
-namespace NetStore.Modules.Customers.Core.Domain.Entities;
+namespace NetStore.Modules.Customers.Core.Domain.Customer;
 
 internal sealed class Address
 {
-    public Guid Id { get; set; }
     public string Country { get; set; }
     public string City { get; set; }
     public string Street { get; set; }
@@ -31,8 +30,7 @@ internal sealed class Address
         {
             throw new InvalidAddressException("Postal code cannot be empty.");
         }
-
-        Id = Guid.NewGuid();
+        
         Country = country;
         City = city;
         Street = street;

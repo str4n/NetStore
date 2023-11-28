@@ -4,7 +4,7 @@ using NetStore.Modules.Customers.Core.Mappings;
 using NetStore.Modules.Customers.Core.Repositories;
 using NetStore.Shared.Abstractions.Commands;
 
-namespace NetStore.Modules.Customers.Core.CQRS.Commands.Handlers;
+namespace NetStore.Modules.Customers.Core.Commands.Handlers;
 
 internal sealed class CompleteCustomerInformationHandler : ICommandHandler<CompleteCustomerInformation>
 {
@@ -19,16 +19,15 @@ internal sealed class CompleteCustomerInformationHandler : ICommandHandler<Compl
     
     public async Task HandleAsync(CompleteCustomerInformation command)
     {
-        var customer = await _customersRepository.GetByUserId(command.Id);
+        var customer = await _customersRepository.GetAsync(command.Id);
 
         if (customer.IsCompleted)
         {
             throw new ProfileInformationAlreadyCompletedException();
         }
         
-        customer.CompleteInformation(command.FirstName, command.LastName, command.Addresses.Select(x => x.ToEntity()));
+        customer.CompleteInformation(command.FirstName, command.LastName, command.Address.ToEntity());
 
         _dbContext.Customers.Update(customer);
-        _dbContext.Addresses.AddRange(customer.Addresses);
     }
 }

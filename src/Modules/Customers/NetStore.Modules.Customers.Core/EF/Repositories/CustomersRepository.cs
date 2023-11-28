@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NetStore.Modules.Customers.Core.Domain.Entities;
+using NetStore.Modules.Customers.Core.Domain.Customer;
 using NetStore.Modules.Customers.Core.Repositories;
 
 namespace NetStore.Modules.Customers.Core.EF.Repositories;
@@ -27,8 +27,5 @@ internal sealed class CustomersRepository : ICustomersRepository
     }
 
     public Task<Customer> GetAsync(Guid id)
-        => _customers.Include(x => x.Addresses).SingleOrDefaultAsync(x => x.Id == id);
-
-    public Task<Customer> GetByUserId(Guid id)
-        => _customers.Include(x => x.Addresses).SingleOrDefaultAsync(x => x.UserId == id);
+        => _customers.SingleOrDefaultAsync(x => x.Id == id);
 }

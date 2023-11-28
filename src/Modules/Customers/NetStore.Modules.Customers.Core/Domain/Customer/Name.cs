@@ -1,6 +1,6 @@
 ﻿using NetStore.Modules.Customers.Core.Domain.Exceptions;
 
-namespace NetStore.Modules.Customers.Core.Domain.ValueObjects;
+namespace NetStore.Modules.Customers.Core.Domain.Customer;
 
 internal sealed record Name
 {

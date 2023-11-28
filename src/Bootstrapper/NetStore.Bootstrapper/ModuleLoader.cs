@@ -30,7 +30,7 @@ public static class ModuleLoader
         foreach (var module in RegisteredModules.Values)
         {
             module.AddModule(services, configuration);
-            Logger.LogInformation("Added {name} module!", module.Name);
+            Logger.LogInformation("Loaded {name} module!", module.Name);
         }
 
         return services;

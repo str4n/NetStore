@@ -1,5 +1,5 @@
 @url = https://localhost:7240/customers-module/customers
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOTU0N2IxYy05ZDgxLTRlOGEtOTRkYS00YjZjODhiNTYwMGEiLCJ1bmlxdWVfbmFtZSI6ImY5NTQ3YjFjLTlkODEtNGU4YS05NGRhLTRiNmM4OGI1NjAwYSIsImVtYWlsIjoidGVzdG93eTEyMzRAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsIm5iZiI6MTcwMTAyNTQzMSwiZXhwIjoxNzAxMTExODMxLCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.E05gJPxuMDwigO1dW3TuaOG5rkcxTend2C3a7SHGoNM
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzFkN2ZkZi1iZDM0LTQyNGEtYjFlZS03OGVjODI0NGZmMmUiLCJ1bmlxdWVfbmFtZSI6IjY3MWQ3ZmRmLWJkMzQtNDI0YS1iMWVlLTc4ZWM4MjQ0ZmYyZSIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNzAxMjAwMTg2LCJleHAiOjE3MDEyODY1ODYsImlzcyI6Im5ldHN0b3JlIiwiYXVkIjoibmV0c3RvcmUifQ.Z8lTHbjtMB9nf3EEdeytz-VPx9izYIAZyEAVCUDNY9M
 
 PUT {{url}}
 Authorization: Bearer {{jwt}}
@@ -8,14 +8,14 @@ Content-Type: application/json
 {
     "firstName": "Jack",
     "LastName": "Sparrow",
-    "addresses": [
-        {
-            "Country": "Poland",
-            "City": "Krakow",
-            "Street": "Testowa",
-            "PostalCode": "80-180"
-        }
-    ]
+    "Address": 
+    {
+        "Country": "Poland",
+        "City": "Krakow",
+        "Street": "Testowa",
+        "PostalCode": "80-180"
+    }
+    
 }
 
 ###

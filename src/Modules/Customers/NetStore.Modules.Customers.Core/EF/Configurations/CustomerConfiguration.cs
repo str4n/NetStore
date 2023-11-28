@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NetStore.Modules.Customers.Core.Domain.Entities;
+using NetStore.Modules.Customers.Core.Domain.Customer;
 
 namespace NetStore.Modules.Customers.Core.EF.Configurations;
 
@@ -20,6 +20,6 @@ internal sealed class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.Property(x => x.LastName)
             .HasConversion(x => x.Value, x => new(x));
 
-        builder.HasMany(x => x.Addresses).WithOne();
+        builder.OwnsOne(x => x.Address);
     }
 }

@@ -1,4 +1,4 @@
-﻿using NetStore.Modules.Customers.Core.Domain.Entities;
+﻿using NetStore.Modules.Customers.Core.Domain.Customer;
 using NetStore.Modules.Customers.Core.Repositories;
 using NetStore.Modules.Users.Shared.Events;
 using NetStore.Shared.Abstractions.Events;
@@ -16,7 +16,7 @@ internal sealed class UserCreatedEventHandler : IEventHandler<UserCreated>
     
     public async Task HandleAsync(UserCreated @event)
     {
-        var customer = new Customer(Guid.NewGuid(), @event.Email, @event.Id);
+        var customer = new Customer(@event.Id , @event.Email);
 
         await _customersRepository.AddAsync(customer);
     }
