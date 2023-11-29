@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStore.Modules.Customers.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStore.Modules.Users.Shared", "src\Modules\Users\NetStore.Modules.Users.Shared\NetStore.Modules.Users.Shared.csproj", "{516FA0A9-8CC0-472F-99B6-1F04F8294508}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStore.Shared.Types", "src\Shared\NetStore.Shared.Types\NetStore.Shared.Types.csproj", "{CCBDBD68-F10E-4419-BB33-C5F3BBF82AD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,10 @@ Global
 		{516FA0A9-8CC0-472F-99B6-1F04F8294508}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{516FA0A9-8CC0-472F-99B6-1F04F8294508}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{516FA0A9-8CC0-472F-99B6-1F04F8294508}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCBDBD68-F10E-4419-BB33-C5F3BBF82AD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCBDBD68-F10E-4419-BB33-C5F3BBF82AD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCBDBD68-F10E-4419-BB33-C5F3BBF82AD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCBDBD68-F10E-4419-BB33-C5F3BBF82AD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{23E5D7FE-AB0C-4BAB-9837-3D3E4D34AB5C} = {2D2E84B8-813D-4C83-BBD4-09CF9C0071B7}
@@ -106,5 +112,6 @@ Global
 		{C3F37F66-6322-4727-A843-3B46021B06BA} = {4AF79E93-0CAF-4E9B-B045-691ED60F147C}
 		{6772CC97-5B1F-4068-91A5-DE78D5118EF9} = {4AF79E93-0CAF-4E9B-B045-691ED60F147C}
 		{516FA0A9-8CC0-472F-99B6-1F04F8294508} = {026A0EA6-10D4-4387-A10F-3573EE3BEA7F}
+		{CCBDBD68-F10E-4419-BB33-C5F3BBF82AD9} = {6E1F8EB7-4060-4D95-9FF6-9125C616278F}
 	EndGlobalSection
 EndGlobal

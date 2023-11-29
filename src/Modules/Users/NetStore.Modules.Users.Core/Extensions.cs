@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NetStore.Modules.Users.Core.CQRS.Commands;
-using NetStore.Modules.Users.Core.CQRS.Commands.Handlers;
 using NetStore.Modules.Users.Core.Domain.Entities;
 using NetStore.Modules.Users.Core.EF;
 using NetStore.Modules.Users.Core.Services;

@@ -8,7 +8,7 @@ using NetStore.Modules.Products.Core.CQRS.Queries;
 using NetStore.Modules.Products.Core.DTO;
 using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Abstractions.Queries;
-using NetStore.Shared.Abstractions.SharedTypes.ValueObjects;
+using NetStore.Shared.Types.SharedTypes.ValueObjects;
 
 namespace NetStore.Modules.Products.Api.Endpoints;
 

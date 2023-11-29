@@ -1,6 +1,6 @@
-using NetStore.Shared.Abstractions.SharedTypes.Exceptions;
+using NetStore.Shared.Types.SharedTypes.Exceptions;
 
-namespace NetStore.Shared.Abstractions.SharedTypes.ValueObjects;
+namespace NetStore.Shared.Types.SharedTypes.ValueObjects;
 
 public sealed record Role
 {

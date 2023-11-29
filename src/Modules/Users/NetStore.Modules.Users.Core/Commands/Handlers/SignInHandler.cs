@@ -5,7 +5,7 @@ using NetStore.Modules.Users.Core.Services;
 using NetStore.Shared.Abstractions.Auth;
 using NetStore.Shared.Abstractions.Commands;
 
-namespace NetStore.Modules.Users.Core.CQRS.Commands.Handlers;
+namespace NetStore.Modules.Users.Core.Commands.Handlers;
 
 internal sealed class SignInHandler : ICommandHandler<SignIn>
 {

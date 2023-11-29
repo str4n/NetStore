@@ -3,7 +3,7 @@ using NetStore.Modules.Users.Core.Mappings;
 using NetStore.Modules.Users.Core.Repositories;
 using NetStore.Shared.Abstractions.Queries;
 
-namespace NetStore.Modules.Users.Core.CQRS.Queries.Handlers;
+namespace NetStore.Modules.Users.Core.Queries.Handlers;
 
 internal sealed class GetUserHandler : IQueryHandler<GetUser, UserDto>
 {

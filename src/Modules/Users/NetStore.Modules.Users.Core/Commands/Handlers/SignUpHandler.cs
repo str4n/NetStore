@@ -7,12 +7,11 @@ using NetStore.Modules.Users.Core.Repositories;
 using NetStore.Modules.Users.Core.Services;
 using NetStore.Modules.Users.Shared.Events;
 using NetStore.Shared.Abstractions.Commands;
-using NetStore.Shared.Abstractions.Events;
 using NetStore.Shared.Abstractions.Messaging;
-using NetStore.Shared.Abstractions.SharedTypes.ValueObjects;
 using NetStore.Shared.Abstractions.Time;
+using NetStore.Shared.Types.SharedTypes.ValueObjects;
 
-namespace NetStore.Modules.Users.Core.CQRS.Commands.Handlers;
+namespace NetStore.Modules.Users.Core.Commands.Handlers;
 
 internal sealed class SignUpHandler : ICommandHandler<SignUp>
 {

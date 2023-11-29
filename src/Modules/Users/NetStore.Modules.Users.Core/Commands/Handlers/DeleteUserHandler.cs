@@ -2,7 +2,7 @@
 using NetStore.Modules.Users.Core.Repositories;
 using NetStore.Shared.Abstractions.Commands;
 
-namespace NetStore.Modules.Users.Core.CQRS.Commands.Handlers;
+namespace NetStore.Modules.Users.Core.Commands.Handlers;
 
 internal sealed class DeleteUserHandler : ICommandHandler<DeleteUser>
 {

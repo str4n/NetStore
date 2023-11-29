@@ -3,15 +3,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using NetStore.Modules.Users.Core.CQRS.Commands;
-using NetStore.Modules.Users.Core.CQRS.Queries;
-using NetStore.Modules.Users.Core.Domain.ValueObjects;
+using NetStore.Modules.Users.Core.Commands;
 using NetStore.Modules.Users.Core.DTO;
+using NetStore.Modules.Users.Core.Queries;
 using NetStore.Shared.Abstractions.Auth;
 using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Abstractions.Contexts;
 using NetStore.Shared.Abstractions.Queries;
-using NetStore.Shared.Abstractions.SharedTypes.ValueObjects;
+using NetStore.Shared.Types.SharedTypes.ValueObjects;
 
 namespace NetStore.Modules.Users.Api.Endpoints;
 

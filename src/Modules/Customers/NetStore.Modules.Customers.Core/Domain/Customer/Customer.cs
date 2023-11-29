@@ -1,4 +1,4 @@
-﻿using NetStore.Shared.Abstractions.SharedTypes.ValueObjects;
+﻿using NetStore.Shared.Types.SharedTypes.ValueObjects;
 
 namespace NetStore.Modules.Customers.Core.Domain.Customer;
 
