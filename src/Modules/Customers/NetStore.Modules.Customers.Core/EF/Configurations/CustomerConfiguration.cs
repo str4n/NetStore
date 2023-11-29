@@ -20,6 +20,8 @@ internal sealed class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.Property(x => x.LastName)
             .HasConversion(x => x.Value, x => new(x));
 
+        builder.Property(x => x.CustomerStatus).HasConversion<string>();
+
         builder.OwnsOne(x => x.Address);
     }
 }

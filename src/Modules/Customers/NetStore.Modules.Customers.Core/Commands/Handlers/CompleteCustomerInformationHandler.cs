@@ -21,7 +21,7 @@ internal sealed class CompleteCustomerInformationHandler : ICommandHandler<Compl
     {
         var customer = await _customersRepository.GetAsync(command.Id);
 
-        if (customer.IsCompleted)
+        if (customer.IsCompleted())
         {
             throw new ProfileInformationAlreadyCompletedException();
         }

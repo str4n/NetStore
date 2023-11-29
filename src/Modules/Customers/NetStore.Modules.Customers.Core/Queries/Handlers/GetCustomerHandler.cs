@@ -1,4 +1,5 @@
-﻿using NetStore.Modules.Customers.Core.DTO;
+﻿using NetStore.Modules.Customers.Core.Domain.Customer;
+using NetStore.Modules.Customers.Core.DTO;
 using NetStore.Modules.Customers.Core.Mappings;
 using NetStore.Modules.Customers.Core.Repositories;
 using NetStore.Shared.Abstractions.Queries;
@@ -15,5 +16,15 @@ internal sealed class GetCustomerHandler : IQueryHandler<GetCustomer, CustomerDt
     }
 
     public async Task<CustomerDto> HandleAsync(GetCustomer query)
-        => (await _customersRepository.GetAsync(query.Id)).AsDto();
+    {
+        var customer = await _customersRepository.GetAsync(query.Id);
+
+        if (!customer.IsCompleted())
+        {
+            return new CustomerDto(customer.Id, default, default, customer.Email, default);
+        }
+
+        return customer.AsDto();
+    }
+    
 }

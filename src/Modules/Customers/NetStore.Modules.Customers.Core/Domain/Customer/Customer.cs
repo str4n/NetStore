@@ -9,7 +9,7 @@ internal sealed class Customer
     public Name LastName { get; private set; }
     public Email Email { get; private set; }
     public Address Address { get; private set; }
-    public bool IsCompleted { get; private set; }
+    public CustomerStatus CustomerStatus { get; private set; } = CustomerStatus.InformationNotCompleted;
 
     // TODO: Orders history
     // TODO: Payment methods
@@ -42,7 +42,7 @@ internal sealed class Customer
         LastName = lastName;
         Address = address;
 
-        IsCompleted = true;
+        CustomerStatus = CustomerStatus.InformationCompleted;
     }
 
     public static Customer CreateFromUser(Guid id, Email email)
@@ -51,4 +51,6 @@ internal sealed class Customer
     public void UpdateFirstName(Name firstname) => FirstName = firstname;
     public void UpdateLastName(Name lastname) => LastName = lastname;
     public void UpdateAddress(Address address) => Address = address;
+
+    public bool IsCompleted() => CustomerStatus is CustomerStatus.InformationCompleted;
 }
