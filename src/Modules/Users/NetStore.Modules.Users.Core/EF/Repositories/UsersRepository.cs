@@ -2,7 +2,7 @@
 using NetStore.Modules.Users.Core.Domain.Entities;
 using NetStore.Modules.Users.Core.Domain.ValueObjects;
 using NetStore.Modules.Users.Core.Repositories;
-using NetStore.Shared.Types.SharedTypes.ValueObjects;
+using NetStore.Shared.Types.ValueObjects;
 
 namespace NetStore.Modules.Users.Core.EF.Repositories;
 

@@ -10,7 +10,7 @@ using NetStore.Shared.Abstractions.Auth;
 using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Abstractions.Contexts;
 using NetStore.Shared.Abstractions.Queries;
-using NetStore.Shared.Types.SharedTypes.ValueObjects;
+using NetStore.Shared.Types.ValueObjects;
 
 namespace NetStore.Modules.Users.Api.Endpoints;
 
