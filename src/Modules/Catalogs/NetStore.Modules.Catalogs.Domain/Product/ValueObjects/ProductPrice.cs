@@ -2,7 +2,7 @@
 
 namespace NetStore.Modules.Catalogs.Domain.Product.ValueObjects;
 
-internal sealed record ProductPrice
+public sealed record ProductPrice
 {
     public double Value { get; }
 

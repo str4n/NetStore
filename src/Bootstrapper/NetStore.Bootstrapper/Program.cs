@@ -14,8 +14,8 @@ ModuleLoader.Load<CustomersModule>();
 builder.Host.UseLogging();
 
 builder.Services
-    .AddInfrastructure(builder.Configuration)
-    .AddModules(builder.Configuration);
+    .AddModules(builder.Configuration)
+    .AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 

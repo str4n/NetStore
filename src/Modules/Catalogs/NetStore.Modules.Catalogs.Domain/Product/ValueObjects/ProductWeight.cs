@@ -2,7 +2,7 @@
 
 namespace NetStore.Modules.Catalogs.Domain.Product.ValueObjects;
 
-internal sealed record ProductWeight
+public sealed record ProductWeight
 {
     public double Value { get; }
     public WeightUnit Unit { get; }
@@ -16,6 +16,10 @@ internal sealed record ProductWeight
 
         Value = value;
         Unit = unit;
+    }
+
+    private ProductWeight()
+    {
     }
 
     public ProductWeight ConvertTo(WeightUnit unit)

@@ -1,24 +1,29 @@
 ﻿namespace NetStore.Modules.Catalogs.Domain.Category;
 
-internal sealed class Category
+public sealed class Category
 {
-    public Guid Id { get; private set; }
+    public long Id { get; private set; }
     public CategoryName Name { get; private set; }
     public CategoryDescription Description { get; private set; }
-    public string Code => GetCode();
+    public string Code { get; private set; }
 
     public static Category Create(CategoryName name, CategoryDescription description)
-        => new Category()
+    {
+        var category = new Category
         {
-            Id = Guid.NewGuid(),
             Name = name,
             Description = description
         };
+
+        category.Code = category.GenerateCode();
+
+        return category;
+    }
     
     public void UpdateName(CategoryName name) => Name = name;
     public void UpdateDescription(CategoryDescription description) => Description = description;
     
-    private string GetCode()
+    private string GenerateCode()
     {
         var codeFirstPart = Name.Value[0];
         var codeSecondPart = new Random().Next(100, 999);

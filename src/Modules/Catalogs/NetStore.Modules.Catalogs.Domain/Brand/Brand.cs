@@ -1,6 +1,6 @@
 ﻿namespace NetStore.Modules.Catalogs.Domain.Brand;
 
-internal sealed class Brand
+public sealed class Brand
 {
     public long Id { get; private set; }
     public BrandName Name { get; private set; }

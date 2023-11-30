@@ -4,7 +4,7 @@ using NetStore.Shared.Types.Domain;
 
 namespace NetStore.Modules.Catalogs.Domain.Product;
 
-internal sealed class Product : Aggregate
+public sealed class Product : Aggregate
 {
     public ProductName Name { get; private set; }
     public ProductDescription Description { get; private set; }

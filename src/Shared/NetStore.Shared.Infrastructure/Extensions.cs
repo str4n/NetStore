@@ -40,6 +40,16 @@ internal static class Extensions
         services.AddAuth(configuration);
 
         services.AddControllers();
+
+        services.AddSwaggerGen(swagger =>
+        {
+            swagger.CustomSchemaIds(x => x.FullName);
+            swagger.SwaggerDoc("v1", new OpenApiInfo()
+            {
+                Title = "NetStore API",
+                Version = "v1"
+            });
+        });
         
         services.AddEvents();
         
@@ -52,17 +62,6 @@ internal static class Extensions
         services.AddMessaging();
 
         services.AddTransactionalDecorators();
-        
-
-        services.AddSwaggerGen(swagger =>
-        {
-            swagger.CustomSchemaIds(x => x.FullName);
-            swagger.SwaggerDoc("v1", new OpenApiInfo()
-            {
-                Title = "NetStore API",
-                Version = "v1"
-            });
-        });
 
         return services;
     }

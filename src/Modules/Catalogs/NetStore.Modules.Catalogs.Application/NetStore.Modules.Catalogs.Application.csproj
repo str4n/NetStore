@@ -9,4 +9,9 @@
       <ProjectReference Include="..\NetStore.Modules.Catalogs.Infrastructure\NetStore.Modules.Catalogs.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="DTO\" />
+      <Folder Include="Queries\" />
+    </ItemGroup>
+
 </Project>

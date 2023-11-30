@@ -2,7 +2,7 @@
 
 namespace NetStore.Modules.Catalogs.Domain.Brand;
 
-internal sealed record BrandName
+public sealed record BrandName
 {
     public string Value { get; }
 

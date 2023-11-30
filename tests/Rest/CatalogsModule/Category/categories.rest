@@ -1,24 +1,11 @@
-@url = https://localhost:7240/customers-module/customers
+@url = https://localhost:7240/catalogs-module/categories
 @jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNWZlNTQ3OC0zMTMyLTQzMGUtODk1Yy0yMjQwZTZkMzU4NmYiLCJ1bmlxdWVfbmFtZSI6IjM1ZmU1NDc4LTMxMzItNDMwZS04OTVjLTIyNDBlNmQzNTg2ZiIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMTM4MzY2MywiZXhwIjoxNzAxNDcwMDYzLCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.n4uDZTrn6owAZOctUNrfXy5SMm7Usy38BfVcGIoqa8A
 
-PUT {{url}}
+POST {{url}}
 Authorization: Bearer {{jwt}}
 Content-Type: application/json
 
 {
-    "firstName": "Jack",
-    "LastName": "Sparrow",
-    "Address": 
-    {
-        "Country": "Poland",
-        "City": "Krakow",
-        "Street": "Testowa",
-        "PostalCode": "80-180"
-    }
-    
+    "name": "Down jackets",
+    "description": "Very comfy and warm jackets"
 }
-
-###
-
-GET {{url}}
-Authorization: Bearer {{jwt}}

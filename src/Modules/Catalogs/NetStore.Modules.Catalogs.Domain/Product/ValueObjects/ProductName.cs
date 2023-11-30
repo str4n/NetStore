@@ -2,7 +2,7 @@
 
 namespace NetStore.Modules.Catalogs.Domain.Product.ValueObjects;
 
-internal sealed record ProductName
+public sealed record ProductName
 {
     public string Value { get; }
 

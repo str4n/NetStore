@@ -2,7 +2,7 @@
 
 namespace NetStore.Modules.Catalogs.Domain.Category;
 
-internal sealed record CategoryDescription
+public sealed record CategoryDescription
 {
     public string Value { get; }
 
