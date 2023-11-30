@@ -11,8 +11,8 @@ internal sealed class Product : Aggregate
     public Category.Category Category { get; private set; }
     public Brand.Brand Brand { get; private set; }
     public ProductModel Model { get; private set; }
-    public ProductPrice Price { get; private set; }
-    
+    public ProductPrice NetPrice { get; private set; }
+    public ProductPrice GrossPrice { get; private set; }
     public ProductFabric Fabric { get; private set; }
     public ProductWeight Weight { get; private set; }
     public Gender Gender { get; private set; }
@@ -24,11 +24,16 @@ internal sealed class Product : Aggregate
     public static Product Create(ProductName name, ProductDescription description, ProductPrice price,
         Category.Category category, Brand.Brand brand, ProductModel model, ProductFabric fabric, ProductWeight weight,
         Gender gender, AgeCategory ageCategory, Size size, Color color, string sku)
-        => new Product
+    {
+        var product = new Product
         {
             Name = name,
             Description = description,
-            Price = price,
+            NetPrice = price,
+            
+            // Does this logic belong to the Product itself? TODO: Legal module
+            GrossPrice = CalculateGrossPrice(price, ageCategory),
+            
             Category = category,
             Brand = brand,
             Model = model,
@@ -39,5 +44,98 @@ internal sealed class Product : Aggregate
             Size = size,
             Color = color,
             SKU = sku
+        };
+        
+        product.ClearEvents();
+
+        return product;
+    }
+
+    #region UpdateMethods
+    public void ChangeName(ProductName name)
+    {
+        Name = name;
+        IncrementVersion();
+    }
+
+    public void ChangeDescription(ProductDescription description)
+    {
+        Description = description;
+        IncrementVersion();
+    }
+
+    public void ChangeCategory(Category.Category category)
+    {
+        Category = category;
+        IncrementVersion();
+    }
+
+    public void ChangeBrand(Brand.Brand brand)
+    {
+        Brand = brand;
+        IncrementVersion();
+    }
+
+    public void ChangeModel(ProductModel model)
+    {
+        Model = model;
+        IncrementVersion();
+    }
+
+    public void ChangePrice(ProductPrice price)
+    {
+        NetPrice = price;
+        IncrementVersion();
+    }
+
+    public void ChangeFabric(ProductFabric fabric)
+    {
+        Fabric = fabric;
+        IncrementVersion();
+    }
+
+    public void ChangeWeight(ProductWeight weight)
+    {
+        Weight = weight;
+        IncrementVersion();
+    }
+
+    public void ChangeGender(Gender gender)
+    {
+        Gender = gender;
+        IncrementVersion();
+    }
+
+    public void ChangeAgeCategory(AgeCategory ageCategory)
+    {
+        AgeCategory = ageCategory;
+        IncrementVersion();
+    }
+
+    public void ChangeSize(Size size)
+    {
+        Size = size;
+        IncrementVersion();
+    }
+
+    public void ChangeColor(Color color)
+    {
+        Color = color;
+        IncrementVersion();
+    }
+
+    public void ChangeSKU(string sku)
+    {
+        SKU = sku;
+        IncrementVersion();
+    }
+    #endregion
+
+    private static ProductPrice CalculateGrossPrice(ProductPrice price, AgeCategory ageCategory)
+        => ageCategory switch
+        {
+            AgeCategory.Child or AgeCategory.Teenager => price.Value + price * 0.05,
+            AgeCategory.Adult => price.Value + price * 0.23,
+            _ => throw new ArgumentOutOfRangeException(nameof(ageCategory), ageCategory, null)
         };
 }
