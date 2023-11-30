@@ -11,5 +11,8 @@
     </ItemGroup>
 
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="NetStore.Modules.Catalogs.Infrastructure" />
+    </ItemGroup>
 
 </Project>

@@ -20,6 +20,8 @@ internal sealed class Product : Aggregate
     public Size Size { get; private set; }
     public Color Color { get; private set; }
     public string SKU { get; private set; }
+    
+    // TODO: Product state
 
     public static Product Create(ProductName name, ProductDescription description, ProductPrice price,
         Category.Category category, Brand.Brand brand, ProductModel model, ProductFabric fabric, ProductWeight weight,

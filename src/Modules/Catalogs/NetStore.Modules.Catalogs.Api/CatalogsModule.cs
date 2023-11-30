@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NetStore.Modules.Catalogs.Infrastructure;
 using NetStore.Shared.Abstractions.Modules;
 
 namespace NetStore.Modules.Catalogs.Api;
@@ -11,6 +12,7 @@ public sealed class CatalogsModule : Module
     public override string Path => BasePath;
     public override void AddModule(IServiceCollection services, IConfiguration configuration)
     {
+        services.AddInfrastructure(configuration);
     }
 
     public override void UseModule(WebApplication app)
