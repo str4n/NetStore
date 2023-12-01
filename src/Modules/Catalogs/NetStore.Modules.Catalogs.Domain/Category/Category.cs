@@ -26,7 +26,7 @@ public sealed class Category
     private string GenerateCode()
     {
         var codeFirstPart = Name.Value[0];
-        var codeSecondPart = new Random().Next(100, 999);
+        var codeSecondPart = new Random().Next(1000, 9999);
 
         return $"{codeFirstPart}-{codeSecondPart}";
     }

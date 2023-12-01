@@ -30,4 +30,10 @@ internal sealed class CategoryRepository : ICategoryRepository
         _dbContext.Categories.Update(category);
         return Task.CompletedTask;
     }
+
+    public Task DeleteAsync(long id)
+    {
+        _dbContext.Categories.Where(x => x.Id == id).ExecuteDelete();
+        return Task.CompletedTask;
+    }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetStore.Modules.Catalogs.Api.Endpoints;
+using NetStore.Modules.Catalogs.Api.Endpoints.Category;
 using NetStore.Modules.Catalogs.Application;
 using NetStore.Modules.Catalogs.Infrastructure;
 using NetStore.Shared.Abstractions.Modules;

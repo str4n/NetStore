@@ -4,10 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using NetStore.Modules.Catalogs.Application.DTO;
 using NetStore.Modules.Catalogs.Application.Queries;
-using NetStore.Modules.Catalogs.Application.Queries.Handlers;
 using NetStore.Shared.Abstractions.Queries;
 
-namespace NetStore.Modules.Catalogs.Api.Endpoints;
+namespace NetStore.Modules.Catalogs.Api.Endpoints.Category;
 
 internal static class CategoryCustomerEndpoints
 {

@@ -12,9 +12,26 @@ Content-Type: application/json
 
 ###
 
+PUT {{url}}/1
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+    "name": "Sample jackets",
+    "description": "A new sample description"
+}
+
+###
+
+DELETE {{url}}/1
+Authorization: Bearer {{jwt}}
+
+
+###
+
 GET {{url}}/all
 
 
 ###
 
-GET {{url}}?code=D-504
+GET {{url}}?code=D-5049
