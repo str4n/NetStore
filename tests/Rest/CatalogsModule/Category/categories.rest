@@ -9,3 +9,12 @@ Content-Type: application/json
     "name": "Down jackets",
     "description": "Very comfy and warm jackets"
 }
+
+###
+
+GET {{url}}/all
+
+
+###
+
+GET {{url}}?code=D-504

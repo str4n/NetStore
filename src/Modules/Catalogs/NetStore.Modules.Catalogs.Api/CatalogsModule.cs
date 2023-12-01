@@ -21,6 +21,8 @@ public sealed class CatalogsModule : Module
 
     public override void UseModule(WebApplication app)
     {
-        app.MapCategoryEmployeeEndpoints();
+        app
+            .MapCategoryEmployeeEndpoints()
+            .MapCategoryCustomerEndpoints();
     }
 }

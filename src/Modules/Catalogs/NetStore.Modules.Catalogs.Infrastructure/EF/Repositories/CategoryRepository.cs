@@ -15,6 +15,9 @@ internal sealed class CategoryRepository : ICategoryRepository
 
     public Task<Category> GetAsync(long id)
         => _dbContext.Categories.SingleOrDefaultAsync(x => x.Id == id);
+    
+    public Task<Category> GetByCodeAsync(string code)
+        => _dbContext.Categories.SingleOrDefaultAsync(x => x.Code == code);
 
     public async Task<IEnumerable<Category>> GetAllAsync()
         => await _dbContext.Categories.ToListAsync();
