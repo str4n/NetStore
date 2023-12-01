@@ -23,7 +23,7 @@ public sealed class Product : Aggregate
     
     // TODO: Product state
 
-    public static Product Create(ProductName name, ProductDescription description, ProductPrice price,
+    public static Product Create(ProductName name, ProductDescription description, 
         Category.Category category, Brand.Brand brand, ProductModel model, ProductFabric fabric, ProductWeight weight,
         Gender gender, AgeCategory ageCategory, Size size, Color color, string sku)
     {
@@ -31,10 +31,9 @@ public sealed class Product : Aggregate
         {
             Name = name,
             Description = description,
-            NetPrice = price,
             
             // Does this logic belong to the Product itself? TODO: Legal module
-            GrossPrice = CalculateGrossPrice(price, ageCategory),
+            // GrossPrice = CalculateGrossPrice(price, ageCategory),
             
             Category = category,
             Brand = brand,
@@ -84,9 +83,17 @@ public sealed class Product : Aggregate
         IncrementVersion();
     }
 
-    public void ChangePrice(ProductPrice price)
+    internal void ChangePrice(ProductPrice netPrice, ProductPrice grossPrice)
     {
-        NetPrice = price;
+        if (GrossPrice.Value is default(double) && NetPrice.Value is default(double))
+        {
+            NetPrice = netPrice;
+            GrossPrice = grossPrice;
+            return;
+        }
+        
+        NetPrice = netPrice;
+        GrossPrice = grossPrice;
         IncrementVersion();
     }
 
@@ -132,12 +139,5 @@ public sealed class Product : Aggregate
         IncrementVersion();
     }
     #endregion
-
-    private static ProductPrice CalculateGrossPrice(ProductPrice price, AgeCategory ageCategory)
-        => ageCategory switch
-        {
-            AgeCategory.Child or AgeCategory.Teenager => price.Value + price * 0.05,
-            AgeCategory.Adult => price.Value + price * 0.23,
-            _ => throw new ArgumentOutOfRangeException(nameof(ageCategory), ageCategory, null)
-        };
+    
 }
