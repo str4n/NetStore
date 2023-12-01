@@ -10,6 +10,7 @@ using NetStore.Shared.Abstractions.Auth;
 using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Abstractions.Contexts;
 using NetStore.Shared.Abstractions.Queries;
+using NetStore.Shared.Infrastructure.Auth.Policies;
 using NetStore.Shared.Types.ValueObjects;
 
 namespace NetStore.Modules.Users.Api.Endpoints;
@@ -25,7 +26,7 @@ internal static class UsersEndpoints
         app.MapPost(Route + "/sign-up", SignUp);
         app.MapPost(Route + "/sign-in", SignIn);
 
-        app.MapDelete(Route + "/{id:guid}", Delete).RequireAuthorization();
+        app.MapDelete(Route + "/{id:guid}", Delete).RequireAuthorization(Policies.AtLeastAdmin);
 
         return app;
     }
@@ -53,8 +54,7 @@ internal static class UsersEndpoints
         
         return Results.Ok(token);
     }
-
-    [Authorize(Roles = Role.Admin)]
+    
     private static async Task<IResult> Delete([FromRoute]Guid id, [FromServices]ICommandDispatcher commandDispatcher)
     {
         var command = new DeleteUser(id);

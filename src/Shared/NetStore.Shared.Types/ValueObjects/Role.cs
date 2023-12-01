@@ -4,10 +4,12 @@ namespace NetStore.Shared.Types.ValueObjects;
 
 public sealed record Role
 {
-    private static readonly string[] AvailableRoles = { Admin, User };
+    public static readonly string[] RoleHierarchy = { User, Employee, Admin }; // the first role has the least permissions
+    private static readonly string[] AvailableRoles = { Admin, User, Employee };
     
     public const string User = "user";
     public const string Admin = "admin";
+    public const string Employee = "employee";
     
     public string Value { get; }
 

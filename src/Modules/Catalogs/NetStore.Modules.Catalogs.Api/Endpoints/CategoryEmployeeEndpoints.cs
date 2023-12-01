@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using NetStore.Modules.Catalogs.Application.Commands;
 using NetStore.Shared.Abstractions.Commands;
-using NetStore.Shared.Types.ValueObjects;
+using NetStore.Shared.Infrastructure.Auth.Policies;
 
 namespace NetStore.Modules.Catalogs.Api.Endpoints;
 
@@ -15,12 +14,11 @@ internal static class CategoryEmployeeEndpoints
     
     public static IEndpointRouteBuilder MapCategoryEmployeeEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapPost(Route, Create).RequireAuthorization();
+        app.MapPost(Route, Create).RequireAuthorization(Policies.AtLeastEmployee);
         
         return app;
     }
     
-    [Authorize(Roles = Role.Admin)]
     private static async Task<IResult> Create([FromBody] CreateCategory command,
         [FromServices] ICommandDispatcher commandDispatcher)
     {

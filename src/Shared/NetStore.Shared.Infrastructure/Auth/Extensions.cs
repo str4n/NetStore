@@ -1,9 +1,13 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using NetStore.Shared.Abstractions.Auth;
+using NetStore.Shared.Infrastructure.Auth.Policies;
+using NetStore.Shared.Infrastructure.Auth.Policies.Handlers;
+using NetStore.Shared.Types.ValueObjects;
 
 namespace NetStore.Shared.Infrastructure.Auth;
 
@@ -36,7 +40,13 @@ internal static class Extensions
             };
         });
 
-        services.AddAuthorization();
+        services.AddScoped<IAuthorizationHandler, RoleRequirementHandler>();
+
+        services.AddAuthorization(authorizationOptions =>
+        {
+            authorizationOptions.AddPolicy(Policies.Policies.AtLeastEmployee, builder => builder.AddRequirements(new RoleRequirement(Role.Employee)));
+            authorizationOptions.AddPolicy(Policies.Policies.AtLeastAdmin, builder => builder.AddRequirements(new RoleRequirement(Role.Admin)));
+        });
 
         return services;
     }
