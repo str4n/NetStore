@@ -19,8 +19,8 @@ internal sealed class ProductRepository : IProductRepository
     public async Task<IEnumerable<Product>> GetAllAsync()
         => await _catalogsDbContext.Products.ToListAsync();
 
-    public async Task AddAsync(Product product)
-        => await _catalogsDbContext.Products.AddAsync(product);
+    public async Task AddAsync(IEnumerable<Product> products)
+        => await _catalogsDbContext.Products.AddRangeAsync(products);
 
     public Task UpdateAsync(Product product)
     {

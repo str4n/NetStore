@@ -9,7 +9,9 @@ public sealed class Product : Aggregate
     public ProductName Name { get; private set; }
     public ProductDescription Description { get; private set; }
     public Category.Category Category { get; private set; }
+    public long CategoryId { get; private set; }
     public Brand.Brand Brand { get; private set; }
+    public long BrandId { get; private set; }
     public ProductModel Model { get; private set; }
     public ProductPrice NetPrice { get; private set; }
     public ProductPrice GrossPrice { get; private set; }
@@ -23,20 +25,21 @@ public sealed class Product : Aggregate
     
     // TODO: Product state
 
-    public static Product Create(ProductName name, ProductDescription description, 
-        Category.Category category, Brand.Brand brand, ProductModel model, ProductFabric fabric, ProductWeight weight,
+    public static Product Create(AggregateId id, ProductName name, ProductDescription description, 
+        long categoryId, long brandId, ProductModel model, ProductFabric fabric, ProductWeight weight,
         Gender gender, AgeCategory ageCategory, Size size, Color color, string sku)
     {
         var product = new Product
         {
+            Id = id,
             Name = name,
             Description = description,
             
             // Does this logic belong to the Product itself? TODO: Legal module
             // GrossPrice = CalculateGrossPrice(price, ageCategory),
             
-            Category = category,
-            Brand = brand,
+            CategoryId = categoryId,
+            BrandId = brandId,
             Model = model,
             Fabric = fabric,
             Weight = weight,
@@ -85,7 +88,7 @@ public sealed class Product : Aggregate
 
     internal void ChangePrice(ProductPrice netPrice, ProductPrice grossPrice)
     {
-        if (GrossPrice.Value is default(double) && NetPrice.Value is default(double))
+        if (GrossPrice is null && NetPrice is null)
         {
             NetPrice = netPrice;
             GrossPrice = grossPrice;

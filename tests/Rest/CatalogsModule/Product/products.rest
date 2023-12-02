@@ -1,4 +1,4 @@
-@url = https://localhost:7240/catalogs-module/categories
+@url = https://localhost:7240/catalogs-module/products
 @jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNWZlNTQ3OC0zMTMyLTQzMGUtODk1Yy0yMjQwZTZkMzU4NmYiLCJ1bmlxdWVfbmFtZSI6IjM1ZmU1NDc4LTMxMzItNDMwZS04OTVjLTIyNDBlNmQzNTg2ZiIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMTU0NjI2OCwiZXhwIjoxNzAxNjMyNjY4LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.BFufLWbAGg8yABMVbnXNoR0Xvbr1LIa4lZOWQEtZjU0
 
 POST {{url}}
@@ -6,32 +6,12 @@ Authorization: Bearer {{jwt}}
 Content-Type: application/json
 
 {
-    "name": "Down jackets",
-    "description": "Very comfy and warm jackets"
+    "mockupid": 1,
+    "count": 4,
+    "agecategory": "Adult",
+    "size": "M",
+    "Color": "Black",
+    "price": 1299,
+    "weight": 460,
+    "weightUnit": "Gram"
 }
-
-###
-
-PUT {{url}}/1
-Authorization: Bearer {{jwt}}
-Content-Type: application/json
-
-{
-    "name": "Sample jackets",
-    "description": "A new sample description"
-}
-
-###
-
-DELETE {{url}}/1
-Authorization: Bearer {{jwt}}
-
-
-###
-
-GET {{url}}/all
-
-
-###
-
-GET {{url}}?code=D-2223

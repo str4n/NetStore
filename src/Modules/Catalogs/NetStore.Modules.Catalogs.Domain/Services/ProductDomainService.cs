@@ -5,9 +5,8 @@ namespace NetStore.Modules.Catalogs.Domain.Services;
 
 internal sealed class ProductDomainService : IProductDomainService
 {
-    public void SetProductPrice(Product.Product product)
+    public void SetProductPrice(Product.Product product, ProductPrice netPrice)
     {
-        var netPrice = product.NetPrice;
         var ageCategory = product.AgeCategory;
         
         var grossPrice = ageCategory switch

@@ -4,5 +4,5 @@ namespace NetStore.Modules.Catalogs.Domain.Services;
 
 public interface IProductDomainService
 {
-    void SetProductPrice(Product.Product product);
+    void SetProductPrice(Product.Product product, ProductPrice netPrice);
 }

@@ -2,8 +2,12 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetStore.Modules.Catalogs.Api.Endpoints;
+using NetStore.Modules.Catalogs.Api.Endpoints.Brand;
 using NetStore.Modules.Catalogs.Api.Endpoints.Category;
+using NetStore.Modules.Catalogs.Api.Endpoints.Product;
+using NetStore.Modules.Catalogs.Api.Endpoints.ProductMockup;
 using NetStore.Modules.Catalogs.Application;
+using NetStore.Modules.Catalogs.Domain;
 using NetStore.Modules.Catalogs.Infrastructure;
 using NetStore.Shared.Abstractions.Modules;
 
@@ -17,6 +21,7 @@ public sealed class CatalogsModule : Module
     {
         services
             .AddApplication()
+            .AddDomain()
             .AddInfrastructure(configuration);
     }
 
@@ -25,5 +30,13 @@ public sealed class CatalogsModule : Module
         app
             .MapCategoryAdminEndpoints()
             .MapCategoryCustomerEndpoints();
+
+        app
+            .MapBrandAdminEndpoints()
+            .MapBrandCustomerEndpoints();
+
+        app.MapProductMockupEndpoints();
+
+        app.MapProductAdminEndpoints();
     }
 }

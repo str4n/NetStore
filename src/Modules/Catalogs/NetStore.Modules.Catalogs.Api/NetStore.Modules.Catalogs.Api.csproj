@@ -8,10 +8,6 @@
     <ItemGroup>
       <ProjectReference Include="..\NetStore.Modules.Catalogs.Application\NetStore.Modules.Catalogs.Application.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Endpoints\Brand\" />
-    </ItemGroup>
     
 
 </Project>
