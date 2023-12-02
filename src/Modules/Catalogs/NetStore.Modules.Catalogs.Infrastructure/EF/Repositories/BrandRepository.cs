@@ -16,6 +16,9 @@ internal sealed class BrandRepository : IBrandRepository
     public Task<Brand> GetAsync(long id)
         => _dbContext.Brands.SingleOrDefaultAsync(x => x.Id == id);
 
+    public Task<Brand> GetByNameAsync(string name)
+        => _dbContext.Brands.SingleOrDefaultAsync(x => x.Name == name);
+
     public async Task AddAsync(Brand brand)
         => await _dbContext.Brands.AddAsync(brand);
 
