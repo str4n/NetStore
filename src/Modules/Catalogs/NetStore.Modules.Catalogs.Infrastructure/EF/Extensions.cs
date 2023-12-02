@@ -16,7 +16,9 @@ internal static class Extensions
         
         services
             .AddScoped<ICategoryRepository, CategoryRepository>()
-            .AddScoped<IBrandRepository, BrandRepository>();
+            .AddScoped<IBrandRepository, BrandRepository>()
+            .AddScoped<IProductRepository, ProductRepository>()
+            .AddScoped<IProductMockupRepository, ProductMockupRepository>();
 
         return services;
     }
