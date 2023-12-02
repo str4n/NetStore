@@ -8,15 +8,15 @@ using NetStore.Shared.Infrastructure.Auth.Policies;
 
 namespace NetStore.Modules.Catalogs.Api.Endpoints.Category;
 
-internal static class CategoryEmployeeEndpoints
+internal static class CategoryAdminEndpoints
 {
     private const string Route = CatalogsModule.BasePath + "/categories";
     
-    public static IEndpointRouteBuilder MapCategoryEmployeeEndpoints(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder MapCategoryAdminEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapPost(Route, Create).RequireAuthorization(Policies.AtLeastEmployee);
-        app.MapPut(Route + "/{id:long}", Update).RequireAuthorization(Policies.AtLeastEmployee);
-        app.MapDelete(Route + "/{id:long}", Delete).RequireAuthorization(Policies.AtLeastEmployee);
+        app.MapPost(Route, Create).RequireAuthorization(Policies.AtLeastAdmin);
+        app.MapPut(Route + "/{id:long}", Update).RequireAuthorization(Policies.AtLeastAdmin);
+        app.MapDelete(Route + "/{id:long}", Delete).RequireAuthorization(Policies.AtLeastAdmin);
         
         return app;
     }
