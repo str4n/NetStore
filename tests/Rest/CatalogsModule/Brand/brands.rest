@@ -8,3 +8,7 @@ Content-Type: application/json
 {
     "name": "The North Face"
 }
+
+###
+
+GET {{url}}
