@@ -45,6 +45,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStore.Modules.Catalogs.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStore.Modules.Catalogs.Infrastructure", "src\Modules\Catalogs\NetStore.Modules.Catalogs.Infrastructure\NetStore.Modules.Catalogs.Infrastructure.csproj", "{702E59FD-EEBA-487F-9BEF-565CF98DB7FA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orders", "Orders", "{5CDCD17F-250B-46CD-B4CF-F55A57DC6A86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStore.Modules.Orders.Api", "src\Modules\Orders\NetStore.Modules.Orders.Api\NetStore.Modules.Orders.Api.csproj", "{E0F08482-5EA2-4376-B2D2-6ADE173A6FB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStore.Modules.Orders.Application", "src\Modules\Orders\NetStore.Modules.Orders.Application\NetStore.Modules.Orders.Application.csproj", "{BC92FED3-150E-499D-B04F-11CC7D8C0D92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStore.Modules.Orders.Domain", "src\Modules\Orders\NetStore.Modules.Orders.Domain\NetStore.Modules.Orders.Domain.csproj", "{08B2C788-FEF8-4666-A86E-7180A109E3A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStore.Modules.Orders.Infrastructure", "src\Modules\Orders\NetStore.Modules.Orders.Infrastructure\NetStore.Modules.Orders.Infrastructure.csproj", "{84742939-7079-4F68-8A03-494A980D2F35}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +116,22 @@ Global
 		{702E59FD-EEBA-487F-9BEF-565CF98DB7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{702E59FD-EEBA-487F-9BEF-565CF98DB7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{702E59FD-EEBA-487F-9BEF-565CF98DB7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F08482-5EA2-4376-B2D2-6ADE173A6FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F08482-5EA2-4376-B2D2-6ADE173A6FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F08482-5EA2-4376-B2D2-6ADE173A6FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F08482-5EA2-4376-B2D2-6ADE173A6FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC92FED3-150E-499D-B04F-11CC7D8C0D92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC92FED3-150E-499D-B04F-11CC7D8C0D92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC92FED3-150E-499D-B04F-11CC7D8C0D92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC92FED3-150E-499D-B04F-11CC7D8C0D92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08B2C788-FEF8-4666-A86E-7180A109E3A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08B2C788-FEF8-4666-A86E-7180A109E3A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08B2C788-FEF8-4666-A86E-7180A109E3A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08B2C788-FEF8-4666-A86E-7180A109E3A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84742939-7079-4F68-8A03-494A980D2F35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84742939-7079-4F68-8A03-494A980D2F35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84742939-7079-4F68-8A03-494A980D2F35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84742939-7079-4F68-8A03-494A980D2F35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{23E5D7FE-AB0C-4BAB-9837-3D3E4D34AB5C} = {2D2E84B8-813D-4C83-BBD4-09CF9C0071B7}
@@ -127,5 +153,10 @@ Global
 		{4478A0E7-9FD3-4162-BACF-65CD179F4F39} = {D26AFD43-DE26-4C48-B2D6-EBE42BA00D98}
 		{BBE8C65D-1E5F-4F02-A310-7CF86C4A07F0} = {D26AFD43-DE26-4C48-B2D6-EBE42BA00D98}
 		{702E59FD-EEBA-487F-9BEF-565CF98DB7FA} = {D26AFD43-DE26-4C48-B2D6-EBE42BA00D98}
+		{5CDCD17F-250B-46CD-B4CF-F55A57DC6A86} = {763342C3-8548-41F2-9655-0E80D2EB0E79}
+		{E0F08482-5EA2-4376-B2D2-6ADE173A6FB4} = {5CDCD17F-250B-46CD-B4CF-F55A57DC6A86}
+		{BC92FED3-150E-499D-B04F-11CC7D8C0D92} = {5CDCD17F-250B-46CD-B4CF-F55A57DC6A86}
+		{08B2C788-FEF8-4666-A86E-7180A109E3A5} = {5CDCD17F-250B-46CD-B4CF-F55A57DC6A86}
+		{84742939-7079-4F68-8A03-494A980D2F35} = {5CDCD17F-250B-46CD-B4CF-F55A57DC6A86}
 	EndGlobalSection
 EndGlobal
