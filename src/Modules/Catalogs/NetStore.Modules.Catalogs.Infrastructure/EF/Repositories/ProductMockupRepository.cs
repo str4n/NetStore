@@ -16,6 +16,9 @@ internal sealed class ProductMockupRepository : IProductMockupRepository
     public Task<ProductMockup> GetAsync(long id)
         => _catalogsDbContext.ProductMockups.SingleOrDefaultAsync(x => x.Id == id);
 
+    public async Task<IEnumerable<ProductMockup>> GetAllAsync()
+        => await _catalogsDbContext.ProductMockups.ToListAsync();
+
     public async Task AddAsync(ProductMockup mockup)
         => await _catalogsDbContext.ProductMockups.AddAsync(mockup);
 

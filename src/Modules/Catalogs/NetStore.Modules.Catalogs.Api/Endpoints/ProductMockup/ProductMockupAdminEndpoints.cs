@@ -8,11 +8,11 @@ using NetStore.Shared.Infrastructure.Auth.Policies;
 
 namespace NetStore.Modules.Catalogs.Api.Endpoints.ProductMockup;
 
-internal static class ProductMockupEndpoints
+internal static class ProductMockupAdminEndpoints
 {
     private const string Route = CatalogsModule.BasePath + "/mockups";
     
-    public static IEndpointRouteBuilder MapProductMockupEndpoints(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder MapProductMockupAdminEndpoints(this IEndpointRouteBuilder app)
     {
         app.MapPost(Route, Create).RequireAuthorization(Policies.AtLeastAdmin);
         

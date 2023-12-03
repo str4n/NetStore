@@ -14,3 +14,8 @@ Content-Type: application/json
     "fabric": "69 G/M^2, 100% Nylon",
     "Gender": "Male"
 }
+
+###
+
+GET {{url}}
+Authorization: Bearer {{jwt}}

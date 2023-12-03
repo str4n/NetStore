@@ -35,7 +35,9 @@ public sealed class CatalogsModule : Module
             .MapBrandAdminEndpoints()
             .MapBrandCustomerEndpoints();
 
-        app.MapProductMockupEndpoints();
+        app
+            .MapProductMockupAdminEndpoints()
+            .MapProductMockupEmployeeEndpoints();
 
         app
             .MapProductEmployeeEndpoints()
