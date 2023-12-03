@@ -1,4 +1,5 @@
 ﻿using NetStore.Modules.Catalogs.Application.Exceptions;
+using NetStore.Modules.Catalogs.Application.Services;
 using NetStore.Modules.Catalogs.Domain.Product;
 using NetStore.Modules.Catalogs.Domain.Product.Enums;
 using NetStore.Modules.Catalogs.Domain.Product.ValueObjects;
@@ -13,12 +14,17 @@ internal sealed class CreateProductsHandler : ICommandHandler<CreateProducts>
     private readonly IProductRepository _productRepository;
     private readonly IProductMockupRepository _productMockupRepository;
     private readonly IProductDomainService _domainService;
+    private readonly ISkuGenerator _skuGenerator;
+    private readonly ICategoryRepository _categoryRepository;
 
-    public CreateProductsHandler(IProductRepository productRepository, IProductMockupRepository productMockupRepository, IProductDomainService domainService)
+    public CreateProductsHandler(IProductRepository productRepository, IProductMockupRepository productMockupRepository, 
+        IProductDomainService domainService, ISkuGenerator skuGenerator, ICategoryRepository categoryRepository)
     {
         _productRepository = productRepository;
         _productMockupRepository = productMockupRepository;
         _domainService = domainService;
+        _skuGenerator = skuGenerator;
+        _categoryRepository = categoryRepository;
     }
     
     public async Task HandleAsync(CreateProducts command)
@@ -47,18 +53,23 @@ internal sealed class CreateProductsHandler : ICommandHandler<CreateProducts>
         {
             throw new InvalidProductColorException();
         }
+        
+        var category = await _categoryRepository.GetAsync(mockup.CategoryId);
 
+        if (category is null)
+        {
+            throw new CategoryNotFoundException();
+        }
 
         List<Product> products = new();
-        
-        
-        // TODO: SKU generator
+
+        var sku = _skuGenerator.Generate(mockup.Model, category.Name, command.Color, command.Size);
         
         for (var i = 0; i < command.Count; i++)
         {
             var product = Product.Create(Guid.NewGuid(), mockup.Name, mockup.Description, mockup.CategoryId,
                 mockup.BrandId, mockup.Model, mockup.Fabric, mockup.Gender, ageCategory, size, color,
-                "");
+                sku);
 
             _domainService.SetProductPrice(product, command.Price);
             
