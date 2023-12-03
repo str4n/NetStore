@@ -17,13 +17,24 @@ internal sealed class GetAllProductsHandler : IQueryHandler<GetAllProducts, IEnu
     
     public async Task<IEnumerable<ProductDto>> HandleAsync(GetAllProducts query)
     {
-        var products = query.GetBy switch
+        var products = (query.GetBy switch
         {
             "category" => await _productRepository.GetAllByCategoryAsync(query.Value, false),
             "brand" => await _productRepository.GetAllByBrandAsync(query.Value, false),
             _ => await _productRepository.GetAllAsync(false)
-        };
-
+        }).ToList();
+        
+        
+        var counts = products
+            .GroupBy(p => new { p.Size, p.Color, p.Name })
+            .Select(g => new { 
+                Size = g.Key.Size, 
+                Color = g.Key.Color, 
+                Name = g.Key.Name, 
+                Count = g.Count()
+            })
+            .ToList();
+        
         products = products
             .GroupBy(p => new { p.Size, p.Color, p.Name })
             .Select(g => g.First())
@@ -32,7 +43,10 @@ internal sealed class GetAllProductsHandler : IQueryHandler<GetAllProducts, IEnu
         var dtos = products.Select(x => 
             new ProductDto(x.Id, x.Name, x.Description, x.Category.Name, x.Brand.Name, 
                 x.Model, x.GrossPrice, x.Fabric, 
-                x.Gender.ToString(),x.AgeCategory.ToString(), x.Size.ToString(), x.Color.ToString()));
+                x.Gender.ToString(), x.AgeCategory.ToString(), 
+                x.Size.ToString(), x.Color.ToString(), 
+                counts.FirstOrDefault(c => c.Size == x.Size && c.Color == x.Color && c.Name == x.Name)?.Count ?? 0));
+
 
         return dtos;
     }
