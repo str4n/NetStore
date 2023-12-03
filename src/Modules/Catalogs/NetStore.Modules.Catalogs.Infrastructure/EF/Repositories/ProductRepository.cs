@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using NetStore.Modules.Catalogs.Domain.Brand;
 using NetStore.Modules.Catalogs.Domain.Product;
 using NetStore.Modules.Catalogs.Domain.Repositories;
 
@@ -16,8 +19,48 @@ internal sealed class ProductRepository : IProductRepository
     public Task<Product> GetAsync(Guid id)
         => _catalogsDbContext.Products.SingleOrDefaultAsync(x => x.Id.Value == id);
 
-    public async Task<IEnumerable<Product>> GetAllAsync()
-        => await _catalogsDbContext.Products.ToListAsync();
+    public async Task<IEnumerable<Product>> GetAllAsync(bool tracking = true)
+        => tracking
+            ? await _catalogsDbContext.Products
+                .Include(x => x.Brand)
+                .Include(x => x.Category)
+                .ToListAsync()
+            
+            : await _catalogsDbContext.Products
+                .AsNoTracking()
+                .Include(x => x.Brand)
+                .Include(x => x.Category)
+                .ToListAsync();
+
+    public async Task<IEnumerable<Product>> GetAllByCategoryAsync(string category, bool tracking = true)
+        => tracking
+            ? await _catalogsDbContext.Products
+                .Include(x => x.Brand)
+                .Include(x => x.Category)
+                .Where(x => x.Category.Name == category)
+                .ToListAsync()
+            
+            : await _catalogsDbContext.Products
+                .AsNoTracking()
+                .Include(x => x.Brand)
+                .Include(x => x.Category)
+                .Where(x => x.Category.Name == category)
+                .ToListAsync();
+
+    public async Task<IEnumerable<Product>> GetAllByBrandAsync(string brand, bool tracking = true)
+        => tracking
+            ? await _catalogsDbContext.Products
+                .Include(x => x.Brand)
+                .Include(x => x.Category)
+                .Where(x => x.Brand.Name == brand)
+                .ToListAsync()
+            
+            : await _catalogsDbContext.Products
+                .AsNoTracking()
+                .Include(x => x.Brand)
+                .Include(x => x.Category)
+                .Where(x => x.Brand.Name == brand)
+                .ToListAsync();
 
     public async Task AddAsync(IEnumerable<Product> products)
         => await _catalogsDbContext.Products.AddRangeAsync(products);

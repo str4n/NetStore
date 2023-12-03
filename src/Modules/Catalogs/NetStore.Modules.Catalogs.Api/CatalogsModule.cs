@@ -37,6 +37,8 @@ public sealed class CatalogsModule : Module
 
         app.MapProductMockupEndpoints();
 
-        app.MapProductAdminEndpoints();
+        app
+            .MapProductEmployeeEndpoints()
+            .MapProductCustomerEndpoints();
     }
 }

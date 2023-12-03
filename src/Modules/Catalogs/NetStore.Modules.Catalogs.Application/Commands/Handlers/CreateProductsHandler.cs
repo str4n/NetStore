@@ -27,7 +27,6 @@ internal sealed class CreateProductsHandler : ICommandHandler<CreateProducts>
         var isAgeCategoryValid = Enum.TryParse(command.AgeCategory, out AgeCategory ageCategory);
         var isSizeValid = Enum.TryParse(command.Size, out Size size);
         var isColorValid = Enum.TryParse(command.Color, out Color color);
-        var isWeightUnitValid = Enum.TryParse(command.WeightUnit, out WeightUnit weightUnit);
 
         if (mockup is null)
         {
@@ -49,21 +48,16 @@ internal sealed class CreateProductsHandler : ICommandHandler<CreateProducts>
             throw new InvalidProductColorException();
         }
 
-        if (!isWeightUnitValid)
-        {
-            throw new InvalidProductWeightUnitException();
-        }
 
         List<Product> products = new();
-
-        var productWeight = new ProductWeight(command.Weight, weightUnit);
+        
         
         // TODO: SKU generator
         
         for (var i = 0; i < command.Count; i++)
         {
             var product = Product.Create(Guid.NewGuid(), mockup.Name, mockup.Description, mockup.CategoryId,
-                mockup.BrandId, mockup.Model, mockup.Fabric, productWeight, mockup.Gender, ageCategory, size, color,
+                mockup.BrandId, mockup.Model, mockup.Fabric, mockup.Gender, ageCategory, size, color,
                 "");
 
             _domainService.SetProductPrice(product, command.Price);

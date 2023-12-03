@@ -8,13 +8,13 @@ using NetStore.Shared.Infrastructure.Auth.Policies;
 
 namespace NetStore.Modules.Catalogs.Api.Endpoints.Product;
 
-internal static class ProductAdminEndpoints
+internal static class ProductEmployeeEndpoints
 {
     private const string Route = CatalogsModule.BasePath + "/products";
     
-    public static IEndpointRouteBuilder MapProductAdminEndpoints(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder MapProductEmployeeEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapPost(Route, Create).RequireAuthorization(Policies.AtLeastAdmin);
+        app.MapPost(Route, Create).RequireAuthorization(Policies.AtLeastEmployee);
         
         return app;
     }
@@ -24,6 +24,6 @@ internal static class ProductAdminEndpoints
     {
         await commandDispatcher.SendAsync(command);
 
-        return Results.Ok();
+        return Results.NoContent();
     }
 }

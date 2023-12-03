@@ -16,7 +16,6 @@ public sealed class Product : Aggregate
     public ProductPrice NetPrice { get; private set; }
     public ProductPrice GrossPrice { get; private set; }
     public ProductFabric Fabric { get; private set; }
-    public ProductWeight Weight { get; private set; }
     public Gender Gender { get; private set; }
     public AgeCategory AgeCategory { get; private set; }
     public Size Size { get; private set; }
@@ -26,8 +25,8 @@ public sealed class Product : Aggregate
     // TODO: Product state
 
     public static Product Create(AggregateId id, ProductName name, ProductDescription description, 
-        long categoryId, long brandId, ProductModel model, ProductFabric fabric, ProductWeight weight,
-        Gender gender, AgeCategory ageCategory, Size size, Color color, string sku)
+        long categoryId, long brandId, ProductModel model, ProductFabric fabric, Gender gender, AgeCategory ageCategory, 
+        Size size, Color color, string sku)
     {
         var product = new Product
         {
@@ -42,7 +41,6 @@ public sealed class Product : Aggregate
             BrandId = brandId,
             Model = model,
             Fabric = fabric,
-            Weight = weight,
             Gender = gender,
             AgeCategory = ageCategory,
             Size = size,
@@ -103,12 +101,6 @@ public sealed class Product : Aggregate
     public void ChangeFabric(ProductFabric fabric)
     {
         Fabric = fabric;
-        IncrementVersion();
-    }
-
-    public void ChangeWeight(ProductWeight weight)
-    {
-        Weight = weight;
         IncrementVersion();
     }
 

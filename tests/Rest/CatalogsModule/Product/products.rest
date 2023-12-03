@@ -7,11 +7,22 @@ Content-Type: application/json
 
 {
     "mockupid": 1,
-    "count": 4,
+    "count": 1,
     "agecategory": "Adult",
-    "size": "M",
-    "Color": "Black",
-    "price": 1299,
-    "weight": 460,
-    "weightUnit": "Gram"
+    "size": "S",
+    "Color": "Red",
+    "price": 1399
 }
+
+###
+
+GET {{url}}?getby=brand&value=The%20North%20Face
+
+
+###
+
+GET {{url}}
+
+###
+
+GET {{url}}?getby=category&value=Down%20jackets
