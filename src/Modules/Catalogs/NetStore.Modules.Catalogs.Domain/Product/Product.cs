@@ -1,6 +1,6 @@
 ﻿using NetStore.Modules.Catalogs.Domain.Product.Enums;
 using NetStore.Modules.Catalogs.Domain.Product.ValueObjects;
-using NetStore.Shared.Types.Domain;
+using NetStore.Shared.Types.Aggregate;
 
 namespace NetStore.Modules.Catalogs.Domain.Product;
 

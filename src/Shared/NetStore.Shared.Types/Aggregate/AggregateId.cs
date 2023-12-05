@@ -1,4 +1,4 @@
-﻿namespace NetStore.Shared.Types.Domain;
+﻿namespace NetStore.Shared.Types.Aggregate;
 
 public record AggregateId<T>(T Value);
 

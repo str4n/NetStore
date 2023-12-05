@@ -12,7 +12,6 @@ internal sealed class Customer
     public CustomerStatus CustomerStatus { get; private set; } = CustomerStatus.InformationNotCompleted;
 
     // TODO: Orders history
-    // TODO: Payment methods
 
     private Customer(Guid id, Name firstName, Name lastName, Email email, Address address)
     {

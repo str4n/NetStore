@@ -13,5 +13,6 @@ public enum ExceptionCategory
 {
     ValidationError,
     NotFound,
-    AlreadyExists
+    AlreadyExists,
+    BadRequest
 }

@@ -1,7 +1,6 @@
-﻿using System.Collections.Concurrent;
-using NetStore.Shared.Abstractions.Domain;
+﻿using NetStore.Shared.Abstractions.Domain;
 
-namespace NetStore.Shared.Types.Domain;
+namespace NetStore.Shared.Types.Aggregate;
 
 public abstract class Aggregate<T>
 {

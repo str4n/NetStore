@@ -49,6 +49,7 @@ internal sealed class ExceptionHandlerMiddleware : IMiddleware
             ExceptionCategory.NotFound => (HttpStatusCode.NotFound, error),
             ExceptionCategory.ValidationError => (HttpStatusCode.BadRequest, error),
             ExceptionCategory.AlreadyExists => (HttpStatusCode.BadRequest, error),
+            ExceptionCategory.BadRequest => (HttpStatusCode.BadRequest, error),
             _ => (HttpStatusCode.BadRequest, error)
         };
     }
