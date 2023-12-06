@@ -14,4 +14,8 @@ public sealed class Product
         SKU = sku;
         Price = price;
     }
+
+    private Product()
+    {
+    }
 }

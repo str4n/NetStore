@@ -5,7 +5,10 @@ using NetStore.Modules.Catalogs.Domain.Product.Enums;
 using NetStore.Modules.Catalogs.Domain.Product.ValueObjects;
 using NetStore.Modules.Catalogs.Domain.Repositories;
 using NetStore.Modules.Catalogs.Domain.Services;
+using NetStore.Modules.Catalogs.Shared.Events;
 using NetStore.Shared.Abstractions.Commands;
+using NetStore.Shared.Abstractions.Events;
+using NetStore.Shared.Abstractions.Messaging;
 
 namespace NetStore.Modules.Catalogs.Application.Commands.Handlers;
 
@@ -16,15 +19,17 @@ internal sealed class CreateProductsHandler : ICommandHandler<CreateProducts>
     private readonly IProductDomainService _domainService;
     private readonly ISkuGenerator _skuGenerator;
     private readonly ICategoryRepository _categoryRepository;
+    private readonly IMessageBroker _messageBroker;
 
     public CreateProductsHandler(IProductRepository productRepository, IProductMockupRepository productMockupRepository, 
-        IProductDomainService domainService, ISkuGenerator skuGenerator, ICategoryRepository categoryRepository)
+        IProductDomainService domainService, ISkuGenerator skuGenerator, ICategoryRepository categoryRepository, IMessageBroker messageBroker)
     {
         _productRepository = productRepository;
         _productMockupRepository = productMockupRepository;
         _domainService = domainService;
         _skuGenerator = skuGenerator;
         _categoryRepository = categoryRepository;
+        _messageBroker = messageBroker;
     }
     
     public async Task HandleAsync(CreateProducts command)
@@ -62,20 +67,24 @@ internal sealed class CreateProductsHandler : ICommandHandler<CreateProducts>
         }
 
         List<Product> products = new();
+        List<Task> tasks = new();
 
         var sku = _skuGenerator.Generate(mockup.Model, category.Name, command.Color, command.Size);
         
         for (var i = 0; i < command.Count; i++)
         {
-            var product = Product.Create(Guid.NewGuid(), mockup.Name, mockup.Description, mockup.CategoryId,
+            var id = Guid.NewGuid();
+            var product = Product.Create(id, mockup.Name, mockup.Description, mockup.CategoryId,
                 mockup.BrandId, mockup.Model, mockup.Fabric, mockup.Gender, ageCategory, size, color,
                 sku);
 
             _domainService.SetProductPrice(product, command.Price);
             
             products.Add(product);
+            tasks.Add(_messageBroker.PublishAsync(new ProductCreated(id,mockup.Name,product.SKU,product.GrossPrice)));
         }
-
+        
         await _productRepository.AddAsync(products);
+        await Task.WhenAll(tasks);
     }
 }
