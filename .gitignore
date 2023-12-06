@@ -36,3 +36,6 @@ msbuild.wrn
 # Jetbrains Rider
 .idea/
 .idea
+
+# Docker
+.containers

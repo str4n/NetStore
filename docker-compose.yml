@@ -1,6 +1,17 @@
 version: '3'
 
 services:
+  rabbitmq:
+    image: "rabbitmq:3.11.7-management"
+    container_name: rabbitmq
+    restart: unless-stopped
+    volumes:
+      - ./.containers/queue/data/:/var/lib/rabbitmq
+      - ./.containers/queue/log/:/var/log/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
   postgres:
     image: postgres
     shm_size: '4gb'
@@ -11,7 +22,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - ./.containers/database:/var/lib/postgres/data
 
 volumes:
   postgres:
