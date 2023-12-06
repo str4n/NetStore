@@ -10,18 +10,18 @@ public sealed class Order
     public Guid CustomerId { get; private set; }
     public IEnumerable<OrderLine> OrderLines => _orderLines;
     private readonly List<OrderLine> _orderLines;
-    public PaymentCard PaymentCard { get; private set; }
+    public Payment.Payment Payment { get; private set; }
     public Shipment.Shipment Shipment { get; private set; }
     public DateTime PlaceDate { get; private set; }
     public OrderStatus Status { get; private set; }
 
-    private Order(Guid customerId, IEnumerable<OrderLine> orderLines, Shipment.Shipment shipment, PaymentCard paymentCard,
+    private Order(Guid customerId, IEnumerable<OrderLine> orderLines, Shipment.Shipment shipment, Payment.Payment payment,
         DateTime placeDate)
     {
         CustomerId = customerId;
         _orderLines = orderLines.ToList();
         Shipment = shipment;
-        PaymentCard = paymentCard;
+        Payment = payment;
         PlaceDate = placeDate;
     }
 
@@ -35,7 +35,7 @@ public sealed class Order
 
         orderLines.Add(shipmentLine);
 
-        return new Order(checkoutCart.CustomerId, orderLines, checkoutCart.Shipment, checkoutCart.PaymentCard,
+        return new Order(checkoutCart.CustomerId, orderLines, checkoutCart.Shipment, checkoutCart.Payment,
             placeDate);
     }
 
