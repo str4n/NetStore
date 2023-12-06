@@ -26,7 +26,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./.containers/database:/var/lib/postgres/data
+      - postgres:/var/lib/postgresql/data
 
 volumes:
   postgres:
