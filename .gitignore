@@ -38,4 +38,5 @@ msbuild.wrn
 .idea
 
 # Docker
+.containers/
 .containers
