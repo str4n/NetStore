@@ -6,26 +6,28 @@ namespace NetStore.Modules.Catalogs.Infrastructure.EF.Repositories;
 
 internal sealed class ProductMockupRepository : IProductMockupRepository
 {
-    private readonly CatalogsDbContext _catalogsDbContext;
+    private readonly CatalogsDbContext _dbContext;
 
-    public ProductMockupRepository(CatalogsDbContext catalogsDbContext)
+    public ProductMockupRepository(CatalogsDbContext dbContext)
     {
-        _catalogsDbContext = catalogsDbContext;
+        _dbContext = dbContext;
     }
 
     public Task<ProductMockup> GetAsync(long id)
-        => _catalogsDbContext.ProductMockups.SingleOrDefaultAsync(x => x.Id == id);
+        => _dbContext.ProductMockups.SingleOrDefaultAsync(x => x.Id == id);
 
     public async Task<IEnumerable<ProductMockup>> GetAllAsync()
-        => await _catalogsDbContext.ProductMockups.ToListAsync();
+        => await _dbContext.ProductMockups.ToListAsync();
 
     public async Task AddAsync(ProductMockup mockup)
-        => await _catalogsDbContext.ProductMockups.AddAsync(mockup);
-
-    public Task UpdateAsync(ProductMockup mockup)
     {
-        _catalogsDbContext.ProductMockups.Update(mockup);
+        await _dbContext.ProductMockups.AddAsync(mockup);
+        await _dbContext.SaveChangesAsync();
+    }
 
-        return Task.CompletedTask;
+    public async Task UpdateAsync(ProductMockup mockup)
+    {
+        _dbContext.ProductMockups.Update(mockup);
+        await _dbContext.SaveChangesAsync();
     }
 }

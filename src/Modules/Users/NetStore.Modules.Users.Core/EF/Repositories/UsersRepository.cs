@@ -37,11 +37,12 @@ internal sealed class UsersRepository : IUsersRepository
     public async Task AddAsync(User user)
     {
         await _users.AddAsync(user);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task UpdateAsync(User user)
+    public async Task UpdateAsync(User user)
     {
         _users.Update(user);
-        return Task.CompletedTask;
+        await _dbContext.SaveChangesAsync();
     }
 }

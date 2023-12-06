@@ -23,17 +23,20 @@ internal sealed class CategoryRepository : ICategoryRepository
         => await _dbContext.Categories.ToListAsync();
 
     public async Task AddAsync(Category category)
-        => await _dbContext.Categories.AddAsync(category);
-
-    public Task UpdateAsync(Category category)
     {
-        _dbContext.Categories.Update(category);
-        return Task.CompletedTask;
+        await _dbContext.Categories.AddAsync(category);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task DeleteAsync(long id)
+    public async Task UpdateAsync(Category category)
+    {
+        _dbContext.Categories.Update(category);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(long id)
     {
         _dbContext.Categories.Where(x => x.Id == id).ExecuteDelete();
-        return Task.CompletedTask;
+        await _dbContext.SaveChangesAsync();
     }
 }

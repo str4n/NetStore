@@ -11,8 +11,6 @@ internal static class Extensions
     public static IServiceCollection AddEF(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddPostgres<CatalogsDbContext>(configuration);
-
-        services.AddUnitOfWork<ICatalogsUnitOfWork, CatalogsUnitOfWork>();
         
         services
             .AddScoped<ICategoryRepository, CategoryRepository>()

@@ -22,16 +22,16 @@ internal sealed class CreateProductMockupHandler : ICommandHandler<CreateProduct
     
     public async Task HandleAsync(CreateProductMockup command)
     {
-        var categoryId = (await _categoryRepository.GetByCodeAsync(command.CategoryCode)).Id;
-        var brandId = (await _brandRepository.GetByNameAsync(command.Brand)).Id;
+        var category = await _categoryRepository.GetByCodeAsync(command.CategoryCode);
+        var brand = await _brandRepository.GetByNameAsync(command.Brand);
         var isGenderValid = Enum.TryParse(command.Gender, out Gender gender);
         
-        if (categoryId is default(long))
+        if (category is null)
         {
             throw new CategoryNotFoundException();
         }
         
-        if (brandId is default(long))
+        if (brand is null)
         {
             throw new BrandNotFoundException();
         }
@@ -42,7 +42,7 @@ internal sealed class CreateProductMockupHandler : ICommandHandler<CreateProduct
         }
 
         var mockup = ProductMockup.Create(command.Name, command.Description, command.Model, command.Fabric,
-            gender, categoryId, brandId);
+            gender, category.Id, brand.Id);
 
         await _productMockupRepository.AddAsync(mockup);
     }

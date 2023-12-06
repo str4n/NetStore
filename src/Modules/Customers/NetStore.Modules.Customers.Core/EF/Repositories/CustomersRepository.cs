@@ -18,12 +18,13 @@ internal sealed class CustomersRepository : ICustomersRepository
     public async Task AddAsync(Customer customer)
     {
         await _customers.AddAsync(customer);
+        await _dbContext.SaveChangesAsync();
     }
 
-    public Task UpdateAsync(Customer customer)
+    public async Task UpdateAsync(Customer customer)
     {
         _customers.Update(customer);
-        return Task.CompletedTask;
+        await _dbContext.SaveChangesAsync();
     }
 
     public Task<Customer> GetAsync(Guid id)

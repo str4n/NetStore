@@ -23,11 +23,14 @@ internal sealed class BrandRepository : IBrandRepository
         => await _dbContext.Brands.ToListAsync();
 
     public async Task AddAsync(Brand brand)
-        => await _dbContext.Brands.AddAsync(brand);
+    {
+        await _dbContext.Brands.AddAsync(brand);
+        await _dbContext.SaveChangesAsync();
+    }
 
-    public Task UpdateAsync(Brand brand)
+    public async Task UpdateAsync(Brand brand)
     {
         _dbContext.Brands.Update(brand);
-        return Task.CompletedTask;
+        await _dbContext.SaveChangesAsync();
     }
 }

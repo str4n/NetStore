@@ -7,7 +7,6 @@ using NetStore.Shared.Abstractions.Time;
 using NetStore.Shared.Infrastructure.Auth;
 using NetStore.Shared.Infrastructure.Commands;
 using NetStore.Shared.Infrastructure.Contexts;
-using NetStore.Shared.Infrastructure.Events;
 using NetStore.Shared.Infrastructure.Exceptions;
 using NetStore.Shared.Infrastructure.Messaging;
 using NetStore.Shared.Infrastructure.Postgres;
@@ -51,17 +50,11 @@ internal static class Extensions
             });
         });
         
-        services.AddEvents();
-        
         services
             .AddCommands()
             .AddQueries();
 
-        services.AddCrossModuleQueries();
-
-        services.AddMessaging();
-
-        services.AddTransactionalDecorators();
+        services.AddMessaging(configuration);
 
         return services;
     }
