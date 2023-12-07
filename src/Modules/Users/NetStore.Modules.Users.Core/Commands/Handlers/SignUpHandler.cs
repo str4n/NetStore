@@ -42,12 +42,12 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
         
         if (await _usersRepository.GetByEmailAsync(email) is not null)
         {
-            throw new UserAlreadyExistsException($"User with email: {email} already exists");
+            throw new UserAlreadyExistsException($"User with email: {email.Value} already exists");
         }
 
         if (await _usersRepository.GetByUsernameAsync(username) is not null)
         {
-            throw new UserAlreadyExistsException($"User with username: {username} already exists");
+            throw new UserAlreadyExistsException($"User with username: {username.Value} already exists");
         }
 
         var securedPassword = _passwordManager.Secure(password);
