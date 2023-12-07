@@ -8,7 +8,7 @@ Content-Type: application/json
 {
     "name": "The North Face MESKA CIENIOWANA KURTKA 1996 NUPTSE",
     "description": "Puchowa kurtka firmy The North Face",
-    "categoryCode": "D-9295",
+    "categoryCode": "D-2223",
     "brand": "The North Face",
     "model": "1996 NUPTSE",
     "fabric": "69 G/M^2, 100% Nylon",

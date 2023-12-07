@@ -1,12 +1,12 @@
 @url = https://localhost:7240/users-module/users
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmOTU0N2IxYy05ZDgxLTRlOGEtOTRkYS00YjZjODhiNTYwMGEiLCJ1bmlxdWVfbmFtZSI6ImY5NTQ3YjFjLTlkODEtNGU4YS05NGRhLTRiNmM4OGI1NjAwYSIsImVtYWlsIjoidGVzdG93eTEyMzRAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsIm5iZiI6MTcwMTAyNTQzMSwiZXhwIjoxNzAxMTExODMxLCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.E05gJPxuMDwigO1dW3TuaOG5rkcxTend2C3a7SHGoNM
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NTI1OTJmMC0wODVlLTQxNDktYjFhMy1hYWYzNWU5YWE4YzUiLCJ1bmlxdWVfbmFtZSI6IjQ1MjU5MmYwLTA4NWUtNDE0OS1iMWEzLWFhZjM1ZTlhYThjNSIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMTk1Nzg4NiwiZXhwIjoxNzAyMDQ0Mjg2LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.v3k2eW9JzQ774X3NgcFgUqkSo-UAoB4-BFWwauG-nGU
 
 POST {{url}}/sign-up
 Content-Type: application/json
 
 {
-    "email": "testowy1234@gmail.com",
-    "username": "test1234",
+    "email": "testowy123@gmail.com",
+    "username": "test123",
     "password": "Test123!"
 }
 
@@ -28,5 +28,5 @@ Authorization: Bearer {{jwt}}
 
 ###
 
-DELETE {{url}}/0520f172-e0e8-4db0-87f3-a740d25595e6
+DELETE {{url}}/452592f0-085e-4149-b1a3-aaf35e9aa8c5
 Authorization: Bearer {{jwt}}
