@@ -8,7 +8,9 @@ public static class Extensions
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddConsumer<ProductCreatedConsumer>();
+        services
+            .AddConsumer<ProductCreatedConsumer>()
+            .AddConsumer<UserSignedUpConsumer>();
         
         return services;
     }
