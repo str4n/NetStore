@@ -32,6 +32,14 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(x => x.Fabric).HasConversion(x => x.Value, x => new(x))
             .IsRequired();
 
+        builder.Property(x => x.Gender).HasConversion<string>().IsRequired();
+
+        builder.Property(x => x.AgeCategory).HasConversion<string>().IsRequired();
+
+        builder.Property(x => x.Size).HasConversion<string>().IsRequired();
+
+        builder.Property(x => x.Color).HasConversion<string>().IsRequired();
+
         builder.HasOne(x => x.Category).WithMany();
 
         builder.HasOne(x => x.Brand).WithMany();

@@ -24,7 +24,8 @@ internal sealed class ProductMockupConfiguration : IEntityTypeConfiguration<Prod
         builder.Property(x => x.Fabric).HasConversion(x => x.Value, x => new(x))
             .IsRequired();
 
-
+        builder.Property(x => x.Gender).HasConversion<string>();
+        
         builder.HasOne<Category>().WithMany().HasForeignKey(x => x.CategoryId);
 
         builder.HasOne<Brand>().WithMany().HasForeignKey(x => x.BrandId);
