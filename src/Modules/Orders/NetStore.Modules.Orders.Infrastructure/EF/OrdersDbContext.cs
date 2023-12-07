@@ -8,6 +8,7 @@ namespace NetStore.Modules.Orders.Infrastructure.EF;
 internal sealed class OrdersDbContext : DbContext
 {
     public DbSet<Product> Products { get; set; }
+    public DbSet<Cart> Carts { get; set; }
 
     public OrdersDbContext(DbContextOptions<OrdersDbContext> dbContextOptions) : base(dbContextOptions)
     {

@@ -18,6 +18,10 @@ public sealed class CheckoutCart
         _products = cart.Products.ToList();
     }
 
+    private CheckoutCart()
+    {
+    }
+
     public void SetShipment(Shipment.Shipment shipment) => Shipment = shipment;
     public void SetPaymentCard(Payment.Payment payment) => Payment = payment;
 

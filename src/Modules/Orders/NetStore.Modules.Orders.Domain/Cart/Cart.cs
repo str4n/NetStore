@@ -29,7 +29,7 @@ public sealed class Cart
 
         if (cartProduct is null)
         {
-            _products.Add(new CartProduct(product,1));
+            _products.Add(new CartProduct(Id, product,1));
             return;
         }
         

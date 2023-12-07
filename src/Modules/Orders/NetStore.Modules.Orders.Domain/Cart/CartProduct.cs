@@ -4,10 +4,12 @@ namespace NetStore.Modules.Orders.Domain.Cart;
 
 public sealed class CartProduct
 {
+    public Guid CartId { get; private set; }
     public Product.Product Product { get; private set; }
+    public Guid ProductId { get; private set; }
     public int Quantity { get; private set; }
 
-    public CartProduct(Product.Product product, int quantity)
+    public CartProduct(Guid cartId, Product.Product product, int quantity)
     {
         Product = product;
         if (quantity < 1)
@@ -16,6 +18,11 @@ public sealed class CartProduct
         }
 
         Quantity = quantity;
+        CartId = cartId;
+    }
+
+    private CartProduct()
+    {
     }
 
     public void IncreaseQuantity() => Quantity++;
