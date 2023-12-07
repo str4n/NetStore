@@ -23,7 +23,7 @@ internal sealed class DeleteUserHandler : ICommandHandler<DeleteUser>
             throw new UserNotFoundException(command.Id);
         }
 
-        user.UserState = UserState.Deleted;
+        user.State = UserState.Deleted;
         
         //TODO: jwt blacklist
 

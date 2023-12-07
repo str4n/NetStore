@@ -10,18 +10,18 @@ internal sealed class User
     public Username Username { get; set; }
     public Password Password { get; set; }
     public Role Role { get; set; }
-    public UserState UserState { get; set; }
+    public UserState State { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 
-    public User(Guid id, Email email, Username username, Password password, Role role, UserState userState, DateTime createdAt)
+    public User(Guid id, Email email, Username username, Password password, Role role, UserState state, DateTime createdAt)
     {
         Id = id;
         Email = email;
         Username = username;
         Password = password;
         Role = role;
-        UserState = userState;
+        State = state;
         CreatedAt = createdAt;
     }
 }

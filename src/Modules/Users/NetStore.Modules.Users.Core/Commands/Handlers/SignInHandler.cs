@@ -36,7 +36,7 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
             throw new InvalidCredentialsException();
         }
         
-        if (user.UserState is UserState.Deleted)
+        if (user.State is UserState.Deleted)
         {
             throw new UserNotActiveException(user.Username);
         }

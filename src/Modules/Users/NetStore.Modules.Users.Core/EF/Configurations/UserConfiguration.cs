@@ -26,7 +26,7 @@ internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
             .HasConversion(x => x.Value, x => new(x))
             .IsRequired();
 
-        builder.Property(x => x.UserState).IsRequired();
+        builder.Property(x => x.State).HasConversion<string>().IsRequired();
 
         builder.HasIndex(x => x.Email).IsUnique();
         builder.HasIndex(x => x.Username).IsUnique();
