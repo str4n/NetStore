@@ -1,4 +1,5 @@
 ﻿using NetStore.Modules.Orders.Domain.Exceptions;
+using NetStore.Modules.Orders.Domain.Product;
 
 namespace NetStore.Modules.Orders.Domain.Cart;
 
@@ -19,6 +20,13 @@ public sealed class Cart
     {
         var cartProduct = _products.SingleOrDefault(x => x.Product.Id == product.Id);
 
+        if (product.State == ProductState.Locked)
+        {
+            throw new ProductAlreadyInDifferentCartException(product.Id);
+        }
+        
+        product.LockProduct();
+
         if (cartProduct is null)
         {
             _products.Add(new CartProduct(product,1));
@@ -36,6 +44,8 @@ public sealed class Cart
         {
             throw new CartProductNotFoundException();
         }
+        
+        product.UnlockProduct();
 
         if (cartProduct.Quantity is 1)
         {
@@ -46,7 +56,15 @@ public sealed class Cart
         cartProduct.DecreaseQuantity();
     }
 
-    public void Clear() => _products.Clear();
+    public void Clear()
+    {
+        foreach (var product in _products)
+        {
+            product.Product.UnlockProduct();
+        }
+        
+        _products.Clear();
+    }
 
     public CheckoutCart CheckoutCart()
     {

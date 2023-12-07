@@ -24,6 +24,8 @@ internal sealed class DeleteUserHandler : ICommandHandler<DeleteUser>
         }
 
         user.UserState = UserState.Deleted;
+        
+        //TODO: jwt blacklist
 
         await _usersRepository.UpdateAsync(user);
     }

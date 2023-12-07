@@ -6,6 +6,7 @@ public sealed class Product
     public string Name { get; private set; }
     public string SKU { get; private set; }
     public double Price { get; private set; }
+    public ProductState State { get; private set; } = ProductState.Available;
 
     public Product(Guid id, string name, string sku, double price)
     {
@@ -18,4 +19,7 @@ public sealed class Product
     private Product()
     {
     }
+
+    public void LockProduct() => State = ProductState.Locked;
+    public void UnlockProduct() => State = ProductState.Available;
 }
