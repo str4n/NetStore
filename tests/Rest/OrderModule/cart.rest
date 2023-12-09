@@ -8,5 +8,10 @@ Content-Type: application/json
 
 {
     "name": "The North Face MESKA CIENIOWANA KURTKA 1996 NUPTSE",
-    "quantity": 2
+    "quantity": 1
 }
+
+###
+
+GET {{url}}
+Authorization: Bearer {{jwt}}

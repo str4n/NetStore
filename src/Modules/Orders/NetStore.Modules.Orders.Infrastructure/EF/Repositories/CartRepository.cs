@@ -26,5 +26,8 @@ internal sealed class CartRepository : ICartRepository
     }
 
     public Task<Cart> GetByCustomerIdAsync(Guid customerId)
-        => _dbContext.Carts.SingleOrDefaultAsync(x => x.CustomerId == customerId);
+        => _dbContext.Carts
+            .Include(x => x.Products)
+            .ThenInclude(x => x.Product)
+            .SingleOrDefaultAsync(x => x.CustomerId == customerId);
 }
