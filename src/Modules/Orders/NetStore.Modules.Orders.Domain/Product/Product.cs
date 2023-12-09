@@ -20,6 +20,5 @@ public sealed class Product
     {
     }
 
-    public void LockProduct() => State = ProductState.Locked;
-    public void UnlockProduct() => State = ProductState.Available;
+    public void Order() => State = ProductState.Ordered;
 }

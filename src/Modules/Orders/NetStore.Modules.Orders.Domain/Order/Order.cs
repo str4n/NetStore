@@ -1,6 +1,5 @@
 ﻿using NetStore.Modules.Orders.Domain.Cart;
 using NetStore.Modules.Orders.Domain.Exceptions;
-using NetStore.Modules.Orders.Domain.Payment;
 
 namespace NetStore.Modules.Orders.Domain.Order;
 
@@ -8,8 +7,8 @@ public sealed class Order
 {
     public Guid Id { get; private set; }
     public Guid CustomerId { get; private set; }
-    public IEnumerable<OrderLine> OrderLines => _orderLines;
-    private readonly List<OrderLine> _orderLines;
+    public IEnumerable<OrderLine> Lines => _lines;
+    private readonly List<OrderLine> _lines;
     public Payment.Payment Payment { get; private set; }
     public Shipment.Shipment Shipment { get; private set; }
     public DateTime PlaceDate { get; private set; }
@@ -19,14 +18,23 @@ public sealed class Order
         DateTime placeDate)
     {
         CustomerId = customerId;
-        _orderLines = orderLines.ToList();
+        _lines = orderLines.ToList();
         Shipment = shipment;
         Payment = payment;
         PlaceDate = placeDate;
     }
 
+    private Order()
+    {
+    }
+
     internal static Order CreateFromCheckout(CheckoutCart checkoutCart, DateTime placeDate)
     {
+        foreach (var cartProduct in checkoutCart.Products)
+        {
+            cartProduct.Product.Order();
+        }
+        
         var orderLines = checkoutCart.Products.Select((x, i) =>
             new OrderLine(i, x.Product.Name, x.Product.SKU, x.Product.Price, x.Quantity)).ToList();
         

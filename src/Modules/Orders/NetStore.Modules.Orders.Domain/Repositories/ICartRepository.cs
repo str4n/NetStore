@@ -3,5 +3,6 @@
 public interface ICartRepository
 {
     Task AddAsync(Cart.Cart cart);
-    Task<Cart.Cart> GetAsync(Guid customerId);
+    Task UpdateAsync(Cart.Cart cart);
+    Task<Cart.Cart> GetByCustomerIdAsync(Guid customerId);
 }

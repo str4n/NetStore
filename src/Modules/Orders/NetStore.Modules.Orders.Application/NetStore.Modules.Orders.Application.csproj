@@ -11,4 +11,8 @@
       <ProjectReference Include="..\NetStore.Modules.Orders.Infrastructure\NetStore.Modules.Orders.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Queries\Handlers\" />
+    </ItemGroup>
+
 </Project>

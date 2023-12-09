@@ -4,6 +4,7 @@ namespace NetStore.Modules.Orders.Domain.Order;
 
 public sealed class OrderLine
 {
+    public Guid Id { get; private set; }
     public int OrderLineNumber { get; private set; }
     public string Name { get; private set; }
     public string SKU { get; private set; }
@@ -21,10 +22,15 @@ public sealed class OrderLine
             throw new InvalidOrderLineDataException("Unit price cannot be negative or zero.");
         }
 
+        Id = Guid.NewGuid();
         OrderLineNumber = orderLineNumber;
         SKU = sku;
         Name = name;
         UnitPrice = unitPrice;
         Quantity = quantity;
+    }
+
+    private OrderLine()
+    {
     }
 }

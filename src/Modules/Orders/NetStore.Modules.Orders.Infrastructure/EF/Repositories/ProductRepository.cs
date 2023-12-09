@@ -13,8 +13,14 @@ internal sealed class ProductRepository : IProductRepository
         _dbContext = dbContext;
     }
 
-    public Task<Product> GetAsync(Guid id)
-        => _dbContext.Products.SingleOrDefaultAsync(x => x.Id == id);
+    public async Task<IEnumerable<Product>> GetAvailableAsync(string productName, int quantity)
+    {
+        var products = _dbContext.Products.Where(x => x.State != ProductState.Ordered);
+        
+        var result = await products.Take(quantity).ToListAsync();
+
+        return result;
+    }
 
     public async Task AddAsync(Product product)
     {

@@ -18,14 +18,12 @@ public sealed class Cart
 
     public void AddProduct(Product.Product product)
     {
-        var cartProduct = _products.SingleOrDefault(x => x.Product.Id == product.Id);
+        var cartProduct = _products.SingleOrDefault(x => x.Product.Name == product.Name);
 
-        if (product.State == ProductState.Locked)
+        if (product.State == ProductState.Ordered)
         {
-            throw new ProductAlreadyInDifferentCartException(product.Id);
+            throw new ProductAlreadyOrderedCartException(product.Id);
         }
-        
-        product.LockProduct();
 
         if (cartProduct is null)
         {
@@ -44,8 +42,6 @@ public sealed class Cart
         {
             throw new CartProductNotFoundException();
         }
-        
-        product.UnlockProduct();
 
         if (cartProduct.Quantity is 1)
         {
@@ -56,15 +52,7 @@ public sealed class Cart
         cartProduct.DecreaseQuantity();
     }
 
-    public void Clear()
-    {
-        foreach (var product in _products)
-        {
-            product.Product.UnlockProduct();
-        }
-        
-        _products.Clear();
-    }
+    public void Clear() => _products.Clear();
 
     public CheckoutCart CheckoutCart()
     {

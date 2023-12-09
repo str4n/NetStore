@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NetStore.Modules.Orders.Api.Endpoints;
 using NetStore.Modules.Orders.Application;
 using NetStore.Modules.Orders.Domain;
 using NetStore.Modules.Orders.Infrastructure;
@@ -22,5 +23,6 @@ public sealed class OrdersModule : Module
 
     public override void UseModule(WebApplication app)
     {
+        app.MapCartCustomerEndpoints();
     }
 }

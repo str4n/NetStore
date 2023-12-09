@@ -2,6 +2,6 @@
 
 public interface IProductRepository
 {
-    Task<Product.Product> GetAsync(Guid id);
+    Task<IEnumerable<Product.Product>> GetAvailableAsync(string productName, int quantity);
     Task AddAsync(Product.Product product);
 }

@@ -19,6 +19,12 @@ internal sealed class CartRepository : ICartRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public Task<Cart> GetAsync(Guid customerId)
+    public async Task UpdateAsync(Cart cart)
+    {
+        _dbContext.Update(cart);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    public Task<Cart> GetByCustomerIdAsync(Guid customerId)
         => _dbContext.Carts.SingleOrDefaultAsync(x => x.CustomerId == customerId);
 }
