@@ -86,7 +86,9 @@ internal sealed class CreateProductsHandler : ICommandHandler<CreateProducts>
             _domainService.SetProductPrice(product, command.Price);
             
             products.Add(product);
-            tasks.Add(_messageBroker.PublishAsync(new ProductCreated(id,mockup.Name,product.SKU, product.CodeName,product.GrossPrice)));
+            tasks.Add(_messageBroker.PublishAsync(
+                new ProductCreated(id,mockup.Name,product.SKU, product.CodeName, product.Size.ToString(), 
+                    product.Color.ToString(),product.GrossPrice)));
         }
         
         await _productRepository.AddAsync(products);

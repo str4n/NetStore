@@ -6,5 +6,5 @@ namespace NetStore.Modules.Orders.Application.Mappings;
 internal static class CartMappings
 {
     public static CartDto AsDto(this Cart cart)
-        => new CartDto(cart.Products.Select(x => new CartProductDto(x.Product.Name, x.Quantity)));
+        => new CartDto(cart.Products.Select(x => new CartProductDto(x.Product.Name,x.Product.Color, x.Product.Size, x.Quantity)));
 }

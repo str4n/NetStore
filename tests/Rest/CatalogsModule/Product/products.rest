@@ -7,10 +7,10 @@ Content-Type: application/json
 
 {
     "mockupid": 1,
-    "count": 5,
-    "agecategory": "Adult",
-    "size": "M",
-    "Color": "Black",
+    "count": 3,
+    "agecategory": "Teenager",
+    "size": "L",
+    "Color": "Green",
     "price": 1299
 }
 

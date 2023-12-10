@@ -7,8 +7,8 @@ Authorization: Bearer {{jwt}}
 Content-Type: application/json
 
 {
-    "codeName": "1996-nuptse-m-black-adult",
-    "quantity": 2
+    "codeName": "1996-nuptse-xl-blue-adult",
+    "quantity": 1
 }
 
 ###
