@@ -13,9 +13,13 @@ Content-Type: application/json
 
 ###
 
-DELETE {{url}}?codeName=1996-nuptse-m-black-adult&quantity=1
+DELETE {{url}}?codeName=1996-nuptse-xl-blue-adult&quantity=3
 Authorization: Bearer {{jwt}}
 
+###
+
+DELETE {{url}}/clear
+Authorization: Bearer {{jwt}}
 
 ###
 

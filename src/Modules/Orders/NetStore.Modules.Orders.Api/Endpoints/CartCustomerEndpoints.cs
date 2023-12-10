@@ -18,6 +18,7 @@ internal static class CartCustomerEndpoints
         app.MapGet(Route, GetCart).RequireAuthorization();
         app.MapPost(Route, AddProduct).RequireAuthorization();
         app.MapDelete(Route, RemoveProduct).RequireAuthorization();
+        app.MapDelete(Route + "/clear", ClearCart).RequireAuthorization();
 
         return app;
     }
@@ -42,6 +43,13 @@ internal static class CartCustomerEndpoints
     {
         await commandDispatcher.SendAsync(command);
 
+        return Results.NoContent();
+    }
+
+    private static async Task<IResult> ClearCart([FromServices] ICommandDispatcher commandDispatcher)
+    {
+        await commandDispatcher.SendAsync(new ClearCart());
+        
         return Results.NoContent();
     }
 }
