@@ -17,6 +17,7 @@ internal static class CartCustomerEndpoints
     {
         app.MapGet(Route, GetCart).RequireAuthorization();
         app.MapPost(Route, AddProduct).RequireAuthorization();
+        app.MapDelete(Route, RemoveProduct).RequireAuthorization();
 
         return app;
     }
@@ -30,6 +31,14 @@ internal static class CartCustomerEndpoints
 
     private static async Task<IResult> AddProduct([FromBody] AddProductToCart command, 
         [FromServices]ICommandDispatcher commandDispatcher)
+    {
+        await commandDispatcher.SendAsync(command);
+
+        return Results.NoContent();
+    }
+
+    private static async Task<IResult> RemoveProduct([AsParameters] RemoveProductFromCart command,
+        [FromServices] ICommandDispatcher commandDispatcher)
     {
         await commandDispatcher.SendAsync(command);
 
