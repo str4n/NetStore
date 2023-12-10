@@ -54,7 +54,7 @@ public sealed class Cart
 
     public void Clear() => _products.Clear();
 
-    public CheckoutCart CheckoutCart()
+    public CheckoutCart Checkout()
     {
         if (_products.Count is 0)
         {

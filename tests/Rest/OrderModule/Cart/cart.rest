@@ -25,3 +25,8 @@ Authorization: Bearer {{jwt}}
 
 GET {{url}}
 Authorization: Bearer {{jwt}}
+
+###
+
+PUT {{url}}/checkout
+Authorization: Bearer {{jwt}}
