@@ -14,7 +14,11 @@ internal sealed class ProductCreatedConsumer : IConsumer<ProductCreated>
         _productRepository = productRepository;
     }
 
-    public Task Consume(ConsumeContext<ProductCreated> context)
-        => _productRepository.AddAsync(new Product(context.Message.Id, context.Message.Name, context.Message.SKU,
-            context.Message.Price));
+    public async Task Consume(ConsumeContext<ProductCreated> context)
+    {
+        var message = context.Message;
+
+        await _productRepository.AddAsync(new Product(message.Id, message.Name, message.SKU, message.CodeName,
+            message.Price));
+    }
 }

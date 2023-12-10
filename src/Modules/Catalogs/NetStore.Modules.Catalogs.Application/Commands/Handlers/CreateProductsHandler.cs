@@ -20,9 +20,11 @@ internal sealed class CreateProductsHandler : ICommandHandler<CreateProducts>
     private readonly ISkuGenerator _skuGenerator;
     private readonly ICategoryRepository _categoryRepository;
     private readonly IMessageBroker _messageBroker;
+    private readonly IProductCodeNameGenerator _codeNameGenerator;
 
     public CreateProductsHandler(IProductRepository productRepository, IProductMockupRepository productMockupRepository, 
-        IProductDomainService domainService, ISkuGenerator skuGenerator, ICategoryRepository categoryRepository, IMessageBroker messageBroker)
+        IProductDomainService domainService, ISkuGenerator skuGenerator, ICategoryRepository categoryRepository, 
+        IMessageBroker messageBroker, IProductCodeNameGenerator codeNameGenerator)
     {
         _productRepository = productRepository;
         _productMockupRepository = productMockupRepository;
@@ -30,6 +32,7 @@ internal sealed class CreateProductsHandler : ICommandHandler<CreateProducts>
         _skuGenerator = skuGenerator;
         _categoryRepository = categoryRepository;
         _messageBroker = messageBroker;
+        _codeNameGenerator = codeNameGenerator;
     }
     
     public async Task HandleAsync(CreateProducts command)
@@ -77,11 +80,13 @@ internal sealed class CreateProductsHandler : ICommandHandler<CreateProducts>
             var product = Product.Create(id, mockup.Name, mockup.Description, mockup.CategoryId,
                 mockup.BrandId, mockup.Model, mockup.Fabric, mockup.Gender, ageCategory, size, color,
                 sku);
+            
+            product.ChangeCodeName(_codeNameGenerator.Generate(product));
 
             _domainService.SetProductPrice(product, command.Price);
             
             products.Add(product);
-            tasks.Add(_messageBroker.PublishAsync(new ProductCreated(id,mockup.Name,product.SKU,product.GrossPrice)));
+            tasks.Add(_messageBroker.PublishAsync(new ProductCreated(id,mockup.Name,product.SKU, product.CodeName,product.GrossPrice)));
         }
         
         await _productRepository.AddAsync(products);

@@ -18,7 +18,7 @@ public sealed class Cart
 
     public void AddProduct(Product.Product product)
     {
-        var cartProduct = _products.SingleOrDefault(x => x.Product.Name == product.Name);
+        var cartProduct = _products.SingleOrDefault(x => x.Product.CodeName == product.CodeName);
 
         if (product.State == ProductState.Ordered)
         {

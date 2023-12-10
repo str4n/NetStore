@@ -13,9 +13,9 @@ internal sealed class ProductRepository : IProductRepository
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<Product>> GetAvailableAsync(string productName, int quantity)
+    public async Task<IEnumerable<Product>> GetAvailableAsync(string codeName, int quantity)
     {
-        var products = _dbContext.Products.Where(x => x.State != ProductState.Ordered);
+        var products = _dbContext.Products.Where(x => x.State != ProductState.Ordered && x.CodeName == codeName);
         
         var result = await products.Take(quantity).ToListAsync();
 

@@ -21,6 +21,7 @@ public sealed class Product : Aggregate
     public Size Size { get; private set; }
     public Color Color { get; private set; }
     public string SKU { get; private set; }
+    public string CodeName { get; private set; }
     
     // TODO: Product state
 
@@ -45,7 +46,7 @@ public sealed class Product : Aggregate
             AgeCategory = ageCategory,
             Size = size,
             Color = color,
-            SKU = sku
+            SKU = sku,
         };
         
         product.ClearEvents();
@@ -131,6 +132,18 @@ public sealed class Product : Aggregate
     public void ChangeSKU(string sku)
     {
         SKU = sku;
+        IncrementVersion();
+    }
+
+    public void ChangeCodeName(string codeName)
+    {
+        if (string.IsNullOrWhiteSpace(CodeName))
+        {
+            CodeName = codeName;
+            return;
+        }
+
+        CodeName = codeName;
         IncrementVersion();
     }
     #endregion

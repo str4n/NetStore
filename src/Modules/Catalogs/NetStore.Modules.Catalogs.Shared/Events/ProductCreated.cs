@@ -2,4 +2,4 @@
 
 namespace NetStore.Modules.Catalogs.Shared.Events;
 
-public sealed record ProductCreated(Guid Id, string Name, string SKU, double Price) : IEvent;
+public sealed record ProductCreated(Guid Id, string Name, string SKU, string CodeName, double Price) : IEvent;

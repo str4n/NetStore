@@ -2,4 +2,4 @@
 
 namespace NetStore.Modules.Orders.Application.Commands;
 
-public sealed record AddProductToCart(string ProductName, int Quantity) : ICommand;
+public sealed record AddProductToCart(string CodeName, int Quantity) : ICommand;

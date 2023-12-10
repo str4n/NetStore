@@ -1,5 +1,5 @@
 @url = https://localhost:7240/catalogs-module/products
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NTI1OTJmMC0wODVlLTQxNDktYjFhMy1hYWYzNWU5YWE4YzUiLCJ1bmlxdWVfbmFtZSI6IjQ1MjU5MmYwLTA4NWUtNDE0OS1iMWEzLWFhZjM1ZTlhYThjNSIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMTk1Nzg4NiwiZXhwIjoxNzAyMDQ0Mjg2LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.v3k2eW9JzQ774X3NgcFgUqkSo-UAoB4-BFWwauG-nGU
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NzZkNmY2Ny05N2MwLTRjZmEtYjU4ZC03ZmJjZDE2N2Q5NWUiLCJ1bmlxdWVfbmFtZSI6IjU3NmQ2ZjY3LTk3YzAtNGNmYS1iNThkLTdmYmNkMTY3ZDk1ZSIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMjIxODk1NywiZXhwIjoxNzAyMjIyNTU3LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.rl1VdWNeJHT4w7GOQX4W3ZU_lSC7xEGgdDLVVIXMgOI
 
 POST {{url}}
 Authorization: Bearer {{jwt}}
@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
     "mockupid": 1,
-    "count": 1,
+    "count": 5,
     "agecategory": "Adult",
     "size": "M",
     "Color": "Black",

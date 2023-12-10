@@ -23,7 +23,7 @@ internal sealed class AddProductToCartHandler : ICommandHandler<AddProductToCart
     public async Task HandleAsync(AddProductToCart command)
     {
         var cart = await _cartRepository.GetByCustomerIdAsync(_identityContext.Id);
-        var products = (await _productRepository.GetAvailableAsync(command.ProductName, command.Quantity)).ToList();
+        var products = (await _productRepository.GetAvailableAsync(command.CodeName, command.Quantity)).ToList();
 
         if (cart is null)
         {
@@ -32,7 +32,7 @@ internal sealed class AddProductToCartHandler : ICommandHandler<AddProductToCart
         
         if (products.IsNullOrEmpty())
         {
-            throw new ProductNotFoundException(command.ProductName);
+            throw new ProductNotFoundException();
         }
 
         if (products.Count != command.Quantity)

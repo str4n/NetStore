@@ -1,5 +1,5 @@
 @url = https://localhost:7240/orders-module/cart
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NzZkNmY2Ny05N2MwLTRjZmEtYjU4ZC03ZmJjZDE2N2Q5NWUiLCJ1bmlxdWVfbmFtZSI6IjU3NmQ2ZjY3LTk3YzAtNGNmYS1iNThkLTdmYmNkMTY3ZDk1ZSIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNzAyMTMzMjA5LCJleHAiOjE3MDIxMzY4MDksImlzcyI6Im5ldHN0b3JlIiwiYXVkIjoibmV0c3RvcmUifQ.BUonGUbtArGm_Nc1amfMSctwwYUhx3TAQD_5EG8cjEI
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NzZkNmY2Ny05N2MwLTRjZmEtYjU4ZC03ZmJjZDE2N2Q5NWUiLCJ1bmlxdWVfbmFtZSI6IjU3NmQ2ZjY3LTk3YzAtNGNmYS1iNThkLTdmYmNkMTY3ZDk1ZSIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNzAyMjE3ODc2LCJleHAiOjE3MDIyMjE0NzYsImlzcyI6Im5ldHN0b3JlIiwiYXVkIjoibmV0c3RvcmUifQ.rAHzfSL2dCZAYycoxTi56A3QIyLArnvVYKE1fnCOMH4
 
 
 POST {{url}}
@@ -7,8 +7,8 @@ Authorization: Bearer {{jwt}}
 Content-Type: application/json
 
 {
-    "name": "The North Face MESKA CIENIOWANA KURTKA 1996 NUPTSE",
-    "quantity": 1
+    "codeName": "1996-nuptse-m-black-adult",
+    "quantity": 2
 }
 
 ###
