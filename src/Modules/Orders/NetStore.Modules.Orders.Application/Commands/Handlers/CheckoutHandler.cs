@@ -21,14 +21,24 @@ internal sealed class CheckoutHandler : ICommandHandler<Checkout>
     
     public async Task HandleAsync(Checkout command)
     {
-        var cart = await _cartRepository.GetByCustomerIdAsync(_identityContext.Id);
+        var customerId = _identityContext.Id;
+        var cart = await _cartRepository.GetByCustomerIdAsync(customerId);
         
         if (cart is null)
         {
             throw new CartErrorException("Error occured while checking out the cart.");
         }
-
+        
         var checkoutCart = cart.Checkout();
+        
+        var previousCheckoutCart = await _checkoutRepository.GetByCustomerId(customerId);
+
+        if (previousCheckoutCart is not null)
+        {
+            previousCheckoutCart = checkoutCart;
+            await _checkoutRepository.UpdateAsync(previousCheckoutCart);
+            return;
+        }
 
         await _checkoutRepository.AddAsync(checkoutCart);
     }
