@@ -24,5 +24,7 @@ public sealed class OrdersModule : Module
     public override void UseModule(WebApplication app)
     {
         app.MapCartCustomerEndpoints();
+
+        app.MapCheckoutCartCustomerEndpoints();
     }
 }
