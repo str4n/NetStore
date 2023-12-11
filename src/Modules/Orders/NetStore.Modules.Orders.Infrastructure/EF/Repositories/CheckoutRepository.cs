@@ -14,10 +14,16 @@ internal sealed class CheckoutRepository : ICheckoutRepository
     }
 
     public Task<CheckoutCart> GetAsync(Guid id)
-        => _dbContext.CheckoutCarts.SingleOrDefaultAsync(x => x.Id == id);
+        => _dbContext.CheckoutCarts
+            .Include(x => x.Products)
+            .ThenInclude(x => x.Product)
+            .SingleOrDefaultAsync(x => x.Id == id);
 
     public Task<CheckoutCart> GetByCustomerId(Guid id)
-        => _dbContext.CheckoutCarts.SingleOrDefaultAsync(x => x.CustomerId == id);
+        => _dbContext.CheckoutCarts
+            .Include(x => x.Products)
+            .ThenInclude(x => x.Product)
+            .SingleOrDefaultAsync(x => x.CustomerId == id);
 
     public async Task UpdateAsync(CheckoutCart checkoutCart)
     {

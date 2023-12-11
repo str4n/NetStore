@@ -12,6 +12,6 @@ internal static class CheckoutCartMappings
             checkoutCart.Shipment.AsDto(),
             checkoutCart.Products.Select(x => x.AsDto()));
 
-    private static ShipmentDto AsDto(this Shipment shipment)
+    public static ShipmentDto AsDto(this Shipment shipment)
         => new(shipment.City, shipment.Street, shipment.PostalCode, shipment.ReceiverName);
 }

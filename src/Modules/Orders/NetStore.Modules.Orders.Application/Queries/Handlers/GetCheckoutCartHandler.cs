@@ -20,13 +20,30 @@ internal sealed class GetCheckoutCartHandler : IQueryHandler<GetCheckoutCart, Ch
     
     public async Task<CheckoutCartDto> HandleAsync(GetCheckoutCart query)
     {
-        var checkoutCart = await _checkoutRepository.GetByCustomerId(_identityContext.Id);
+        var checkout = await _checkoutRepository.GetByCustomerId(_identityContext.Id);
 
-        if (checkoutCart is null)
+        if (checkout is null)
         {
             throw new CheckoutCartNotFoundException();
         }
 
-        return checkoutCart.AsDto();
+        if (checkout.Shipment is not null)
+        {
+            return new CheckoutCartDto(default, checkout.Shipment.AsDto(), 
+                checkout.Products.Select(x => x.AsDto()));
+        }
+
+        if (checkout.Payment is not null)
+        {
+            return new CheckoutCartDto(checkout.Payment.PaymentMethod.ToString(), default,
+                checkout.Products.Select(x => x.AsDto()));
+        }
+
+        if (!checkout.IsCompleted())
+        {
+            return new CheckoutCartDto(default, default, checkout.Products.Select(x => x.AsDto()));
+        }
+
+        return checkout.AsDto();
     }
 }

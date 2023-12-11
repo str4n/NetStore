@@ -1,4 +1,5 @@
-﻿using NetStore.Modules.Orders.Domain.Payment;
+﻿using NetStore.Modules.Orders.Domain.Exceptions;
+using NetStore.Modules.Orders.Domain.Payment;
 
 namespace NetStore.Modules.Orders.Domain.Cart;
 
@@ -24,6 +25,15 @@ public sealed class CheckoutCart
 
     public void SetShipment(Shipment.Shipment shipment) => Shipment = shipment;
     public void SetPaymentCard(Payment.Payment payment) => Payment = payment;
+    public bool IsCompleted() => Shipment is not null && Payment is not null && _products.Any();
 
-    public Order.Order PlaceOrder(DateTime placeDate) => Order.Order.CreateFromCheckout(this, placeDate);
+    public Order.Order PlaceOrder(DateTime placeDate)
+    {
+        if (!IsCompleted())
+        {
+            throw new CheckoutNotCompletedException();
+        }
+
+        return Order.Order.CreateFromCheckout(this, placeDate);
+    }
 }
