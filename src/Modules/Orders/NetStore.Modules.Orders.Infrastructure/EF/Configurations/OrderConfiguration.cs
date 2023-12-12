@@ -13,6 +13,9 @@ internal sealed class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
         builder.HasKey(x => x.Id);
 
+        builder.Property(x => x.Id)
+            .HasConversion(x => x.Value, x => new(x));
+
         builder.HasMany(x => x.Lines);
         
         builder.Property(x => x.Shipment).HasConversion(

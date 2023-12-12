@@ -1,11 +1,11 @@
 ﻿using NetStore.Modules.Orders.Domain.Cart;
 using NetStore.Modules.Orders.Domain.Exceptions;
+using NetStore.Shared.Types.Aggregate;
 
 namespace NetStore.Modules.Orders.Domain.Order;
 
-public sealed class Order
+public sealed class Order : Aggregate
 {
-    public Guid Id { get; private set; }
     public Guid CustomerId { get; private set; }
     public IEnumerable<OrderLine> Lines => _lines;
     private readonly List<OrderLine> _lines;
@@ -17,6 +17,7 @@ public sealed class Order
     private Order(Guid customerId, IEnumerable<OrderLine> orderLines, Shipment.Shipment shipment, Payment.Payment payment,
         DateTime placeDate)
     {
+        Id = Guid.NewGuid();
         CustomerId = customerId;
         _lines = orderLines.ToList();
         Shipment = shipment;
@@ -43,8 +44,12 @@ public sealed class Order
 
         orderLines.Add(shipmentLine);
 
-        return new Order(checkoutCart.CustomerId, orderLines, checkoutCart.Shipment, checkoutCart.Payment,
+        var order = new Order(checkoutCart.CustomerId, orderLines, checkoutCart.Shipment, checkoutCart.Payment,
             placeDate);
+        
+        order.ClearEvents();
+
+        return order;
     }
 
     internal void Complete()
@@ -55,6 +60,7 @@ public sealed class Order
         }
 
         Status = OrderStatus.Completed;
+        IncrementVersion();
     }
 
     internal void Cancel()
@@ -65,6 +71,7 @@ public sealed class Order
         }
 
         Status = OrderStatus.Canceled;
+        IncrementVersion();
     }
     
     internal void Pay()
@@ -75,6 +82,7 @@ public sealed class Order
         }
 
         Status = OrderStatus.Paid;
+        IncrementVersion();
     }
 
     internal void SetInProgress()
@@ -85,5 +93,6 @@ public sealed class Order
         }
 
         Status = OrderStatus.InProgress;
+        IncrementVersion();
     }
 }
