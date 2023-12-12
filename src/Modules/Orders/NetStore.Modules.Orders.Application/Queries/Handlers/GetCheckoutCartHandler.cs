@@ -27,13 +27,13 @@ internal sealed class GetCheckoutCartHandler : IQueryHandler<GetCheckoutCart, Ch
             throw new CheckoutCartNotFoundException();
         }
 
-        if (checkout.Shipment is not null)
+        if (checkout.Shipment is not null && checkout.Payment is null)
         {
             return new CheckoutCartDto(default, checkout.Shipment.AsDto(), 
                 checkout.Products.Select(x => x.AsDto()));
         }
 
-        if (checkout.Payment is not null)
+        if (checkout.Payment is not null && checkout.Shipment is null)
         {
             return new CheckoutCartDto(checkout.Payment.PaymentMethod.ToString(), default,
                 checkout.Products.Select(x => x.AsDto()));

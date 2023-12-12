@@ -37,4 +37,13 @@ internal sealed class CheckoutRepository : ICheckoutRepository
         await _dbContext.CheckoutCarts.AddAsync(checkoutCart);
         await _dbContext.SaveChangesAsync();
     }
+
+    public async Task DeleteAsync(Guid customerId)
+    {
+        await _dbContext.CheckoutCarts
+            .Where(x => x.CustomerId == customerId)
+            .ExecuteDeleteAsync();
+
+        await _dbContext.SaveChangesAsync();
+    }
 }

@@ -25,5 +25,7 @@ internal sealed class OrderConfiguration : IEntityTypeConfiguration<Order>
         builder.Property(x => x.Payment).HasConversion(
             x => JsonConvert.SerializeObject(x),
             x => JsonConvert.DeserializeObject<Payment>(x));
+
+        builder.Property(x => x.Status).HasConversion<string>();
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Routing;
 using NetStore.Modules.Orders.Application.Commands;
 using NetStore.Modules.Orders.Application.DTO;
 using NetStore.Modules.Orders.Application.Queries;
+using NetStore.Modules.Orders.Application.Storage;
 using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Abstractions.Queries;
 
@@ -20,6 +21,8 @@ internal static class CheckoutCartCustomerEndpoints
 
         app.MapPut(Route + "/shipment", SetShipment).RequireAuthorization();
         app.MapPut(Route + "/payment", SetPayment).RequireAuthorization();
+
+        app.MapPost(Route + "/place-order", PlaceOrder).RequireAuthorization();
 
         return app;
     }
@@ -45,5 +48,13 @@ internal static class CheckoutCartCustomerEndpoints
         await commandDispatcher.SendAsync(command);
 
         return Results.Ok();
+    }
+
+    private static async Task<IResult> PlaceOrder([FromServices] ICommandDispatcher commandDispatcher,
+        [FromServices] IPaymentStorage paymentStorage)
+    {
+        await commandDispatcher.SendAsync(new PlaceOrder());
+
+        return Results.Ok(paymentStorage.Get());
     }
 }

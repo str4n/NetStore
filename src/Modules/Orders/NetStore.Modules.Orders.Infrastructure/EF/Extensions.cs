@@ -15,7 +15,8 @@ internal static class Extensions
         services
             .AddScoped<IProductRepository, ProductRepository>()
             .AddScoped<ICartRepository, CartRepository>()
-            .AddScoped<ICheckoutRepository, CheckoutRepository>();
+            .AddScoped<ICheckoutRepository, CheckoutRepository>()
+            .AddScoped<IOrderRepository, OrderRepository>();
 
         return services;
     }

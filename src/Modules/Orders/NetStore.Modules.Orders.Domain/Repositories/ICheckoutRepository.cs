@@ -8,4 +8,5 @@ public interface ICheckoutRepository
     Task<CheckoutCart> GetByCustomerId(Guid id);
     Task UpdateAsync(CheckoutCart checkoutCart);
     Task AddAsync(CheckoutCart checkoutCart);
+    Task DeleteAsync(Guid customerId);
 }   
