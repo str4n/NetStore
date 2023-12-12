@@ -39,7 +39,7 @@ internal sealed class GetCheckoutCartHandler : IQueryHandler<GetCheckoutCart, Ch
                 checkout.Products.Select(x => x.AsDto()));
         }
 
-        if (!checkout.IsCompleted())
+        if (!checkout.IsInformationCompleted())
         {
             return new CheckoutCartDto(default, default, checkout.Products.Select(x => x.AsDto()));
         }
