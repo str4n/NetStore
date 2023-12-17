@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using NetStore.Modules.Customers.Core.Domain.Exceptions;
 
-namespace NetStore.Modules.Customers.Core.Domain.Customer;
+namespace NetStore.Modules.Customers.Core.Domain.Address;
 
 internal sealed class Address
 {

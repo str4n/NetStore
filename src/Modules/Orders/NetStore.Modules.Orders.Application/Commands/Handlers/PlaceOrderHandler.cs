@@ -48,7 +48,7 @@ internal sealed class PlaceOrderHandler : ICommandHandler<PlaceOrder>
         var @event = new OrderPlaced(customerId,
             new OrderDto(order.Id, order.Shipment.City, order.Shipment.Street, order.Shipment.PostalCode,
                 order.Shipment.ReceiverName, order.PlaceDate,
-                order.Lines.Select(x => new ProductDto(x.Id, x.Name, x.Quantity, x.UnitPrice))));
+                order.Lines.Select(x => new OrderLineDto(x.OrderLineNumber, x.Name, x.Quantity, x.UnitPrice))));
 
         await _messageBroker.PublishAsync(@event);
     }

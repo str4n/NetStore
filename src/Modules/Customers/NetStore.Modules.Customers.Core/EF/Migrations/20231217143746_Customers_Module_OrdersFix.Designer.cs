@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetStore.Modules.Customers.Core.EF;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NetStore.Modules.Customers.Core.EF.Migrations
 {
     [DbContext(typeof(CustomersDbContext))]
-    partial class CustomersDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231217143746_Customers_Module_OrdersFix")]
+    partial class Customers_Module_OrdersFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,7 +106,7 @@ namespace NetStore.Modules.Customers.Core.EF.Migrations
 
             modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Customer.Customer", b =>
                 {
-                    b.OwnsOne("NetStore.Modules.Customers.Core.Domain.Customer.Customer.Address#NetStore.Modules.Customers.Core.Domain.Address.Address", "Address", b1 =>
+                    b.OwnsOne("NetStore.Modules.Customers.Core.Domain.Address.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("CustomerId")
                                 .HasColumnType("uuid");
@@ -134,7 +137,7 @@ namespace NetStore.Modules.Customers.Core.EF.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId");
 
-                    b.OwnsOne("NetStore.Modules.Customers.Core.Domain.Order.Order.Address#NetStore.Modules.Customers.Core.Domain.Address.Address", "Address", b1 =>
+                    b.OwnsOne("NetStore.Modules.Customers.Core.Domain.Address.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("OrderId")
                                 .HasColumnType("uuid");

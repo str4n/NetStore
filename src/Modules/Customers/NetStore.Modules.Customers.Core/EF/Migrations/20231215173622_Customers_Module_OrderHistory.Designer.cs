@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetStore.Modules.Customers.Core.EF;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NetStore.Modules.Customers.Core.EF.Migrations
 {
     [DbContext(typeof(CustomersDbContext))]
-    partial class CustomersDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231215173622_Customers_Module_OrderHistory")]
+    partial class Customers_Module_OrderHistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,20 +60,11 @@ namespace NetStore.Modules.Customers.Core.EF.Migrations
                     b.Property<Guid?>("CustomerId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("PlaceDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("ReceiverName")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Orders", "customers");
+                    b.ToTable("Order", "customers");
                 });
 
             modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Order.OrderLine", b =>
@@ -103,7 +97,7 @@ namespace NetStore.Modules.Customers.Core.EF.Migrations
 
             modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Customer.Customer", b =>
                 {
-                    b.OwnsOne("NetStore.Modules.Customers.Core.Domain.Customer.Customer.Address#NetStore.Modules.Customers.Core.Domain.Address.Address", "Address", b1 =>
+                    b.OwnsOne("NetStore.Modules.Customers.Core.Domain.Customer.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("CustomerId")
                                 .HasColumnType("uuid");
@@ -133,30 +127,6 @@ namespace NetStore.Modules.Customers.Core.EF.Migrations
                     b.HasOne("NetStore.Modules.Customers.Core.Domain.Customer.Customer", null)
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId");
-
-                    b.OwnsOne("NetStore.Modules.Customers.Core.Domain.Order.Order.Address#NetStore.Modules.Customers.Core.Domain.Address.Address", "Address", b1 =>
-                        {
-                            b1.Property<Guid>("OrderId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<string>("City")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("PostalCode")
-                                .HasColumnType("text");
-
-                            b1.Property<string>("Street")
-                                .HasColumnType("text");
-
-                            b1.HasKey("OrderId");
-
-                            b1.ToTable("Orders", "customers");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OrderId");
-                        });
-
-                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("NetStore.Modules.Customers.Core.Domain.Order.OrderLine", b =>

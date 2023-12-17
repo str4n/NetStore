@@ -21,7 +21,7 @@ internal sealed class GetCustomerHandler : IQueryHandler<GetCustomer, CustomerDt
 
         if (!customer.IsCompleted())
         {
-            return new CustomerDto(customer.Id, default, default, customer.Email, default);
+            return new CustomerDto(customer.Id, default, default, customer.Email, default, default);
         }
 
         return customer.AsDto();

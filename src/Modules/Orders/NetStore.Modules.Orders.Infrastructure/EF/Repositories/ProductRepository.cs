@@ -22,6 +22,9 @@ internal sealed class ProductRepository : IProductRepository
         return result;
     }
 
+    public Task<int> GetAvailableCountAsync(string codeName)
+        => _dbContext.Products.CountAsync(x => x.State != ProductState.Ordered && x.CodeName == codeName);
+
     public async Task AddAsync(Product product)
     {
         await _dbContext.Products.AddAsync(product);

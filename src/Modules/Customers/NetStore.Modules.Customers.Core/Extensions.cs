@@ -13,7 +13,9 @@ internal static class Extensions
     {
         services.AddEF(configuration);
 
-        services.AddConsumer<UserSignedUpConsumer>();
+        services
+            .AddConsumer<UserSignedUpConsumer>()
+            .AddConsumer<OrderPlacedConsumer>();
         
         return services;
     }

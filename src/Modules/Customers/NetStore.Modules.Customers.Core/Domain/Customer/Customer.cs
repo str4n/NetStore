@@ -8,12 +8,12 @@ internal sealed class Customer
     public Name FirstName { get; private set; }
     public Name LastName { get; private set; }
     public Email Email { get; private set; }
-    public Address Address { get; private set; }
+    public Address.Address Address { get; private set; }
     public CustomerStatus CustomerStatus { get; private set; } = CustomerStatus.InformationNotCompleted;
+    public IEnumerable<Order.Order> Orders => _orders;
+    private readonly List<Order.Order> _orders = new();
 
-    // TODO: Orders history
-
-    private Customer(Guid id, Name firstName, Name lastName, Email email, Address address)
+    private Customer(Guid id, Name firstName, Name lastName, Email email, Address.Address address)
     {
         Id = id;
         FirstName = firstName;
@@ -32,10 +32,10 @@ internal sealed class Customer
     {
     }
 
-    public static Customer Create(Guid id, Name firstName, Name lastName, Email email, Address address)
+    public static Customer Create(Guid id, Name firstName, Name lastName, Email email, Address.Address address)
         => new(id, firstName, lastName, email, address);
 
-    public void CompleteInformation(Name firstName, Name lastName, Address address)
+    public void CompleteInformation(Name firstName, Name lastName, Address.Address address)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -49,7 +49,7 @@ internal sealed class Customer
 
     public void UpdateFirstName(Name firstname) => FirstName = firstname;
     public void UpdateLastName(Name lastname) => LastName = lastname;
-    public void UpdateAddress(Address address) => Address = address;
-
+    public void UpdateAddress(Address.Address address) => Address = address;
+    public void AddOrder(Order.Order order) => _orders.Add(order);
     public bool IsCompleted() => CustomerStatus is CustomerStatus.InformationCompleted;
 }
