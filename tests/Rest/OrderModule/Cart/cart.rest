@@ -1,5 +1,5 @@
 @url = https://localhost:7240/orders-module/cart
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNzZmYzgyOC05YTgxLTQ5MjktYTliNS1kMTJmNWE1ZDUwODgiLCJ1bmlxdWVfbmFtZSI6IjI3NmZjODI4LTlhODEtNDkyOS1hOWI1LWQxMmY1YTVkNTA4OCIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMzE2Mzk3NiwiZXhwIjoxNzAzMTY3NTc2LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.Csdq36QoEeoMVgfC7t1WoEah1r9yKKL6a_B6uSdSj_k
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMzZlM2JlOC02NGE1LTQ0NzItOGYzMy1lY2M2MWMzODZiMTMiLCJ1bmlxdWVfbmFtZSI6IjIzNmUzYmU4LTY0YTUtNDQ3Mi04ZjMzLWVjYzYxYzM4NmIxMyIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNzAzMTcyNDA3LCJleHAiOjE3MDMxNzYwMDcsImlzcyI6Im5ldHN0b3JlIiwiYXVkIjoibmV0c3RvcmUifQ.8AAQ14b-8sQbr75umk9hHSO5xoSSwndw8Jnt4aQvS1A
 
 
 POST {{url}}
@@ -7,7 +7,7 @@ Authorization: Bearer {{jwt}}
 Content-Type: application/json
 
 {
-    "codeName": "1996-nuptse-m-black-adult",
+    "id": "f74a5631-271d-40dc-be48-7ae5cf2dd159",
     "quantity": 3
 }
 

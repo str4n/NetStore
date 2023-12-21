@@ -77,7 +77,7 @@ internal sealed class CreateProductHandler : ICommandHandler<CreateProduct>
 
         var sku = _skuGenerator.Generate(command.Model, category.Name, color.ToString(), size.ToString());
 
-        var product = Product.Create(Guid.NewGuid(), command.Name, command.Description, command.CategoryId,
+        var product = Product.Create(command.Id, command.Name, command.Description, command.CategoryId,
             command.BrandId, command.Model, command.Fabric, gender, ageCategory, size, color, sku);
         
         _domainService.SetProductPrice(product, command.NetPrice);

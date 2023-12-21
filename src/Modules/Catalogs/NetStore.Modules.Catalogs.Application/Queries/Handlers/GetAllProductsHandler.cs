@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using NetStore.Modules.Catalogs.Application.DTO;
+using NetStore.Modules.Catalogs.Application.Mappings;
 using NetStore.Modules.Catalogs.Domain.Product;
 using NetStore.Modules.Catalogs.Domain.Repositories;
 using NetStore.Shared.Abstractions.Queries;
@@ -23,31 +24,8 @@ internal sealed class GetAllProductsHandler : IQueryHandler<GetAllProducts, IEnu
             "brand" => await _productRepository.GetAllByBrandAsync(query.Value, false),
             _ => await _productRepository.GetAllAsync(false)
         }).ToList();
-        
-        
-        var counts = products
-            .GroupBy(p => new { p.Size, p.Color, p.Name })
-            .Select(g => new { 
-                Size = g.Key.Size, 
-                Color = g.Key.Color, 
-                Name = g.Key.Name, 
-                Count = g.Count()
-            })
-            .ToList();
-        
-        products = products
-            .GroupBy(p => new { p.Size, p.Color, p.Name })
-            .Select(g => g.First())
-            .ToList();
-
-        var dtos = products.Select(x => 
-            new ProductDto(x.Id, x.Name, x.Description, x.Category.Name, x.Brand.Name, 
-                x.Model, x.GrossPrice, x.Fabric, 
-                x.Gender.ToString(), x.AgeCategory.ToString(), 
-                x.Size.ToString(), x.Color.ToString(), 
-                counts.FirstOrDefault(c => c.Size == x.Size && c.Color == x.Color && c.Name == x.Name)?.Count ?? 0));
 
 
-        return dtos;
+        return products.Select(x => x.AsDto());
     }
 }

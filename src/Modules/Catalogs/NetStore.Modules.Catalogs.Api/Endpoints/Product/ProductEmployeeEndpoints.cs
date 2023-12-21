@@ -22,8 +22,9 @@ internal static class ProductEmployeeEndpoints
     private static async Task<IResult> Create([FromBody] CreateProduct command,
         [FromServices] ICommandDispatcher commandDispatcher)
     {
-        await commandDispatcher.SendAsync(command);
+        var id = Guid.NewGuid();
+        await commandDispatcher.SendAsync(command with { Id = id});
 
-        return Results.NoContent();
+        return Results.Created($"https://localhost:7240/{Route}/{id}", default);
     }
 }
