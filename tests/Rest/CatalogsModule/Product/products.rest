@@ -1,17 +1,22 @@
 @url = https://localhost:7240/catalogs-module/products
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNzZmYzgyOC05YTgxLTQ5MjktYTliNS1kMTJmNWE1ZDUwODgiLCJ1bmlxdWVfbmFtZSI6IjI3NmZjODI4LTlhODEtNDkyOS1hOWI1LWQxMmY1YTVkNTA4OCIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMjgyNjAzNiwiZXhwIjoxNzAyODI5NjM2LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.dy9TbriZa7seXND1n-0u7okqkfdQ5hepHMNhktPcpLc
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiZWFiNzAzMi1mOTAzLTRkZTktYTg5Yi01YzhlODE0YTE2MDYiLCJ1bmlxdWVfbmFtZSI6ImJlYWI3MDMyLWY5MDMtNGRlOS1hODliLTVjOGU4MTRhMTYwNiIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMzE2OTgzNSwiZXhwIjoxNzAzMTczNDM1LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.C1p1zakw4yyaDOdhrvXubfC3aVnExp978SndUelvCTQ
 
 POST {{url}}
 Authorization: Bearer {{jwt}}
 Content-Type: application/json
 
 {
-    "mockupid": 1,
-    "count": 10,
+    "name": "Sample Jacket",
+    "description": "Sample desc",
+    "categoryId": 1,
+    "brandId": 1,
+    "model": "Sample model",
+    "fabric": "Sample fabric",
+    "gender": "Male",
     "agecategory": "Adult",
     "size": "M",
     "Color": "Black",
-    "price": 1299
+    "netprice": 1299
 }
 
 ###

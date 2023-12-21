@@ -24,20 +24,21 @@ internal sealed class RemoveProductFromCartHandler : ICommandHandler<RemoveProdu
             throw new CartErrorException("Error occured while removing product from the cart.");
         }
 
-        var productsToRemove = cart.Products
-            .Where(x => x.Product.CodeName == command.CodeName)
-            .Take(command.Quantity)
-            .Select(x => x.Product)
-            .ToList();
+        var product = cart.Products.SingleOrDefault(x => x.ProductId == command.Id);
 
-        if (productsToRemove.Count != command.Quantity)
+        if (product is null)
+        {
+            throw new ProductNotFoundException();
+        }
+
+        if (command.Quantity > product.Quantity)
         {
             throw new NotEnoughProductsInCartException(command.Quantity);
         }
 
-        foreach (var product in productsToRemove)
+        for (int i = 0; i < command.Quantity; i++)
         {
-            cart.RemoveProduct(product);
+            cart.RemoveProduct(product.Product);
         }
 
         await _cartRepository.UpdateAsync(cart);

@@ -18,7 +18,7 @@ internal sealed class ProductCreatedConsumer : IConsumer<ProductCreated>
     {
         var message = context.Message;
 
-        await _productRepository.AddAsync(new Product(message.Id, message.Name, message.SKU, message.CodeName,message.Size, message.Color,
+        await _productRepository.AddAsync(new Product(message.Id, message.Name, message.SKU,message.Size, message.Color,
             message.Price));
     }
 }

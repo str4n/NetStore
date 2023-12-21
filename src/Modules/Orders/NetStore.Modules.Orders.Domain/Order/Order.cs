@@ -32,11 +32,6 @@ public sealed class Order : Aggregate
 
     internal static Order CreateFromCheckout(CheckoutCart checkoutCart, DateTime placeDate)
     {
-        foreach (var cartProduct in checkoutCart.Products)
-        {
-            cartProduct.Product.Order();
-        }
-        
         var orderLines = checkoutCart.Products.Select((x, i) =>
             new OrderLine(i, x.Product.Name, x.Product.SKU, x.Product.Price, x.Quantity)).ToList();
         

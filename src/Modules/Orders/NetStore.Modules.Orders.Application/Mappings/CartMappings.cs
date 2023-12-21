@@ -9,6 +9,6 @@ internal static class CartMappings
         => new CartDto(cart.Products.Select(x => x.AsDto()));
 
     public static CartProductDto AsDto(this CartProduct cartProduct)
-        => new CartProductDto(cartProduct.Product.Name, cartProduct.Product.CodeName, cartProduct.Product.Color,
+        => new CartProductDto(cartProduct.Product.Name, cartProduct.Product.Color,
             cartProduct.Product.Size, cartProduct.Quantity);
 }

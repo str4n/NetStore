@@ -9,7 +9,5 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
     public void Configure(EntityTypeBuilder<Product> builder)
     {
         builder.HasKey(x => x.Id);
-
-        builder.Property(x => x.State).HasConversion<string>();
     }
 }

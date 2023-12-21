@@ -23,31 +23,22 @@ internal sealed class AddProductToCartHandler : ICommandHandler<AddProductToCart
     public async Task HandleAsync(AddProductToCart command)
     {
         var cart = await _cartRepository.GetByCustomerIdAsync(_identityContext.Id);
-        var products = (await _productRepository.GetAvailableAsync(command.CodeName, command.Quantity)).ToList();
         
         if (cart is null)
         {
             throw new CartErrorException("Error occured while adding product to the cart.");
         }
 
-        var currentCartProductCount =
-            cart.Products.SingleOrDefault(x => x.Product.CodeName == command.CodeName)?.Quantity;
+        var product = await _productRepository.GetAsync(command.Id);
 
-        var onStockCount = await _productRepository.GetAvailableCountAsync(command.CodeName);
+        if (product is null)
+        {
+            throw new ProductNotFoundException();
+        }
         
-        if (currentCartProductCount + command.Quantity > onStockCount)
+        if (command.Quantity > product.Stock)
         {
             throw new NotEnoughProductsOnStockException();
-        }
-
-        if (products.Count != command.Quantity)
-        {
-            throw new NotEnoughProductsOnStockException();
-        }
-
-        foreach (var product in products)
-        {
-            cart.AddProduct(product);
         }
 
         await _cartRepository.UpdateAsync(cart);

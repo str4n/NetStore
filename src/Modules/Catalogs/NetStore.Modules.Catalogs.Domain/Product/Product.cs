@@ -21,9 +21,7 @@ public sealed class Product : Aggregate
     public Size Size { get; private set; }
     public Color Color { get; private set; }
     public string SKU { get; private set; }
-    public string CodeName { get; private set; }
-    
-    // TODO: Product state
+    public int Stock { get; private set; }
 
     public static Product Create(AggregateId id, ProductName name, ProductDescription description, 
         long categoryId, long brandId, ProductModel model, ProductFabric fabric, Gender gender, AgeCategory ageCategory, 
@@ -35,7 +33,7 @@ public sealed class Product : Aggregate
             Name = name,
             Description = description,
             
-            // Does this logic belong to the Product itself? TODO: Legal module
+            // // Does this logic belong to the Product itself? TODO: Legal module
             // GrossPrice = CalculateGrossPrice(price, ageCategory),
             
             CategoryId = categoryId,
@@ -47,6 +45,7 @@ public sealed class Product : Aggregate
             Size = size,
             Color = color,
             SKU = sku,
+            Stock = 0,
         };
         
         product.ClearEvents();
@@ -55,6 +54,26 @@ public sealed class Product : Aggregate
     }
 
     #region UpdateMethods
+
+    public void IncreaseStock(int quantity)
+    {
+        if (quantity < 1)
+        {
+            return;
+        }
+
+        Stock += quantity;
+    }
+
+    public void DecreaseStock(int quantity)
+    {
+        if (quantity < 1)
+        {
+            return;
+        }
+
+        Stock -= quantity;
+    }
     public void ChangeName(ProductName name)
     {
         Name = name;
@@ -134,18 +153,7 @@ public sealed class Product : Aggregate
         SKU = sku;
         IncrementVersion();
     }
-
-    public void ChangeCodeName(string codeName)
-    {
-        if (string.IsNullOrWhiteSpace(CodeName))
-        {
-            CodeName = codeName;
-            return;
-        }
-
-        CodeName = codeName;
-        IncrementVersion();
-    }
+    
     #endregion
     
 }

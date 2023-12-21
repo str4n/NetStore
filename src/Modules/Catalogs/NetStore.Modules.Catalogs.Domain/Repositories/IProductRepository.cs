@@ -8,6 +8,6 @@ public interface IProductRepository
     Task<IEnumerable<Product.Product>> GetAllAsync(bool tracking = true);
     Task<IEnumerable<Product.Product>> GetAllByCategoryAsync(string category, bool tracking = true);
     Task<IEnumerable<Product.Product>> GetAllByBrandAsync(string brand, bool tracking = true);
-    Task AddAsync(IEnumerable<Product.Product> products);
+    Task AddAsync(Product.Product product);
     Task UpdateAsync(Product.Product product);
 }

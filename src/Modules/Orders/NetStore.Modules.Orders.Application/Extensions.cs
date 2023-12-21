@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NetStore.Modules.Catalogs.Shared.Events;
 using NetStore.Modules.Orders.Application.Events;
 using NetStore.Modules.Orders.Application.Storage;
 using NetStore.Shared.Infrastructure.Messaging;
@@ -12,7 +13,9 @@ public static class Extensions
         services
             .AddConsumer<ProductCreatedConsumer>()
             .AddConsumer<UserSignedUpConsumer>()
-            .AddConsumer<OrderPlacedConsumer>();
+            .AddConsumer<OrderPlacedConsumer>()
+            .AddConsumer<ProductStockQuantityIncreasedConsumer>()
+            .AddConsumer<ProductStockQuantityDecreasedConsumer>();
 
         services.AddScoped<IPaymentStorage, HttpContextPaymentStorage>();
         

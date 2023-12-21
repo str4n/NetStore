@@ -19,7 +19,7 @@ internal static class ProductEmployeeEndpoints
         return app;
     }
 
-    private static async Task<IResult> Create([FromBody] CreateProducts command,
+    private static async Task<IResult> Create([FromBody] CreateProduct command,
         [FromServices] ICommandDispatcher commandDispatcher)
     {
         await commandDispatcher.SendAsync(command);

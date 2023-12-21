@@ -1,5 +1,4 @@
 ﻿using NetStore.Modules.Orders.Domain.Exceptions;
-using NetStore.Modules.Orders.Domain.Product;
 
 namespace NetStore.Modules.Orders.Domain.Cart;
 
@@ -18,13 +17,8 @@ public sealed class Cart
 
     public void AddProduct(Product.Product product)
     {
-        var cartProduct = _products.SingleOrDefault(x => x.Product.CodeName == product.CodeName);
-
-        if (product.State == ProductState.Ordered)
-        {
-            throw new ProductAlreadyOrderedCartException(product.Id);
-        }
-
+        var cartProduct = _products.SingleOrDefault(x => x.Product.Id == product.Id);
+        
         if (cartProduct is null)
         {
             _products.Add(new CartProduct(Id, product,1));

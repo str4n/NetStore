@@ -2,13 +2,11 @@
 using NetStore.Modules.Catalogs.Domain.Brand;
 using NetStore.Modules.Catalogs.Domain.Category;
 using NetStore.Modules.Catalogs.Domain.Product;
-using NetStore.Modules.Catalogs.Domain.Product.Mockup;
 
 namespace NetStore.Modules.Catalogs.Infrastructure.EF;
 
 internal sealed class CatalogsDbContext : DbContext
 {
-    public DbSet<ProductMockup> ProductMockups { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Brand> Brands { get; set; }
     public DbSet<Category> Categories { get; set; }

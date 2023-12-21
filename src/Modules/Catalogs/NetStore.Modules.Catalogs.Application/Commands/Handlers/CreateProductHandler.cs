@@ -12,40 +12,34 @@ using NetStore.Shared.Abstractions.Messaging;
 
 namespace NetStore.Modules.Catalogs.Application.Commands.Handlers;
 
-internal sealed class CreateProductsHandler : ICommandHandler<CreateProducts>
+internal sealed class CreateProductHandler : ICommandHandler<CreateProduct>
 {
     private readonly IProductRepository _productRepository;
-    private readonly IProductMockupRepository _productMockupRepository;
     private readonly IProductDomainService _domainService;
     private readonly ISkuGenerator _skuGenerator;
     private readonly ICategoryRepository _categoryRepository;
     private readonly IMessageBroker _messageBroker;
-    private readonly IProductCodeNameGenerator _codeNameGenerator;
+    private readonly IBrandRepository _brandRepository;
 
-    public CreateProductsHandler(IProductRepository productRepository, IProductMockupRepository productMockupRepository, 
+    public CreateProductHandler(IProductRepository productRepository, 
         IProductDomainService domainService, ISkuGenerator skuGenerator, ICategoryRepository categoryRepository, 
-        IMessageBroker messageBroker, IProductCodeNameGenerator codeNameGenerator)
+        IMessageBroker messageBroker, IBrandRepository brandRepository)
     {
         _productRepository = productRepository;
-        _productMockupRepository = productMockupRepository;
         _domainService = domainService;
         _skuGenerator = skuGenerator;
         _categoryRepository = categoryRepository;
         _messageBroker = messageBroker;
-        _codeNameGenerator = codeNameGenerator;
+        _brandRepository = brandRepository;
     }
     
-    public async Task HandleAsync(CreateProducts command)
+    public async Task HandleAsync(CreateProduct command)
     {
-        var mockup = await _productMockupRepository.GetAsync(command.MockupId);
         var isAgeCategoryValid = Enum.TryParse(command.AgeCategory, out AgeCategory ageCategory);
         var isSizeValid = Enum.TryParse(command.Size, out Size size);
         var isColorValid = Enum.TryParse(command.Color, out Color color);
-
-        if (mockup is null)
-        {
-            throw new ProductMockupNotFoundException();
-        }
+        var isGenderValid = Enum.TryParse(command.Gender, out Gender gender);
+        
 
         if (!isAgeCategoryValid)
         {
@@ -61,37 +55,36 @@ internal sealed class CreateProductsHandler : ICommandHandler<CreateProducts>
         {
             throw new InvalidProductColorException();
         }
-        
-        var category = await _categoryRepository.GetAsync(mockup.CategoryId);
+
+        if (!isGenderValid)
+        {
+            throw new InvalidProductGenderCategoryException();
+        }
+
+        var category = await _categoryRepository.GetAsync(command.CategoryId);
 
         if (category is null)
         {
             throw new CategoryNotFoundException();
         }
 
-        List<Product> products = new();
-        List<Task> tasks = new();
-
-        var sku = _skuGenerator.Generate(mockup.Model, category.Name, command.Color, command.Size);
+        var brand = await _brandRepository.GetAsync(command.BrandId);
         
-        for (var i = 0; i < command.Count; i++)
+        if (brand is null)
         {
-            var id = Guid.NewGuid();
-            var product = Product.Create(id, mockup.Name, mockup.Description, mockup.CategoryId,
-                mockup.BrandId, mockup.Model, mockup.Fabric, mockup.Gender, ageCategory, size, color,
-                sku);
-            
-            product.ChangeCodeName(_codeNameGenerator.Generate(product));
-
-            _domainService.SetProductPrice(product, command.Price);
-            
-            products.Add(product);
-            tasks.Add(_messageBroker.PublishAsync(
-                new ProductCreated(id,mockup.Name,product.SKU, product.CodeName, product.Size.ToString(), 
-                    product.Color.ToString(),product.GrossPrice)));
+            throw new BrandNotFoundException();
         }
+
+        var sku = _skuGenerator.Generate(command.Model, category.Name, color.ToString(), size.ToString());
+
+        var product = Product.Create(Guid.NewGuid(), command.Name, command.Description, command.CategoryId,
+            command.BrandId, command.Model, command.Fabric, gender, ageCategory, size, color, sku);
         
-        await _productRepository.AddAsync(products);
-        await Task.WhenAll(tasks);
+        _domainService.SetProductPrice(product, command.NetPrice);
+
+        await _productRepository.AddAsync(product);
+
+        await _messageBroker.PublishAsync(new ProductCreated(product.Id, product.Name, product.SKU, product.Size.ToString(),
+            product.Color.ToString(), product.GrossPrice));
     }
 }

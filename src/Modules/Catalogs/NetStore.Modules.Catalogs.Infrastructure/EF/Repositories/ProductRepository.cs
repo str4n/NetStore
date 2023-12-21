@@ -62,9 +62,9 @@ internal sealed class ProductRepository : IProductRepository
                 .Where(x => x.Brand.Name == brand)
                 .ToListAsync();
 
-    public async Task AddAsync(IEnumerable<Product> products)
+    public async Task AddAsync(Product product)
     {
-        await _dbContext.Products.AddRangeAsync(products);
+        await _dbContext.Products.AddAsync(product);
         await _dbContext.SaveChangesAsync();
     }
 

@@ -11,12 +11,11 @@ internal static class Extensions
     public static IServiceCollection AddEF(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddPostgres<CatalogsDbContext>(configuration);
-        
+
         services
             .AddScoped<ICategoryRepository, CategoryRepository>()
             .AddScoped<IBrandRepository, BrandRepository>()
-            .AddScoped<IProductRepository, ProductRepository>()
-            .AddScoped<IProductMockupRepository, ProductMockupRepository>();
+            .AddScoped<IProductRepository, ProductRepository>();
 
         return services;
     }

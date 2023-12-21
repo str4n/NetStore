@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NetStore.Modules.Catalogs.Api.Endpoints;
 using NetStore.Modules.Catalogs.Api.Endpoints.Brand;
 using NetStore.Modules.Catalogs.Api.Endpoints.Category;
 using NetStore.Modules.Catalogs.Api.Endpoints.Product;
-using NetStore.Modules.Catalogs.Api.Endpoints.ProductMockup;
 using NetStore.Modules.Catalogs.Application;
 using NetStore.Modules.Catalogs.Domain;
 using NetStore.Modules.Catalogs.Infrastructure;
@@ -34,10 +32,6 @@ public sealed class CatalogsModule : Module
         app
             .MapBrandAdminEndpoints()
             .MapBrandCustomerEndpoints();
-
-        app
-            .MapProductMockupAdminEndpoints()
-            .MapProductMockupEmployeeEndpoints();
 
         app
             .MapProductEmployeeEndpoints()
