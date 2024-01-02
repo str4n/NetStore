@@ -9,6 +9,7 @@ using NetStore.Shared.Infrastructure.Commands;
 using NetStore.Shared.Infrastructure.Contexts;
 using NetStore.Shared.Infrastructure.Exceptions;
 using NetStore.Shared.Infrastructure.Messaging;
+using NetStore.Shared.Infrastructure.Modules;
 using NetStore.Shared.Infrastructure.Postgres;
 using NetStore.Shared.Infrastructure.Queries;
 using NetStore.Shared.Infrastructure.Services;
@@ -55,6 +56,8 @@ internal static class Extensions
             .AddQueries();
 
         services.AddMessaging(configuration);
+
+        services.AddModuleRequests();
 
         return services;
     }
