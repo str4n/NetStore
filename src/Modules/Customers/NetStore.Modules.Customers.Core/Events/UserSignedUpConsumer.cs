@@ -8,12 +8,12 @@ namespace NetStore.Modules.Customers.Core.Events;
 
 internal sealed class UserSignedUpConsumer : IConsumer<UserSignedUp>
 {
-    private readonly ICustomersRepository _customersRepository;
+    private readonly ICustomerRepository _customerRepository;
     private readonly ILogger<UserSignedUpConsumer> _logger;
 
-    public UserSignedUpConsumer(ICustomersRepository customersRepository)
+    public UserSignedUpConsumer(ICustomerRepository customerRepository)
     {
-        _customersRepository = customersRepository;
+        _customerRepository = customerRepository;
     }
 
     public async Task Consume(ConsumeContext<UserSignedUp> context)
@@ -21,7 +21,7 @@ internal sealed class UserSignedUpConsumer : IConsumer<UserSignedUp>
         var message = context.Message;
         var customer = Customer.CreateFromUser(message.Id, message.Email);
         
-        await _customersRepository.AddAsync(customer);
+        await _customerRepository.AddAsync(customer);
     }
 }
 

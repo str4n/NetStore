@@ -9,8 +9,4 @@
       <ProjectReference Include="..\NetStore.Shared.Abstractions\NetStore.Shared.Abstractions.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Enums\" />
-    </ItemGroup>
-
 </Project>

@@ -8,16 +8,16 @@ namespace NetStore.Modules.Customers.Core.Commands.Handlers;
 
 internal sealed class CompleteCustomerInformationHandler : ICommandHandler<CompleteCustomerInformation>
 {
-    private readonly ICustomersRepository _customersRepository;
+    private readonly ICustomerRepository _customerRepository;
 
-    public CompleteCustomerInformationHandler(ICustomersRepository customersRepository)
+    public CompleteCustomerInformationHandler(ICustomerRepository customerRepository)
     {
-        _customersRepository = customersRepository;
+        _customerRepository = customerRepository;
     }
     
     public async Task HandleAsync(CompleteCustomerInformation command)
     {
-        var customer = await _customersRepository.GetAsync(command.Id);
+        var customer = await _customerRepository.GetAsync(command.Id);
 
         if (customer.IsCompleted())
         {
@@ -26,6 +26,6 @@ internal sealed class CompleteCustomerInformationHandler : ICommandHandler<Compl
         
         customer.CompleteInformation(command.FirstName, command.LastName, command.Address.ToEntity());
 
-        await _customersRepository.UpdateAsync(customer);
+        await _customerRepository.UpdateAsync(customer);
     }
 }

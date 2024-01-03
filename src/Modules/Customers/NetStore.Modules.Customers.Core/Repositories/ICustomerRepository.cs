@@ -2,7 +2,7 @@
 
 namespace NetStore.Modules.Customers.Core.Repositories;
 
-internal interface ICustomersRepository
+internal interface ICustomerRepository
 {
     Task AddAsync(Customer customer);
     Task UpdateAsync(Customer customer);

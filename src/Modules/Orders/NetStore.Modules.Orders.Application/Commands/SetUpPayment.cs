@@ -2,4 +2,4 @@
 
 namespace NetStore.Modules.Orders.Application.Commands;
 
-public record SetPayment(string PaymentMethod) : ICommand;
+public record SetUpPayment(string PaymentMethod) : ICommand;

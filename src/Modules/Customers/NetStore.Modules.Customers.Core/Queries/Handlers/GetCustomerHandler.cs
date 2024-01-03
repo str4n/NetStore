@@ -8,16 +8,16 @@ namespace NetStore.Modules.Customers.Core.Queries.Handlers;
 
 internal sealed class GetCustomerHandler : IQueryHandler<GetCustomer, CustomerDto>
 {
-    private readonly ICustomersRepository _customersRepository;
+    private readonly ICustomerRepository _customerRepository;
 
-    public GetCustomerHandler(ICustomersRepository customersRepository)
+    public GetCustomerHandler(ICustomerRepository customerRepository)
     {
-        _customersRepository = customersRepository;
+        _customerRepository = customerRepository;
     }
 
     public async Task<CustomerDto> HandleAsync(GetCustomer query)
     {
-        var customer = await _customersRepository.GetAsync(query.Id);
+        var customer = await _customerRepository.GetAsync(query.Id);
 
         if (!customer.IsCompleted())
         {

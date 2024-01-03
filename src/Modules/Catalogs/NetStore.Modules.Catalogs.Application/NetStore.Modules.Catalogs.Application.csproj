@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Orders\NetStore.Modules.Orders.Shared\NetStore.Modules.Orders.Shared.csproj" />
       <ProjectReference Include="..\NetStore.Modules.Catalogs.Infrastructure\NetStore.Modules.Catalogs.Infrastructure.csproj" />
       <ProjectReference Include="..\NetStore.Modules.Catalogs.Shared\NetStore.Modules.Catalogs.Shared.csproj" />
     </ItemGroup>

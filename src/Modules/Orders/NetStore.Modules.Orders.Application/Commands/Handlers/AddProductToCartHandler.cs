@@ -41,6 +41,18 @@ internal sealed class AddProductToCartHandler : ICommandHandler<AddProductToCart
             throw new NotEnoughProductsOnStockException();
         }
 
+        var cartProduct = cart.Products.SingleOrDefault(x => x.Product.Id == product.Id);
+
+        if (cartProduct?.Quantity + command.Quantity > product.Stock)
+        {
+            throw new NotEnoughProductsOnStockException();
+        }
+
+        for (int i = 0; i < command.Quantity; i++)
+        {
+            cart.AddProduct(product);
+        }
+        
         await _cartRepository.UpdateAsync(cart);
     }
 }

@@ -40,11 +40,11 @@ public sealed class Order : Aggregate
 
         orderLines.Add(shipmentLine);
 
-        var order = new Order(checkoutCart.CustomerId, orderLines, checkoutCart.Shipment, checkoutCart.Payment,
+        var order = new Order(checkoutCart.CustomerId, orderLines, checkoutCart.Shipment, checkoutCart.Payment with { Amount = orderLines.Sum(x => x.UnitPrice * x.Quantity) },
             placeDate);
         
         order.ClearEvents();
-
+        
         return order;
     }
 

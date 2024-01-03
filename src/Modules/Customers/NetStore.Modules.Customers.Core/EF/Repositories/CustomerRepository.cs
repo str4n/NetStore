@@ -4,12 +4,12 @@ using NetStore.Modules.Customers.Core.Repositories;
 
 namespace NetStore.Modules.Customers.Core.EF.Repositories;
 
-internal sealed class CustomersRepository : ICustomersRepository
+internal sealed class CustomerRepository : ICustomerRepository
 {
     private readonly CustomersDbContext _dbContext;
     private readonly DbSet<Customer> _customers;
 
-    public CustomersRepository(CustomersDbContext dbContext)
+    public CustomerRepository(CustomersDbContext dbContext)
     {
         _dbContext = dbContext;
         _customers = dbContext.Customers;

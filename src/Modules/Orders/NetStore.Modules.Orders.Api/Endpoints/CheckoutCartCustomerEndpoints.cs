@@ -42,7 +42,7 @@ internal static class CheckoutCartCustomerEndpoints
         return Results.Ok();
     }
     
-    private static async Task<IResult> SetPayment([FromBody] SetPayment command,
+    private static async Task<IResult> SetPayment([FromBody] SetUpPayment command,
         [FromServices] ICommandDispatcher commandDispatcher)
     {
         await commandDispatcher.SendAsync(command);

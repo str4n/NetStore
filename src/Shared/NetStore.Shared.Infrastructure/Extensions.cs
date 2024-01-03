@@ -18,7 +18,7 @@ using NetStore.Shared.Infrastructure.Time;
 [assembly: InternalsVisibleTo("NetStore.Bootstrapper")]
 namespace NetStore.Shared.Infrastructure;
 
-internal static class Extensions
+public static class Extensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {

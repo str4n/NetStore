@@ -6,27 +6,27 @@ using NetStore.Shared.Abstractions.Contexts;
 
 namespace NetStore.Modules.Orders.Application.Commands.Handlers;
 
-internal sealed class SetPaymentHandler : ICommandHandler<SetPayment>
+internal sealed class SetUpPaymentHandler : ICommandHandler<SetUpPayment>
 {
     private readonly ICheckoutRepository _checkoutRepository;
     private readonly IIdentityContext _identityContext;
 
-    public SetPaymentHandler(ICheckoutRepository checkoutRepository, IIdentityContext identityContext)
+    public SetUpPaymentHandler(ICheckoutRepository checkoutRepository, IIdentityContext identityContext)
     {
         _checkoutRepository = checkoutRepository;
         _identityContext = identityContext;
     }
     
-    public async Task HandleAsync(SetPayment command)
+    public async Task HandleAsync(SetUpPayment command)
     {
-        var checkout = await _checkoutRepository.GetByCustomerId(_identityContext.Id);
+        var customerId = _identityContext.Id;
+        var checkout = await _checkoutRepository.GetByCustomerId(customerId);
         
         if (checkout is null)
         {
             throw new CheckoutCartNotFoundException();
         }
-
-        var paymentId = Guid.NewGuid();
+        
         var isPaymentMethodValid = Enum.TryParse(command.PaymentMethod, out PaymentMethod paymentMethod);
 
         if (!isPaymentMethodValid)
@@ -34,7 +34,11 @@ internal sealed class SetPaymentHandler : ICommandHandler<SetPayment>
             throw new InvalidPaymentMethodException();
         }
         
-        checkout.SetPayment(new Payment(paymentId, paymentMethod));
+        var paymentId = Guid.NewGuid();
+
+        var paymentGatewaySecret = $"{Guid.NewGuid()}-{Guid.NewGuid()}";
+        
+        checkout.SetPayment(new Payment(paymentId, paymentMethod, default, paymentGatewaySecret, false));
         await _checkoutRepository.UpdateAsync(checkout);
     }
 }

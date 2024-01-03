@@ -10,4 +10,5 @@ public interface IProductRepository
     Task<IEnumerable<Product.Product>> GetAllByBrandAsync(string brand, bool tracking = true);
     Task AddAsync(Product.Product product);
     Task UpdateAsync(Product.Product product);
+    Task DecreaseStockAsync(Guid productId, int quantity);
 }
