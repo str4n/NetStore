@@ -16,7 +16,13 @@ internal sealed class OrderPlacedConsumer : IConsumer<OrderPlaced>
     public async Task Consume(ConsumeContext<OrderPlaced> context)
     {
         var message = context.Message;
-        
-        // Decrease stock
+        var orderLines = message.Order.Lines;
+
+        foreach (var line in orderLines)
+        {
+            await _productRepository.DecreaseStockAsync(line.ProductId, line.Quantity);
+        }
+
+        await _productRepository.SaveChangesAsync();
     }
 }

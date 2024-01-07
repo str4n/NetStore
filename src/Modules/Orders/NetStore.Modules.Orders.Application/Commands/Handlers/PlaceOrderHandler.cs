@@ -62,7 +62,7 @@ internal sealed class PlaceOrderHandler : ICommandHandler<PlaceOrder>
         var orderPlacedEvent = new OrderPlaced(customerId,
             new OrderDto(order.Id, order.Shipment.City, order.Shipment.Street, order.Shipment.PostalCode,
                 order.Shipment.ReceiverName, order.PlaceDate,
-                order.Lines.Select(x => new OrderLineDto(x.OrderLineNumber, x.Name, x.Quantity, x.UnitPrice))));
+                order.Lines.Select(x => new OrderLineDto(x.Id, x.ProductId, x.OrderLineNumber, x.Name, x.Quantity, x.UnitPrice))));
 
         var orderPrice = order.Lines.Sum(x => x.UnitPrice * x.Quantity);
         

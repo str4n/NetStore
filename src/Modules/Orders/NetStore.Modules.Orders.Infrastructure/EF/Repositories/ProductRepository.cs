@@ -35,7 +35,7 @@ internal sealed class ProductRepository : IProductRepository
             .Where(x => x.Id == productId)
             .ExecuteUpdateAsync(x => x
                 .SetProperty(p => p.Stock, p => p.Stock - quantity));
-
-        await _dbContext.SaveChangesAsync();
     }
+    
+    public async Task SaveChangesAsync() => await _dbContext.SaveChangesAsync();
 }

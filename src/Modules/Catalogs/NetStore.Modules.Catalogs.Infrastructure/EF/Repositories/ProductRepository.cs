@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Query;
 using NetStore.Modules.Catalogs.Domain.Brand;
 using NetStore.Modules.Catalogs.Domain.Product;
 using NetStore.Modules.Catalogs.Domain.Repositories;
+using NetStore.Shared.Types.Aggregate;
 
 namespace NetStore.Modules.Catalogs.Infrastructure.EF.Repositories;
 
@@ -74,13 +75,18 @@ internal sealed class ProductRepository : IProductRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    // public async Task DecreaseStockAsync(Guid productId, int quantity)
-    // {
-    //     await _dbContext
-    //         .Products
-    //         .Where(x => x.Id == productId)
-    //         .ExecuteUpdateAsync(x => x.SetProperty(p => p.Stock, p => p.Stock - quantity));
-    //
-    //     await _dbContext.SaveChangesAsync();
-    // }
+    public async Task DecreaseStockAsync(Guid productId, int quantity)
+    {
+        var products = _dbContext
+            .Products
+            .Where(x => x.Id == (AggregateId)productId);
+
+        var test = await products.ToListAsync();
+        
+        await products.ExecuteUpdateAsync(x => x.SetProperty(p => p.Stock, p => p.Stock - quantity));
+    }
+
+    public async Task SaveChangesAsync() => await _dbContext.SaveChangesAsync();
+    
+    // TODO: Unit of work
 }

@@ -23,7 +23,7 @@ internal sealed class OrderPlacedConsumer : IConsumer<OrderPlaced>
         var message = context.Message;
         var order = new Order(message.Order.Id,message.CustomerId, 
             message.Order.Lines
-                .Select(x => new OrderLine(Guid.NewGuid(), x.OrderLineNumber, x.Name, x.UnitPrice, x.Quantity)), 
+                .Select(x => new OrderLine(x.Id, x.ProductId, x.OrderLineNumber, x.Name, x.UnitPrice, x.Quantity)), 
             OrderStatus.Placed, message.Order.PlaceDate, 
             new Address(message.Order.City, message.Order.Street, message.Order.PostalCode), 
             message.Order.ReceiverName);

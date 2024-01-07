@@ -18,13 +18,13 @@ internal class FakePaymentGatewayFacade : IPaymentGatewayFacade
     
     public async Task SetUpPayment(PaymentDto payment, string fullName, string address)
     {
-        var paymentGatewayUrl = _options.PaymentGatewayUrl;
-        var webhookUrl = _options.WebhookUrl;
-
-        var httpClient = _httpClientFactory.CreateClient("FakePaymentGateway");
-
-        var result = await httpClient.PostAsJsonAsync(paymentGatewayUrl, 
-            new SetUpPaymentWithMetadata(payment.Id, fullName, address, payment.Amount, payment.PaymentGatewaySecret, webhookUrl));
+        // var paymentGatewayUrl = _options.PaymentGatewayUrl;
+        // var webhookUrl = _options.WebhookUrl;
+        //
+        // var httpClient = _httpClientFactory.CreateClient("FakePaymentGateway");
+        //
+        // var result = await httpClient.PostAsJsonAsync(paymentGatewayUrl, 
+        //     new SetUpPaymentWithMetadata(payment.Id, fullName, address, payment.Amount, payment.PaymentGatewaySecret, webhookUrl));
 
         // result.EnsureSuccessStatusCode();
     }

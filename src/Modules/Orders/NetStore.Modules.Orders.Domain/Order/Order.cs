@@ -33,10 +33,10 @@ public sealed class Order : Aggregate
     internal static Order CreateFromCheckout(CheckoutCart checkoutCart, DateTime placeDate)
     {
         var orderLines = checkoutCart.Products.Select((x, i) =>
-            new OrderLine(i, x.Product.Name, x.Product.SKU, x.Product.Price, x.Quantity)).ToList();
+            new OrderLine(x.Product.Id,i, x.Product.Name, x.Product.SKU, x.Product.Price, x.Quantity)).ToList();
         
         var shipmentOrderLineNumber = orderLines.Max(x => x.OrderLineNumber) + 1;
-        var shipmentLine = new OrderLine(shipmentOrderLineNumber, "Shipment","Shipment", 10, 1);
+        var shipmentLine = new OrderLine(Guid.NewGuid(), shipmentOrderLineNumber, "Shipment","Shipment", 10, 1);
 
         orderLines.Add(shipmentLine);
 

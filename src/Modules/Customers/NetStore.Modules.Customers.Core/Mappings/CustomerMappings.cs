@@ -13,6 +13,6 @@ internal static class CustomerMappings
                 .Select(x => new OrderDto(x.Id, x.Address.City, x.Address.Street, x.Address.PostalCode, x.ReceiverName, 
                     x.PlaceDate, 
                     x.Lines
-                        .Select(l => new OrderLineDto(l.OrderLineNumber, l.Name, l.Quantity, l.UnitPrice)))));
+                        .Select(l => new OrderLineDto(l.Id, l.ProductId,l.OrderLineNumber, l.Name, l.Quantity, l.UnitPrice)))));
     
 }
