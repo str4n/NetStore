@@ -1,7 +1,4 @@
-﻿using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-using NetStore.Modules.Catalogs.Domain.Brand;
+﻿using Microsoft.EntityFrameworkCore;
 using NetStore.Modules.Catalogs.Domain.Product;
 using NetStore.Modules.Catalogs.Domain.Repositories;
 using NetStore.Shared.Types.Aggregate;
@@ -80,8 +77,6 @@ internal sealed class ProductRepository : IProductRepository
         var products = _dbContext
             .Products
             .Where(x => x.Id == (AggregateId)productId);
-
-        var test = await products.ToListAsync();
         
         await products.ExecuteUpdateAsync(x => x.SetProperty(p => p.Stock, p => p.Stock - quantity));
     }

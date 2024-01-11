@@ -8,7 +8,7 @@ using NetStore.Modules.Orders.Application.Queries;
 using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Abstractions.Queries;
 
-namespace NetStore.Modules.Orders.Api.Endpoints;
+namespace NetStore.Modules.Orders.Api.Endpoints.Cart;
 
 internal static class CartCustomerEndpoints
 {
@@ -57,7 +57,7 @@ internal static class CartCustomerEndpoints
 
     private static async Task<IResult> CheckoutCart([FromServices] ICommandDispatcher commandDispatcher)
     {
-        await commandDispatcher.SendAsync(new Checkout());
+        await commandDispatcher.SendAsync(new Application.Commands.Checkout());
 
         return Results.Ok();
     }

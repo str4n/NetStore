@@ -78,6 +78,8 @@ public sealed class Order : Aggregate
         }
 
         Status = OrderStatus.Paid;
+        Payment = Payment with { Payed = true };
+        
         IncrementVersion();
     }
 

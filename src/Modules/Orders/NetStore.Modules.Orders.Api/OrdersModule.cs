@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NetStore.Modules.Orders.Api.Endpoints;
-using NetStore.Modules.Orders.Api.External;
+using NetStore.Modules.Orders.Api.Endpoints.Cart;
+using NetStore.Modules.Orders.Api.Endpoints.Checkout;
 using NetStore.Modules.Orders.Application;
-using NetStore.Modules.Orders.Application.External;
 using NetStore.Modules.Orders.Domain;
 using NetStore.Modules.Orders.Infrastructure;
 using NetStore.Shared.Abstractions.Modules;
@@ -22,11 +21,7 @@ public sealed class OrdersModule : Module
             .AddApplication()
             .AddDomain()
             .AddInfrastructure(configuration);
-
-        var options = Extensions.GetOptions<FakePaymentGatewayOptions>(configuration, "PaymentIntegration");
-
-        services.AddSingleton(options);
-        services.AddScoped<IPaymentGatewayFacade, FakePaymentGatewayFacade>();
+        
         services.AddHttpClient();
     }
 

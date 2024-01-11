@@ -2,4 +2,4 @@
 
 namespace NetStore.Modules.Orders.Shared.Events;
 
-public sealed record PaymentRequested(Guid PaymentId, Guid OrderId, Guid CustomerId, double Amount, string Secret) : IEvent;
+public sealed record PaymentRequested(Guid PaymentId, Guid OrderId, Guid CustomerId, double Amount, DateTime DueDate) : IEvent;

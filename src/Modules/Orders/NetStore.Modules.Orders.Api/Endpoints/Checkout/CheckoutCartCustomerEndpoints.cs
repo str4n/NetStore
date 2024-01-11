@@ -9,7 +9,7 @@ using NetStore.Modules.Orders.Application.Storage;
 using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Abstractions.Queries;
 
-namespace NetStore.Modules.Orders.Api.Endpoints;
+namespace NetStore.Modules.Orders.Api.Endpoints.Checkout;
 
 internal static class CheckoutCartCustomerEndpoints
 {

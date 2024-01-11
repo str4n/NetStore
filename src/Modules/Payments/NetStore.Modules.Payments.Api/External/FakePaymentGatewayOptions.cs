@@ -1,4 +1,4 @@
-﻿namespace NetStore.Modules.Orders.Api.External;
+﻿namespace NetStore.Modules.Payments.Api.External;
 
 public class FakePaymentGatewayOptions
 {

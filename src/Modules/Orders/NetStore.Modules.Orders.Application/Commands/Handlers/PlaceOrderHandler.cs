@@ -65,8 +65,10 @@ internal sealed class PlaceOrderHandler : ICommandHandler<PlaceOrder>
                 order.Lines.Select(x => new OrderLineDto(x.Id, x.ProductId, x.OrderLineNumber, x.Name, x.Quantity, x.UnitPrice))));
 
         var orderPrice = order.Lines.Sum(x => x.UnitPrice * x.Quantity);
+
+        var dueDate = _clock.Now().AddHours(2); // TODO: Move to config
         
-        var paymentRequestedEvent = new PaymentRequested(order.Payment.Id, order.Id, customerId, orderPrice, order.Payment.PaymentGatewaySecret);
+        var paymentRequestedEvent = new PaymentRequested(order.Payment.Id, order.Id, customerId, orderPrice, dueDate);
         
         tasks.Add(_messageBroker.PublishAsync(orderPlacedEvent));
         tasks.Add(_messageBroker.PublishAsync(paymentRequestedEvent));

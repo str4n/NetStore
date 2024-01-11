@@ -9,6 +9,7 @@
       <ProjectReference Include="..\..\Modules\Catalogs\NetStore.Modules.Catalogs.Api\NetStore.Modules.Catalogs.Api.csproj" />
       <ProjectReference Include="..\..\Modules\Customers\NetStore.Modules.Customers.Api\NetStore.Modules.Customers.Api.csproj" />
       <ProjectReference Include="..\..\Modules\Orders\NetStore.Modules.Orders.Api\NetStore.Modules.Orders.Api.csproj" />
+      <ProjectReference Include="..\..\Modules\Payments\NetStore.Modules.Payments.Api\NetStore.Modules.Payments.Api.csproj" />
       <ProjectReference Include="..\..\Modules\Users\NetStore.Modules.Users.Api\NetStore.Modules.Users.Api.csproj" />
       <ProjectReference Include="..\..\Shared\NetStore.Shared.Infrastructure\NetStore.Shared.Infrastructure.csproj" />
     </ItemGroup>
