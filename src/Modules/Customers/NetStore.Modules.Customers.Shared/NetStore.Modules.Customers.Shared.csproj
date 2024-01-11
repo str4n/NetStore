@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\NetStore.Shared.Abstractions\NetStore.Shared.Abstractions.csproj" />
+      <ProjectReference Include="..\..\..\Shared\NetStore.Shared.Abstractions\NetStore.Shared.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>

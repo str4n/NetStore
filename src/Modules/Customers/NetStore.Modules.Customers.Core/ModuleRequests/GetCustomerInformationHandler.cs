@@ -1,7 +1,7 @@
 ﻿using NetStore.Modules.Customers.Core.Repositories;
+using NetStore.Modules.Customers.Shared.DTO;
+using NetStore.Modules.Customers.Shared.ModuleRequests;
 using NetStore.Shared.Abstractions.Modules.Requests;
-using NetStore.Shared.Types.DTO;
-using NetStore.Shared.Types.ModuleRequests;
 
 namespace NetStore.Modules.Customers.Core.ModuleRequests;
 

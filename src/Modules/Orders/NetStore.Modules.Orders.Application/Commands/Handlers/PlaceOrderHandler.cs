@@ -1,15 +1,13 @@
-﻿using NetStore.Modules.Orders.Application.Exceptions;
-using NetStore.Modules.Orders.Application.Storage;
+﻿using NetStore.Modules.Customers.Shared.ModuleRequests;
+using NetStore.Modules.Orders.Application.Exceptions;
 using NetStore.Modules.Orders.Domain.Repositories;
+using NetStore.Modules.Orders.Shared.DTO;
 using NetStore.Modules.Orders.Shared.Events;
 using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Abstractions.Contexts;
-using NetStore.Shared.Abstractions.Events;
 using NetStore.Shared.Abstractions.Messaging;
 using NetStore.Shared.Abstractions.Modules.Requests;
 using NetStore.Shared.Abstractions.Time;
-using NetStore.Shared.Types.DTO;
-using NetStore.Shared.Types.ModuleRequests;
 
 namespace NetStore.Modules.Orders.Application.Commands.Handlers;
 

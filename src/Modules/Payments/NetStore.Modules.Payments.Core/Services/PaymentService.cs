@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NetStore.Modules.Customers.Shared.DTO;
 using NetStore.Modules.Payments.Core.Domain;
 using NetStore.Modules.Payments.Core.EF;
 using NetStore.Modules.Payments.Core.Exceptions;
@@ -7,8 +8,8 @@ using NetStore.Modules.Payments.Core.Validators;
 using NetStore.Modules.Payments.Shared.Events;
 using NetStore.Shared.Abstractions.Messaging;
 using NetStore.Shared.Abstractions.Modules.Requests;
-using NetStore.Shared.Types.DTO;
-using NetStore.Shared.Types.ModuleRequests;
+using NetStore.Modules.Customers.Shared.ModuleRequests;
+using NetStore.Modules.Payments.Shared.DTO;
 
 namespace NetStore.Modules.Payments.Core.Services;
 

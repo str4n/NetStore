@@ -7,7 +7,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\NetStore.Shared.Abstractions\NetStore.Shared.Abstractions.csproj" />
-      <ProjectReference Include="..\NetStore.Shared.Types\NetStore.Shared.Types.csproj" />
     </ItemGroup>
 
     <ItemGroup>

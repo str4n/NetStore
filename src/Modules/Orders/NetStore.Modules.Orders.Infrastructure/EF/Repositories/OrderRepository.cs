@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetStore.Modules.Orders.Domain.Order;
 using NetStore.Modules.Orders.Domain.Repositories;
-using NetStore.Shared.Types.Aggregate;
+using NetStore.Shared.Abstractions.Types.Aggregate;
 
 namespace NetStore.Modules.Orders.Infrastructure.EF.Repositories;
 

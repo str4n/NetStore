@@ -1,4 +1,4 @@
-﻿namespace NetStore.Shared.Types;
+﻿namespace NetStore.Modules.Orders.Shared.Enums;
 
 public enum OrderStatus
 {

@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 using NetStore.Modules.Payments.Core.External;
-using NetStore.Shared.Types.DTO;
+using NetStore.Modules.Payments.Shared.DTO;
 
 namespace NetStore.Modules.Payments.Api.External;
 

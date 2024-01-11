@@ -1,6 +1,6 @@
 ﻿using NetStore.Shared.Abstractions.Domain;
 
-namespace NetStore.Shared.Types.Aggregate;
+namespace NetStore.Shared.Abstractions.Types.Aggregate;
 
 public abstract class Aggregate<T>
 {

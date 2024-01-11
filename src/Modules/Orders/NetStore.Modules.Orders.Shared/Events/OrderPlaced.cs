@@ -1,5 +1,5 @@
-﻿using NetStore.Shared.Abstractions.Events;
-using NetStore.Shared.Types.DTO;
+﻿using NetStore.Modules.Orders.Shared.DTO;
+using NetStore.Shared.Abstractions.Events;
 
 namespace NetStore.Modules.Orders.Shared.Events;
 

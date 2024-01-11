@@ -9,6 +9,7 @@
       <ProjectReference Include="..\..\..\Shared\NetStore.Shared.Infrastructure\NetStore.Shared.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Orders\NetStore.Modules.Orders.Shared\NetStore.Modules.Orders.Shared.csproj" />
       <ProjectReference Include="..\..\Users\NetStore.Modules.Users.Shared\NetStore.Modules.Users.Shared.csproj" />
+      <ProjectReference Include="..\NetStore.Modules.Customers.Shared\NetStore.Modules.Customers.Shared.csproj" />
     </ItemGroup>
     
     <ItemGroup>

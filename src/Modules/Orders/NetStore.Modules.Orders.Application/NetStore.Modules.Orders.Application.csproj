@@ -7,6 +7,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Catalogs\NetStore.Modules.Catalogs.Shared\NetStore.Modules.Catalogs.Shared.csproj" />
+      <ProjectReference Include="..\..\Customers\NetStore.Modules.Customers.Shared\NetStore.Modules.Customers.Shared.csproj" />
       <ProjectReference Include="..\..\Payments\NetStore.Modules.Payments.Shared\NetStore.Modules.Payments.Shared.csproj" />
       <ProjectReference Include="..\..\Users\NetStore.Modules.Users.Shared\NetStore.Modules.Users.Shared.csproj" />
       <ProjectReference Include="..\NetStore.Modules.Orders.Infrastructure\NetStore.Modules.Orders.Infrastructure.csproj" />

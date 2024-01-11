@@ -8,7 +8,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\NetStore.Shared.Abstractions\NetStore.Shared.Abstractions.csproj" />
       <ProjectReference Include="..\..\..\Shared\NetStore.Shared.Infrastructure\NetStore.Shared.Infrastructure.csproj" />
-      <ProjectReference Include="..\..\..\Shared\NetStore.Shared.Types\NetStore.Shared.Types.csproj" />
       <ProjectReference Include="..\NetStore.Modules.Catalogs.Domain\NetStore.Modules.Catalogs.Domain.csproj" />
     </ItemGroup>
 

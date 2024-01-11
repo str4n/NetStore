@@ -1,6 +1,6 @@
 ﻿using NetStore.Modules.Payments.Core.Exceptions;
+using NetStore.Modules.Payments.Shared.DTO;
 using NetStore.Shared.Abstractions.Time;
-using NetStore.Shared.Types.DTO;
 
 namespace NetStore.Modules.Payments.Core.Validators;
 

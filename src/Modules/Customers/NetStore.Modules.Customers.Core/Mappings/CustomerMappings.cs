@@ -1,6 +1,6 @@
 ﻿using NetStore.Modules.Customers.Core.Domain.Customer;
 using NetStore.Modules.Customers.Core.DTO;
-using NetStore.Shared.Types.DTO;
+using NetStore.Modules.Orders.Shared.DTO;
 
 namespace NetStore.Modules.Customers.Core.Mappings;
 

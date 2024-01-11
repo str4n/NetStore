@@ -4,6 +4,7 @@ using NetStore.Modules.Customers.Core.Domain.Address;
 using NetStore.Modules.Customers.Core.Domain.Order;
 using NetStore.Modules.Customers.Core.EF;
 using NetStore.Modules.Customers.Core.Repositories;
+using NetStore.Modules.Orders.Shared.Enums;
 using NetStore.Modules.Orders.Shared.Events;
 using NetStore.Shared.Types;
 

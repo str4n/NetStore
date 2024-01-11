@@ -1,3 +1,3 @@
-﻿namespace NetStore.Shared.Types.DTO;
+﻿namespace NetStore.Modules.Payments.Shared.DTO;
 
 public sealed record PaymentWebhookDto(Guid PaymentId, string PaymentGatewaySecret);

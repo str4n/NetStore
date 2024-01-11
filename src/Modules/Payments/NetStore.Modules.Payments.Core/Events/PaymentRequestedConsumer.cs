@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using NetStore.Modules.Orders.Shared.Events;
 using NetStore.Modules.Payments.Core.Services;
-using NetStore.Shared.Types.DTO;
+using NetStore.Modules.Payments.Shared.DTO;
 
 namespace NetStore.Modules.Payments.Core.Events;
 

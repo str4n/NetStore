@@ -1,7 +1,8 @@
 ﻿using NetStore.Modules.Orders.Domain.Cart;
 using NetStore.Modules.Orders.Domain.Exceptions;
+using NetStore.Modules.Orders.Shared.Enums;
+using NetStore.Shared.Abstractions.Types.Aggregate;
 using NetStore.Shared.Types;
-using NetStore.Shared.Types.Aggregate;
 
 namespace NetStore.Modules.Orders.Domain.Order;
 

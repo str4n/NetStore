@@ -1,4 +1,4 @@
-﻿using NetStore.Shared.Types.DTO;
+﻿using NetStore.Modules.Payments.Shared.DTO;
 
 namespace NetStore.Modules.Payments.Core.Services;
 

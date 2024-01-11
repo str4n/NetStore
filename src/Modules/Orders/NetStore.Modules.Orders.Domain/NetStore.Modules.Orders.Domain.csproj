@@ -7,7 +7,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\NetStore.Shared.Abstractions\NetStore.Shared.Abstractions.csproj" />
-      <ProjectReference Include="..\..\..\Shared\NetStore.Shared.Types\NetStore.Shared.Types.csproj" />
+      <ProjectReference Include="..\NetStore.Modules.Orders.Shared\NetStore.Modules.Orders.Shared.csproj" />
     </ItemGroup>
 
 </Project>
