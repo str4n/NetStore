@@ -35,9 +35,6 @@ internal sealed class CheckoutHandler : ICommandHandler<Checkout>
 
         if (previousCheckoutCart is not null)
         {
-            // TODO: Fix
-            previousCheckoutCart = checkoutCart;
-            await _checkoutRepository.UpdateAsync(previousCheckoutCart);
             return;
         }
 

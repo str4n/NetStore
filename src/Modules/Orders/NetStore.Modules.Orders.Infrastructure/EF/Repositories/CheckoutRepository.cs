@@ -31,7 +31,6 @@ internal sealed class CheckoutRepository : ICheckoutRepository
         await _dbContext.SaveChangesAsync();
     }
 
-
     public async Task AddAsync(CheckoutCart checkoutCart)
     {
         await _dbContext.CheckoutCarts.AddAsync(checkoutCart);

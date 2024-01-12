@@ -9,23 +9,35 @@ internal sealed class ClearCartHandler : ICommandHandler<ClearCart>
 {
     private readonly ICartRepository _cartRepository;
     private readonly IIdentityContext _identityContext;
+    private readonly ICheckoutRepository _checkoutRepository;
 
-    public ClearCartHandler(ICartRepository cartRepository, IIdentityContext identityContext)
+    public ClearCartHandler(ICartRepository cartRepository, IIdentityContext identityContext, 
+        ICheckoutRepository checkoutRepository)
     {
         _cartRepository = cartRepository;
         _identityContext = identityContext;
+        _checkoutRepository = checkoutRepository;
     }
     public async Task HandleAsync(ClearCart command)
     {
-        var cart = await _cartRepository.GetByCustomerIdAsync(_identityContext.Id);
+        var customerId = _identityContext.Id;
+        var cart = await _cartRepository.GetByCustomerIdAsync(customerId);
         
         if (cart is null)
         {
             throw new CartErrorException("Error occured while clearing cart.");
         }
         
-        cart.Clear();
+        var checkoutCart = await _checkoutRepository.GetByCustomerId(customerId);
 
+        if (checkoutCart is null)
+        {
+            return;
+        }
+        
+        cart.Clear();
+        
         await _cartRepository.UpdateAsync(cart);
+        await _checkoutRepository.DeleteAsync(customerId);
     }
 }
