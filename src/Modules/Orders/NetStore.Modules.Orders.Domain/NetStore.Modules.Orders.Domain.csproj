@@ -9,5 +9,9 @@
       <ProjectReference Include="..\..\..\Shared\NetStore.Shared.Abstractions\NetStore.Shared.Abstractions.csproj" />
       <ProjectReference Include="..\NetStore.Modules.Orders.Shared\NetStore.Modules.Orders.Shared.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <InternalsVisibleTo Include="NetStore.Modules.Orders.Tests.Unit"/>
+    </ItemGroup>
 
 </Project>
