@@ -13,6 +13,10 @@
       <ProjectReference Include="..\..\Modules\Users\NetStore.Modules.Users.Api\NetStore.Modules.Users.Api.csproj" />
       <ProjectReference Include="..\..\Shared\NetStore.Shared.Infrastructure\NetStore.Shared.Infrastructure.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <InternalsVisibleTo Include="NetStore.Tests.Shared.Integration"/>
+    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
