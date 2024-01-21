@@ -21,4 +21,13 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\src\Modules\Catalogs\NetStore.Modules.Catalogs.Infrastructure\NetStore.Modules.Catalogs.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\..\..\src\Modules\Customers\NetStore.Modules.Customers.Core\NetStore.Modules.Customers.Core.csproj" />
+      <ProjectReference Include="..\..\..\..\src\Modules\Orders\NetStore.Modules.Orders.Domain\NetStore.Modules.Orders.Domain.csproj" />
+      <ProjectReference Include="..\..\..\..\src\Modules\Orders\NetStore.Modules.Orders.Infrastructure\NetStore.Modules.Orders.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\..\..\src\Modules\Payments\NetStore.Modules.Payments.Core\NetStore.Modules.Payments.Core.csproj" />
+      <ProjectReference Include="..\..\..\NetStore.Tests.Shared.Integration\NetStore.Tests.Shared.Integration.csproj" />
+    </ItemGroup>
+
 </Project>

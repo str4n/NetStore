@@ -11,5 +11,9 @@
       <ProjectReference Include="..\NetStore.Modules.Catalogs.Domain\NetStore.Modules.Catalogs.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="NetStore.Modules.Orders.Tests.Integration"/>
+    </ItemGroup>
+
 
 </Project>

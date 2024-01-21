@@ -3,7 +3,7 @@ using NetStore.Shared.Infrastructure;
 
 namespace NetStore.Tests.Shared.Integration;
 
-internal sealed class OptionsProvider
+public sealed class OptionsProvider
 {
     private const string AppSettings = "appsettings.test.json";
     

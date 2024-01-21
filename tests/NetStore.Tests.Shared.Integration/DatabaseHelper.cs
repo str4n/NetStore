@@ -5,7 +5,7 @@ using NetStore.Shared.Infrastructure.Postgres;
 
 namespace NetStore.Tests.Shared.Integration;
 
-public class DbHelper
+public class DatabaseHelper
 {
     private const string SectionName = "Postgres";
     

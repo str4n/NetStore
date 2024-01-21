@@ -14,4 +14,8 @@
       <ProjectReference Include="..\NetStore.Modules.Payments.Shared\NetStore.Modules.Payments.Shared.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="NetStore.Modules.Orders.Tests.Integration"/>
+    </ItemGroup>
+
 </Project>
