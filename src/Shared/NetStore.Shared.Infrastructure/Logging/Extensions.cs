@@ -3,7 +3,7 @@ using Serilog;
 
 namespace NetStore.Shared.Infrastructure.Logging;
 
-internal static class Extensions
+public static class Extensions
 {
     public static IHostBuilder UseLogging(this IHostBuilder host)
     {

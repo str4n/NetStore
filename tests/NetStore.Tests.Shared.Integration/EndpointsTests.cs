@@ -2,13 +2,14 @@
 
 namespace NetStore.Tests.Shared.Integration;
 
-public abstract class EndpointsTests : IClassFixture<OptionsProvider>
+public abstract class EndpointsTests : IClassFixture<OptionsProvider>, IClassFixture<TestApplicationFactory>
 {
     protected HttpClient Client { get; } 
     
-    protected EndpointsTests(OptionsProvider optionsProvider)
+    protected EndpointsTests(OptionsProvider optionsProvider, TestApplicationFactory applicationFactory)
     {
-        var app = new NetStoreTestApp();
-        Client = app.Client;
+        Client = applicationFactory.WithWebHostBuilder(builder => builder.ConfigureServices(services =>
+        {
+        })).CreateClient();
     }
 }

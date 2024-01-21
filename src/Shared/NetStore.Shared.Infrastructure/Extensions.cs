@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -15,7 +14,6 @@ using NetStore.Shared.Infrastructure.Queries;
 using NetStore.Shared.Infrastructure.Services;
 using NetStore.Shared.Infrastructure.Time;
 
-[assembly: InternalsVisibleTo("NetStore.Bootstrapper")]
 namespace NetStore.Shared.Infrastructure;
 
 public static class Extensions

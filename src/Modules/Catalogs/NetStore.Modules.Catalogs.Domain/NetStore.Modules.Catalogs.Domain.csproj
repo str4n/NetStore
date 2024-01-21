@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <InternalsVisibleTo Include="NetStore.Modules.Catalogs.Infrastructure" />
+        <InternalsVisibleTo Include="NetStore.Modules.Orders.Tests.Integration"/>
     </ItemGroup>
 
 </Project>

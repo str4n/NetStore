@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace NetStore.Tests.Shared.Integration;
 
-internal sealed class NetStoreTestApp : WebApplicationFactory<Program>
+internal sealed class ZNetStoreTestApp : WebApplicationFactory<Program>
 {
     public HttpClient Client { get; }
 
-    public NetStoreTestApp()
+    public ZNetStoreTestApp()
     {
         Client = WithWebHostBuilder(builder =>
         {
