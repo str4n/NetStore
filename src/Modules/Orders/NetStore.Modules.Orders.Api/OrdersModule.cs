@@ -7,7 +7,6 @@ using NetStore.Modules.Orders.Application;
 using NetStore.Modules.Orders.Domain;
 using NetStore.Modules.Orders.Infrastructure;
 using NetStore.Shared.Abstractions.Modules;
-using Extensions = NetStore.Shared.Infrastructure.Extensions;
 
 namespace NetStore.Modules.Orders.Api;
 
@@ -27,6 +26,11 @@ public sealed class OrdersModule : Module
 
     public override void UseModule(WebApplication app)
     {
+        if (app.Environment.EnvironmentName.Equals("Test"))
+        {
+            ClearEndpointsForTests(app);
+        }
+        
         app.MapCartCustomerEndpoints();
 
         app.MapCheckoutCartCustomerEndpoints();

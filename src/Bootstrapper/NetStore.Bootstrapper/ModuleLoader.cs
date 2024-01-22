@@ -4,7 +4,7 @@ namespace NetStore.Bootstrapper;
 
 public static class ModuleLoader
 {
-    private static readonly Dictionary<string, Module> RegisteredModules = new();
+    private static readonly List<ModuleRegistryEntry> ModuleRegistry = new();
     private static readonly ILogger Logger;
 
     static ModuleLoader()
@@ -22,15 +22,15 @@ public static class ModuleLoader
     {
         var module = Activator.CreateInstance<TModule>();
         
-        RegisteredModules.Add(module.Name, module);
+        ModuleRegistry.Add(new ModuleRegistryEntry(module.Name, module));
     }
 
     public static IServiceCollection AddModules(this IServiceCollection services, IConfiguration configuration)
     {
-        foreach (var module in RegisteredModules.Values)
+        foreach (var entry in ModuleRegistry)
         {
-            module.AddModule(services, configuration);
-            Logger.LogInformation("Loaded {name} module!", module.Name);
+            entry.Module.AddModule(services, configuration);
+            Logger.LogInformation("Loaded {name} module!", entry.Name);
         }
 
         return services;
@@ -38,11 +38,13 @@ public static class ModuleLoader
 
     public static WebApplication UseModules(this WebApplication app)
     {
-        foreach (var module in RegisteredModules.Values)
+        foreach (var entry in ModuleRegistry)
         {
-            module.UseModule(app);
+            entry.Module.UseModule(app);
         }
 
         return app;
     }
+
+    private record ModuleRegistryEntry(string Name, Module Module);
 }

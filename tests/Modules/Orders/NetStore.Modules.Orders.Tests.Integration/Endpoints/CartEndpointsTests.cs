@@ -2,22 +2,22 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using FluentAssertions;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using NetStore.Modules.Catalogs.Domain.Brand;
 using NetStore.Modules.Catalogs.Domain.Category;
 using NetStore.Modules.Catalogs.Domain.Product;
 using NetStore.Modules.Catalogs.Domain.Product.Enums;
 using NetStore.Modules.Catalogs.Domain.Services;
-using NetStore.Modules.Catalogs.Infrastructure.EF;
 using NetStore.Modules.Orders.Application.Commands;
 using NetStore.Modules.Orders.Domain.Cart;
-using NetStore.Modules.Orders.Infrastructure.EF;
-using NetStore.Modules.Payments.Core.EF;
 using NetStore.Tests.Shared.Integration;
+using NetStore.Tests.Shared.Integration.Endpoints;
 using Xunit;
 
 namespace NetStore.Modules.Orders.Tests.Integration.Endpoints;
 
+[Collection("integration")]
 public class CartEndpointsTests : EndpointsTests, IDisposable
 {
     [Fact]
@@ -27,6 +27,8 @@ public class CartEndpointsTests : EndpointsTests, IDisposable
         var response = await Client.PostAsJsonAsync(Route, new AddProductToCart(productId, 1));
 
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        
+        CreateNewAppInstance();
     }
     
     [Fact]
@@ -51,19 +53,15 @@ public class CartEndpointsTests : EndpointsTests, IDisposable
         cart.Products
             .SingleOrDefault(x => x.ProductId == id)?
             .Quantity.Should().Be(1);
-    }
-    
-    private void Authorize(Guid userId)
-    {
-        var jwt = AuthHelper.GenerateJwt(userId, "admin", "mock@gmail.com");
-        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
+        
+        CreateNewAppInstance();
     }
     
     private const string Route = "orders-module/cart";
     private const string Id = "00000000-0000-0000-0000-000000000001";
     private readonly TestDatabase _testDatabase;
 
-    public CartEndpointsTests(OptionsProvider optionsProvider, TestApplicationFactory applicationFactory) : base(optionsProvider, applicationFactory)
+    public CartEndpointsTests(OptionsProvider optionsProvider) : base(optionsProvider)
     {
         _testDatabase = new TestDatabase();
         SeedDatabase();
