@@ -26,21 +26,4 @@ public class EndpointsTests : WebApplicationFactory<Program> ,IClassFixture<Opti
         var jwt = AuthHelper.GenerateJwt(userId, "admin", "mock@gmail.com");
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
     }
-
-    protected void CreateNewAppInstance()
-    {
-        WithWebHostBuilder(builder =>
-        {
-            builder.UseEnvironment("Test");
-            builder.Configure(app =>
-            {
-                app.UseRouting();
-                app.UseEndpoints(c =>
-                {
-                    c.DataSources.Clear();
-                });
-            });
-        });
-        Client = Factory.CreateClient();
-    }
 }

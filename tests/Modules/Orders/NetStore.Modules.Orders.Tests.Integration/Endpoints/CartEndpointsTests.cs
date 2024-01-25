@@ -27,8 +27,6 @@ public class CartEndpointsTests : EndpointsTests, IDisposable
         var response = await Client.PostAsJsonAsync(Route, new AddProductToCart(productId, 1));
 
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-        
-        CreateNewAppInstance();
     }
     
     [Fact]
@@ -42,20 +40,91 @@ public class CartEndpointsTests : EndpointsTests, IDisposable
         
         response.StatusCode.Should().Be(HttpStatusCode.NoContent);
 
-        var cart = await _testDatabase
-            .OrdersDbContext
-            .Carts
-            .Include(cart => cart.Products)
-            .ThenInclude(x => x.Product)
-            .SingleOrDefaultAsync(x => x.CustomerId == id);
+        var cart = await GetCart(id);
 
         cart.Products.Should().ContainSingle();
         cart.Products
             .SingleOrDefault(x => x.ProductId == id)?
             .Quantity.Should().Be(1);
-        
-        CreateNewAppInstance();
     }
+
+    [Fact]
+    public async Task Add_Multiple_Products_To_Cart_Should_Succeed()
+    {
+        var id = Guid.Parse(Id);
+        
+        Authorize(id);
+        
+        var response = await Client.PostAsJsonAsync(Route, new AddProductToCart(id, 2));
+        
+        response.StatusCode.Should().Be(HttpStatusCode.NoContent);
+
+        var cart = await GetCart(id);
+
+        cart.Products.Should().ContainSingle();
+        cart.Products
+            .SingleOrDefault(x => x.ProductId == id)?
+            .Quantity.Should().Be(2);
+    }
+
+    [Fact]
+    public async Task Remove_Single_Product_From_Cart_When_There_Is_Only_One_Product_Cart_Should_Be_Empty()
+    {
+        var id = Guid.Parse(Id);
+        
+        Authorize(id);
+        
+        var addProductResponse = await Client.PostAsJsonAsync(Route, new AddProductToCart(id, 1));
+        
+        addProductResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
+        
+    }
+
+    [Fact]
+    public async Task Cart_Checkout_Should_Succeed()
+    {
+        var id = Guid.Parse(Id);
+        
+        Authorize(id);
+        
+        var addProductResponse = await Client.PostAsJsonAsync(Route, new AddProductToCart(id, 1));
+        
+        addProductResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
+        
+        var checkoutCartResponse = await Client.PutAsJsonAsync(Route + "/checkout", new Checkout());
+
+        checkoutCartResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        var cart = await GetCart(id);
+        
+        cart.Products.Should().ContainSingle();
+        cart.Products
+            .SingleOrDefault(x => x.ProductId == id)?
+            .Quantity.Should().Be(1);
+
+        var checkout = await _testDatabase.OrdersDbContext.CheckoutCarts
+            .Include(x => x.Products)
+            .ThenInclude(x => x.Product)
+            .SingleOrDefaultAsync(x => x.CustomerId == id);
+
+        checkout.Should().NotBeNull();
+
+        checkout.Shipment.Should().BeNull();
+        checkout.Payment.Should().BeNull();
+        
+        checkout.Products.Should().ContainSingle();
+        checkout.Products
+            .SingleOrDefault(x => x.ProductId == id)?
+            .Quantity.Should().Be(1);
+    }
+
+    private async Task<Cart> GetCart(Guid id)
+        => await _testDatabase
+            .OrdersDbContext
+            .Carts
+            .Include(cart => cart.Products)
+            .ThenInclude(x => x.Product)
+            .SingleOrDefaultAsync(x => x.CustomerId == id);
     
     private const string Route = "orders-module/cart";
     private const string Id = "00000000-0000-0000-0000-000000000001";
@@ -85,7 +154,7 @@ public class CartEndpointsTests : EndpointsTests, IDisposable
 
             new ProductDomainService().SetProductPrice(product, 999);
             
-            product.IncreaseStock(1);
+            product.IncreaseStock(10);
 
             _testDatabase.CatalogsDbContext.Categories.Add(category);
             _testDatabase.CatalogsDbContext.Brands.Add(brand);
@@ -97,7 +166,7 @@ public class CartEndpointsTests : EndpointsTests, IDisposable
             var oProduct = new Domain.Product.Product(id, "mock", "mock", "M", "Black",
                 product.GrossPrice);
 
-            oProduct.Stock = 1;
+            oProduct.Stock = 10;
             
             _testDatabase.OrdersDbContext.Products.Add(oProduct);
             
