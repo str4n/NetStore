@@ -1,5 +1,6 @@
 @url = https://localhost:7240/catalogs-module/products
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMzZlM2JlOC02NGE1LTQ0NzItOGYzMy1lY2M2MWMzODZiMTMiLCJ1bmlxdWVfbmFtZSI6IjIzNmUzYmU4LTY0YTUtNDQ3Mi04ZjMzLWVjYzYxYzM4NmIxMyIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNzA0NjU2MzY5LCJleHAiOjE3MDQ2NTk5NjksImlzcyI6Im5ldHN0b3JlIiwiYXVkIjoibmV0c3RvcmUifQ.I8kjT0NZgsf33XUkZBYZPAMIj1ajt8n6wKqSKzNmhk0
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMzZlM2JlOC02NGE1LTQ0NzItOGYzMy1lY2M2MWMzODZiMTMiLCJ1bmlxdWVfbmFtZSI6IjIzNmUzYmU4LTY0YTUtNDQ3Mi04ZjMzLWVjYzYxYzM4NmIxMyIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNzA2NDQ4NTMyLCJleHAiOjE3MDY1MzQ5MzIsImlzcyI6Im5ldHN0b3JlIiwiYXVkIjoibmV0c3RvcmUifQ.FMnz8YQyU4w3T_P7ApF3Mbly_pXVjll7bdqNV6CMCWs
+@productId = f74a5631-271d-40dc-be48-7ae5cf2dd159
 
 POST {{url}}
 Authorization: Bearer {{jwt}}
@@ -31,3 +32,23 @@ GET {{url}}
 ###
 
 GET {{url}}?getby=category&value=Down%20jackets
+
+###
+
+PATCH {{url}}/increase/{{productId}}
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+    "quantity": 1
+}
+
+###
+
+PATCH {{url}}/decrease/{{productId}}
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+    "quantity": 1
+}

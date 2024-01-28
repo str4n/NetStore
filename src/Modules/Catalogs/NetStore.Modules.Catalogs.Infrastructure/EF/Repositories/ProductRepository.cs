@@ -15,7 +15,7 @@ internal sealed class ProductRepository : IProductRepository
     }
 
     public Task<Product> GetAsync(Guid id)
-        => _dbContext.Products.SingleOrDefaultAsync(x => x.Id.Value == id);
+        => _dbContext.Products.SingleOrDefaultAsync(x => x.Id == (AggregateId)id);
 
     public async Task<IEnumerable<Product>> GetAllAsync(bool tracking = true)
         => tracking

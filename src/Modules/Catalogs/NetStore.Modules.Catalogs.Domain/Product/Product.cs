@@ -1,4 +1,5 @@
-﻿using NetStore.Modules.Catalogs.Domain.Product.Enums;
+﻿using NetStore.Modules.Catalogs.Domain.Exceptions;
+using NetStore.Modules.Catalogs.Domain.Product.Enums;
 using NetStore.Modules.Catalogs.Domain.Product.ValueObjects;
 using NetStore.Shared.Abstractions.Types.Aggregate;
 
@@ -70,6 +71,11 @@ public sealed class Product : Aggregate
         if (quantity < 1)
         {
             return;
+        }
+
+        if (Stock - quantity < 0)
+        {
+            throw new StockCannotBeNegativeValueException();
         }
 
         Stock -= quantity;
