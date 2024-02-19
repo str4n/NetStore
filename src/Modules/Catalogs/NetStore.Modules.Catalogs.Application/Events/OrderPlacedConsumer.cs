@@ -18,11 +18,13 @@ internal sealed class OrderPlacedConsumer : IConsumer<OrderPlaced>
         var message = context.Message;
         var orderLines = message.Order.Lines;
 
+        var productsToDecreaseStock = new Dictionary<Guid, int>();
+        
         foreach (var line in orderLines)
         {
-            await _productRepository.DecreaseStockAsync(line.ProductId, line.Quantity);
+            productsToDecreaseStock.TryAdd(line.ProductId, line.Quantity);
         }
 
-        await _productRepository.SaveChangesAsync();
+        await _productRepository.DecreaseStockAsync(productsToDecreaseStock);
     }
 }
