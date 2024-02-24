@@ -1,6 +1,7 @@
 using NetStore.Bootstrapper;
 using NetStore.Modules.Catalogs.Api;
 using NetStore.Modules.Customers.Api;
+using NetStore.Modules.Notifications.Api;
 using NetStore.Modules.Orders.Api;
 using NetStore.Modules.Payments.Api;
 using NetStore.Modules.Users.Api;
@@ -16,6 +17,7 @@ ModuleLoader.Load<UsersModule>();
 ModuleLoader.Load<CustomersModule>();
 ModuleLoader.Load<OrdersModule>();
 ModuleLoader.Load<PaymentsModule>();
+ModuleLoader.Load<NotificationsModule>();
 
 builder.Services
     .AddModules(builder.Configuration)
