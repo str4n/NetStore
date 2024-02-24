@@ -7,13 +7,13 @@ namespace NetStore.Modules.Users.Core.Queries.Handlers;
 
 internal sealed class GetUserHandler : IQueryHandler<GetUser, UserDto>
 {
-    private readonly IUsersRepository _usersRepository;
+    private readonly IUserRepository _userRepository;
 
-    public GetUserHandler(IUsersRepository usersRepository)
+    public GetUserHandler(IUserRepository userRepository)
     {
-        _usersRepository = usersRepository;
+        _userRepository = userRepository;
     }
     
     public async Task<UserDto> HandleAsync(GetUser query)
-        => (await _usersRepository.GetAsync(query.Id)).AsDto();
+        => (await _userRepository.GetAsync(query.Id)).AsDto();
 }

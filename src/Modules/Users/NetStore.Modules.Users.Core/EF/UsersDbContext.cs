@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NetStore.Modules.Users.Core.Domain.Entities;
+using NetStore.Modules.Users.Core.Domain.User;
 
 namespace NetStore.Modules.Users.Core.EF;
 
 internal sealed class UsersDbContext : DbContext
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<ActivationToken> ActivationTokens { get; set; }
 
     public UsersDbContext(DbContextOptions<UsersDbContext> options) : base(options)
     {

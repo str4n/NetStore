@@ -11,7 +11,9 @@ internal static class Extensions
     public static IServiceCollection AddEF(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddPostgres<UsersDbContext>(configuration);
-        services.AddScoped<IUsersRepository, UsersRepository>();
+        services
+            .AddScoped<IUserRepository, UserRepository>()
+            .AddScoped<IActivationTokenRepository, ActivationTokenRepository>();
 
         return services;
     }

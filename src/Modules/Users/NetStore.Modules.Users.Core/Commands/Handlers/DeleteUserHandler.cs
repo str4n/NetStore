@@ -1,4 +1,4 @@
-﻿using NetStore.Modules.Users.Core.Domain.Entities;
+﻿using NetStore.Modules.Users.Core.Domain.User;
 using NetStore.Modules.Users.Core.Exceptions;
 using NetStore.Modules.Users.Core.Repositories;
 using NetStore.Shared.Abstractions.Commands;
@@ -7,16 +7,16 @@ namespace NetStore.Modules.Users.Core.Commands.Handlers;
 
 internal sealed class DeleteUserHandler : ICommandHandler<DeleteUser>
 {
-    private readonly IUsersRepository _usersRepository;
+    private readonly IUserRepository _userRepository;
 
-    public DeleteUserHandler(IUsersRepository usersRepository)
+    public DeleteUserHandler(IUserRepository userRepository)
     {
-        _usersRepository = usersRepository;
+        _userRepository = userRepository;
     }
     
     public async Task HandleAsync(DeleteUser command)
     {
-        var user = await _usersRepository.GetAsync(command.Id);
+        var user = await _userRepository.GetAsync(command.Id);
 
         if (user is null)
         {
@@ -25,6 +25,6 @@ internal sealed class DeleteUserHandler : ICommandHandler<DeleteUser>
 
         user.State = UserState.Deleted;
 
-        await _usersRepository.UpdateAsync(user);
+        await _userRepository.UpdateAsync(user);
     }
 }

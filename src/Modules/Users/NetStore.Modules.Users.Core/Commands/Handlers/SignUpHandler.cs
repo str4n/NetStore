@@ -1,10 +1,10 @@
 ﻿using System.Text.RegularExpressions;
-using NetStore.Modules.Users.Core.Domain.Entities;
 using NetStore.Modules.Users.Core.Domain.Exceptions;
-using NetStore.Modules.Users.Core.Domain.ValueObjects;
+using NetStore.Modules.Users.Core.Domain.User;
 using NetStore.Modules.Users.Core.Exceptions;
 using NetStore.Modules.Users.Core.Repositories;
 using NetStore.Modules.Users.Core.Services;
+using NetStore.Modules.Users.Core.Validators;
 using NetStore.Modules.Users.Shared.Events;
 using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Abstractions.Messaging;
@@ -15,18 +15,22 @@ namespace NetStore.Modules.Users.Core.Commands.Handlers;
 
 internal sealed class SignUpHandler : ICommandHandler<SignUp>
 {
-    private static readonly Regex Regex = new(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
-    private readonly IUsersRepository _usersRepository;
+    private readonly IUserRepository _userRepository;
     private readonly IPasswordManager _passwordManager;
     private readonly IClock _clock;
     private readonly IMessageBroker _messageBroker;
+    private readonly ISignUpCommandValidator _validator;
+    private readonly IActivationTokenRepository _tokenRepository;
 
-    public SignUpHandler(IUsersRepository usersRepository, IPasswordManager passwordManager, IClock clock, IMessageBroker messageBroker)
+    public SignUpHandler(IUserRepository userRepository, IPasswordManager passwordManager, IClock clock, 
+        IMessageBroker messageBroker, ISignUpCommandValidator validator, IActivationTokenRepository tokenRepository)
     {
-        _usersRepository = usersRepository;
+        _userRepository = userRepository;
         _passwordManager = passwordManager;
         _clock = clock;
         _messageBroker = messageBroker;
+        _validator = validator;
+        _tokenRepository = tokenRepository;
     }
     public async Task HandleAsync(SignUp command)
     {
@@ -35,26 +39,17 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
         var username = new Username(command.Username);
         var password = new Password(command.Password);
 
-        if (!Regex.IsMatch(password))
-        {
-            throw new InvalidPasswordSyntaxException("Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character.");
-        }
-        
-        if (await _usersRepository.GetByEmailAsync(email) is not null)
-        {
-            throw new UserAlreadyExistsException($"User with email: {email.Value} already exists");
-        }
-
-        if (await _usersRepository.GetByUsernameAsync(username) is not null)
-        {
-            throw new UserAlreadyExistsException($"User with username: {username.Value} already exists");
-        }
+        await _validator.Validate(command);
 
         var securedPassword = _passwordManager.Secure(password);
 
-        var user = new User(id, email.Value.ToLowerInvariant(), username, securedPassword, Role.User, UserState.Active, _clock.Now());
+        var user = new User(id, email.Value.ToLowerInvariant(), username, securedPassword, Role.User, UserState.NotActive, _clock.Now());
 
-        await _usersRepository.AddAsync(user);
+        var activationSecret = $"{Guid.NewGuid()}-{Guid.NewGuid()}";
+        var activationToken = new ActivationToken(activationSecret, id);
+        
+        await _userRepository.AddAsync(user);
+        await _tokenRepository.AddAsync(activationToken);
         await _messageBroker.PublishAsync(new UserSignedUp(user.Id, user.Email));
     }
 }

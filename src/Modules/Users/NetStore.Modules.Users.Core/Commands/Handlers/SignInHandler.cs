@@ -1,4 +1,4 @@
-﻿using NetStore.Modules.Users.Core.Domain.Entities;
+﻿using NetStore.Modules.Users.Core.Domain.User;
 using NetStore.Modules.Users.Core.Exceptions;
 using NetStore.Modules.Users.Core.Repositories;
 using NetStore.Modules.Users.Core.Services;
@@ -9,14 +9,14 @@ namespace NetStore.Modules.Users.Core.Commands.Handlers;
 
 internal sealed class SignInHandler : ICommandHandler<SignIn>
 {
-    private readonly IUsersRepository _usersRepository;
+    private readonly IUserRepository _userRepository;
     private readonly ITokenStorage _tokenStorage;
     private readonly IPasswordManager _passwordManager;
     private readonly IAuthenticator _authenticator;
 
-    public SignInHandler(IUsersRepository usersRepository, ITokenStorage tokenStorage, IPasswordManager passwordManager, IAuthenticator authenticator)
+    public SignInHandler(IUserRepository userRepository, ITokenStorage tokenStorage, IPasswordManager passwordManager, IAuthenticator authenticator)
     {
-        _usersRepository = usersRepository;
+        _userRepository = userRepository;
         _tokenStorage = tokenStorage;
         _passwordManager = passwordManager;
         _authenticator = authenticator;
@@ -24,7 +24,7 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
     
     public async Task HandleAsync(SignIn command)
     {
-        var user = await _usersRepository.GetByUsernameAsync(command.Username);
+        var user = await _userRepository.GetByUsernameAsync(command.Username);
 
         if (user is null)
         {
@@ -36,7 +36,7 @@ internal sealed class SignInHandler : ICommandHandler<SignIn>
             throw new InvalidCredentialsException();
         }
         
-        if (user.State is UserState.Deleted)
+        if (user.State is not UserState.Active)
         {
             throw new UserNotActiveException(user.Username);
         }

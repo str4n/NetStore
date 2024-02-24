@@ -1,7 +1,6 @@
-﻿using System.Text.RegularExpressions;
-using NetStore.Modules.Users.Core.Domain.Exceptions;
+﻿using NetStore.Modules.Users.Core.Domain.Exceptions;
 
-namespace NetStore.Modules.Users.Core.Domain.ValueObjects;
+namespace NetStore.Modules.Users.Core.Domain.User;
 
 internal sealed record Password
 {

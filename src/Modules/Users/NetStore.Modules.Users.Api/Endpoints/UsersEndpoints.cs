@@ -26,6 +26,8 @@ internal static class UsersEndpoints
         app.MapPost(Route + "/sign-up", SignUp);
         app.MapPost(Route + "/sign-in", SignIn);
 
+        app.MapPut(Route + "/activate/{secret}", Activate);
+
         app.MapDelete(Route + "/{id:guid}", Delete).RequireAuthorization(Policies.AtLeastAdmin);
 
         return app;
@@ -53,6 +55,13 @@ internal static class UsersEndpoints
         var token = tokenStorage.Get();
         
         return Results.Ok(token);
+    }
+
+    private static async Task<IResult> Activate([FromRoute] string secret, [FromServices] ICommandDispatcher commandDispatcher)
+    {
+        await commandDispatcher.SendAsync(new ActivateAccount(secret));
+
+        return Results.Ok();
     }
     
     private static async Task<IResult> Delete([FromRoute]Guid id, [FromServices]ICommandDispatcher commandDispatcher)

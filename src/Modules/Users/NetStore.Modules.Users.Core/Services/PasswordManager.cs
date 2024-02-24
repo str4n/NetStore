@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using NetStore.Modules.Users.Core.Domain.Entities;
+using NetStore.Modules.Users.Core.Domain.User;
 
 namespace NetStore.Modules.Users.Core.Services;
 

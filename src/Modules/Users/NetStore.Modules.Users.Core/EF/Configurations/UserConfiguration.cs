@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NetStore.Modules.Users.Core.Domain.Entities;
+using NetStore.Modules.Users.Core.Domain.User;
 
 namespace NetStore.Modules.Users.Core.EF.Configurations;
 

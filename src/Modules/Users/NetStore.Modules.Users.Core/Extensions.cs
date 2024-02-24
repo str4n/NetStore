@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NetStore.Modules.Users.Core.Domain.Entities;
+using NetStore.Modules.Users.Core.Domain.User;
 using NetStore.Modules.Users.Core.EF;
 using NetStore.Modules.Users.Core.Services;
+using NetStore.Modules.Users.Core.Validators;
 using NetStore.Modules.Users.Shared.Events;
 using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Infrastructure.Attributes;
@@ -18,6 +19,8 @@ internal static class Extensions
         services
             .AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>()
             .AddSingleton<IPasswordManager, PasswordManager>();
+
+        services.AddTransient<ISignUpCommandValidator, SignUpCommandValidator>();
         
         
         return services;

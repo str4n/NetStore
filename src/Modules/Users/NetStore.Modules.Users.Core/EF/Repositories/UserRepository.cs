@@ -1,17 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NetStore.Modules.Users.Core.Domain.Entities;
-using NetStore.Modules.Users.Core.Domain.ValueObjects;
+using NetStore.Modules.Users.Core.Domain.User;
 using NetStore.Modules.Users.Core.Repositories;
 using NetStore.Shared.Types.ValueObjects;
 
 namespace NetStore.Modules.Users.Core.EF.Repositories;
 
-internal sealed class UsersRepository : IUsersRepository
+internal sealed class UserRepository : IUserRepository
 {
     private readonly UsersDbContext _dbContext;
     private readonly DbSet<User> _users;
 
-    public UsersRepository(UsersDbContext dbContext)
+    public UserRepository(UsersDbContext dbContext)
     {
         _dbContext = dbContext;
         _users = dbContext.Users;

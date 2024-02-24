@@ -60,7 +60,7 @@ public sealed class Order : Aggregate
         IncrementVersion();
     }
 
-    internal void Cancel()
+    public void Cancel()
     {
         if (Status is OrderStatus.Completed)
         {

@@ -1,4 +1,4 @@
-﻿using NetStore.Modules.Users.Core.Domain.Entities;
+﻿using NetStore.Modules.Users.Core.Domain.User;
 using NetStore.Modules.Users.Core.DTO;
 
 namespace NetStore.Modules.Users.Core.Mappings;

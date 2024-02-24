@@ -1,10 +1,9 @@
-﻿using NetStore.Modules.Users.Core.Domain.Entities;
-using NetStore.Modules.Users.Core.Domain.ValueObjects;
+﻿using NetStore.Modules.Users.Core.Domain.User;
 using NetStore.Shared.Types.ValueObjects;
 
 namespace NetStore.Modules.Users.Core.Repositories;
 
-internal interface IUsersRepository
+internal interface IUserRepository
 {
     Task<User> GetByUsernameAsync(Username username);
     Task<User> GetByEmailAsync(Email email);

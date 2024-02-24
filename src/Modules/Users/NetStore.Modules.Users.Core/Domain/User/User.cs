@@ -1,7 +1,6 @@
-﻿using NetStore.Modules.Users.Core.Domain.ValueObjects;
-using NetStore.Shared.Types.ValueObjects;
+﻿using NetStore.Shared.Types.ValueObjects;
 
-namespace NetStore.Modules.Users.Core.Domain.Entities;
+namespace NetStore.Modules.Users.Core.Domain.User;
 
 internal sealed class User
 {
@@ -28,6 +27,7 @@ internal sealed class User
 
 public enum UserState
 {
-    Deleted = 0,
-    Active = 1
+    Deleted,
+    NotActive,
+    Active
 }
