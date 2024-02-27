@@ -1,40 +1,51 @@
 ﻿using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using NetStore.Modules.Notifications.Core.DTO;
+using NetStore.Shared.Infrastructure;
 
 namespace NetStore.Modules.Notifications.Core.Services;
 
 internal sealed class EmailService : IEmailService
 {
     private readonly EmailSenderOptions _options;
+    private readonly string _baseUrl;
     
-    public EmailService(IOptions<EmailSenderOptions> options)
+    public EmailService(IOptions<EmailSenderOptions> emailSenderOptions, IOptions<AppOptions> appOptions)
     {
-        _options = options.Value;
+        _options = emailSenderOptions.Value;
+        _baseUrl = appOptions.Value.Url;
     }
     
-    //TODO: Make this method more generic
+    //TODO: Email templates
     
     public async Task SendAccountActivation(string receiverEmail, string receiverUsername, string activationToken)
+    {
+        var emailSubject = "NetStore account activation";
+        var emailBody = $@"<h1>Welcome</h1><br><p>We're excited to have you get started. First, you need to confirm your account. <a href=""{_baseUrl}/users-module/users/activate/{activationToken}"">Activate account</a> </p><br><br><p>NetStore Team</p>";
+
+        var emailData = new EmailDto(receiverEmail, receiverUsername, emailSubject, emailBody);
+
+        await SendEmail(emailData);
+    }
+
+    private async Task SendEmail(EmailDto emailData)
     {
         using var email = new MimeMessage();
         var sender = new MailboxAddress(_options.SenderName, _options.SenderEmail);
         email.From.Add(sender);
 
-        var receiver = new MailboxAddress(receiverUsername, receiverEmail);
+        var receiver = new MailboxAddress(emailData.ReceiverUsername, emailData.ReceiverEmail);
         email.To.Add(receiver);
 
-        email.Subject = "NetStore account activation";
-
-        //TODO: Move the url to configuration
+        email.Subject = emailData.EmailSubject;
         
-        var emailActivationUrl = $"https://localhost:7240/users/activate/{activationToken}";
-                
         var emailBodyBuilder = new BodyBuilder
         {
-            TextBody = $"Here is your account activation link: {emailActivationUrl}"
+            HtmlBody = emailData.EmailBody,
         };
-
+        
         email.Body = emailBodyBuilder.ToMessageBody();
 
         using var smtpClient = new SmtpClient();

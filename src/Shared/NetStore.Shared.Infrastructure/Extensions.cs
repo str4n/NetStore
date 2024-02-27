@@ -18,6 +18,7 @@ namespace NetStore.Shared.Infrastructure;
 
 public static class Extensions
 {
+    private const string AppSection = "App";
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddExceptionHandling();
@@ -27,6 +28,8 @@ public static class Extensions
         services.AddEndpointsApiExplorer();
 
         services.AddHttpContextAccessor();
+
+        services.Configure<AppOptions>(configuration.GetSection(AppSection));
 
         services.AddSingleton<IContextFactory, ContextFactory>();
         services.AddTransient(sp => sp.GetRequiredService<IContextFactory>().Create());
