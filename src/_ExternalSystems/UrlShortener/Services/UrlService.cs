@@ -27,6 +27,7 @@ internal sealed class UrlService : IUrlService
         };
 
         await _dbContext.ShortenedUrls.AddAsync(shortenedUrl);
+        await _dbContext.SaveChangesAsync();
 
         return new ShortenedUrlDto(shortenedUrl.ShortUrl, shortenedUrl.LongUrl);
     }

@@ -8,15 +8,18 @@ namespace NetStore.Modules.Notifications.Core;
 
 public static class Extensions
 {
-    private const string SectionName = "EmailSender";
+    private const string EmailSenderSection = "EmailSender";
+    private const string UrlShortenerSection = "UrlShortenerIntegration";
     
     public static IServiceCollection AddCore(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<EmailSenderOptions>(configuration.GetSection(SectionName));
+        services.Configure<EmailSenderOptions>(configuration.GetSection(EmailSenderSection));
+        services.Configure<ExternalUrlShortenerOptions>(configuration.GetSection(UrlShortenerSection));
 
         services.AddConsumer<UserSignedUpConsumer>();
         
         services.AddTransient<IEmailService, EmailService>();
+        services.AddTransient<IUrlShortener, ExternalUrlShortener>();
         
         return services;
     }

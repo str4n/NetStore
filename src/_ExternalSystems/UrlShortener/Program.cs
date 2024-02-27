@@ -13,7 +13,7 @@ builder.Services.AddScoped<IUrlService, UrlService>();
 
 var app = builder.Build();
 
-app.MapGet("/{code}", async ([FromBody]string code, [FromServices]IUrlService urlService) =>
+app.MapGet("/{code}", async ([FromRoute]string code, [FromServices]IUrlService urlService) =>
 {
     var result = await urlService.Get(code);
 
