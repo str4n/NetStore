@@ -21,6 +21,7 @@ internal sealed class EmailService : IEmailService
     }
     
     //TODO: Email templates
+    //TODO: Move urls to higher layer
     
     public async Task SendAccountActivation(string receiverEmail, string receiverUsername, string activationToken)
     {
@@ -40,9 +41,32 @@ internal sealed class EmailService : IEmailService
         var emailSubject = "NetStore account activation";
         var emailBody = $@"<h1>Welcome</h1><br><p>We're excited to have you get started. First, you need to confirm your account. <a href=""{activationUrl}"">Activate account</a> </p><br><br><p>NetStore Team</p>";
 
-        var emailData = new EmailDto(receiverEmail, receiverUsername, emailSubject, emailBody);
+        var emailDto = new EmailDto(receiverEmail, receiverUsername, emailSubject, emailBody);
 
-        await SendEmail(emailData);
+        await SendEmail(emailDto);
+    }
+
+    public async Task SendPasswordRecover(string receiverEmail, string receiverUsername, string recoveryToken)
+    {
+        var longActivationUrl = $"{_appOptions.Url}/users-module/users/recover/{recoveryToken}";
+        string activationUrl;
+
+        if (_appOptions.UseUrlShortener)
+        {
+            activationUrl = await _urlShortener.ShortenUrl(longActivationUrl);
+        }
+        else
+        {
+            activationUrl = longActivationUrl;
+        }
+        
+        
+        var emailSubject = "NetStore password recovery";
+        var emailBody = $@"<h1>Welcome</h1><br><p>Click a link to recover password. <a href=""{activationUrl}"">Recover password</a> </p><br><br><p>NetStore Team</p>";
+
+        var emailDto = new EmailDto(receiverEmail, receiverUsername, emailSubject, emailBody);
+
+        await SendEmail(emailDto);
     }
 
     private async Task SendEmail(EmailDto emailData)

@@ -16,7 +16,7 @@ public static class Extensions
         services.Configure<EmailSenderOptions>(configuration.GetSection(EmailSenderSection));
         services.Configure<ExternalUrlShortenerOptions>(configuration.GetSection(UrlShortenerSection));
 
-        services.AddConsumer<UserSignedUpConsumer>();
+        services.AddConsumer<AccountActivationRequestedConsumer>().AddConsumer<PasswordRecoverRequestedConsumer>();
         
         services.AddTransient<IEmailService, EmailService>();
         services.AddTransient<IUrlShortener, ExternalUrlShortener>();

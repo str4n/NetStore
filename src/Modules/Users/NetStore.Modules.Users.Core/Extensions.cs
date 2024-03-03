@@ -5,9 +5,7 @@ using NetStore.Modules.Users.Core.Domain.User;
 using NetStore.Modules.Users.Core.EF;
 using NetStore.Modules.Users.Core.Services;
 using NetStore.Modules.Users.Core.Validators;
-using NetStore.Modules.Users.Shared.Events;
-using NetStore.Shared.Abstractions.Commands;
-using NetStore.Shared.Infrastructure.Attributes;
+
 
 namespace NetStore.Modules.Users.Core;
 

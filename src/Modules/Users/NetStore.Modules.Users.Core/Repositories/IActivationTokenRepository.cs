@@ -4,7 +4,7 @@ namespace NetStore.Modules.Users.Core.Repositories;
 
 public interface IActivationTokenRepository
 {
-    public Task<ActivationToken> GetAsync(string secret);
+    public Task<ActivationToken> GetAsync(string token);
     public Task DeleteAsync(ActivationToken token);
     public Task AddAsync(ActivationToken token);
 }

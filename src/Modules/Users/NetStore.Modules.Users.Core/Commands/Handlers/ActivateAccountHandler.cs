@@ -18,7 +18,7 @@ internal sealed class ActivateAccountHandler : ICommandHandler<ActivateAccount>
     
     public async Task HandleAsync(ActivateAccount command)
     {
-        var token = await _tokenRepository.GetAsync(command.ActivationSecret);
+        var token = await _tokenRepository.GetAsync(command.ActivationToken);
         var userId = token.UserId;
 
         if (token is null)
@@ -30,7 +30,7 @@ internal sealed class ActivateAccountHandler : ICommandHandler<ActivateAccount>
 
         if (user is null)
         {
-            throw new UserNotFoundException(userId);
+            throw new UserNotFoundException();
         }
 
         user.State = UserState.Active;

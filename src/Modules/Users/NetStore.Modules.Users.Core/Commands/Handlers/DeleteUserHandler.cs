@@ -20,7 +20,7 @@ internal sealed class DeleteUserHandler : ICommandHandler<DeleteUser>
 
         if (user is null)
         {
-            throw new UserNotFoundException(command.Id);
+            throw new UserNotFoundException();
         }
 
         user.State = UserState.Deleted;

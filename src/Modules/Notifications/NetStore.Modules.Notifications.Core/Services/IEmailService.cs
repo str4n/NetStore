@@ -3,4 +3,5 @@
 public interface IEmailService
 {
     Task SendAccountActivation(string receiverEmail, string receiverUsername, string activationToken);
+    Task SendPasswordRecover(string receiverEmail, string receiverUsername, string recoveryToken);
 }

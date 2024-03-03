@@ -2,4 +2,4 @@
 
 namespace NetStore.Modules.Users.Core.Commands;
 
-public sealed record ActivateAccount(string ActivationToken) : ICommand;
+public sealed record RequestPasswordRecovery(string Email) : ICommand;

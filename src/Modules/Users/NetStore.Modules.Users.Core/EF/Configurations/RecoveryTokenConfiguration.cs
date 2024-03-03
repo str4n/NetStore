@@ -4,9 +4,9 @@ using NetStore.Modules.Users.Core.Domain.User;
 
 namespace NetStore.Modules.Users.Core.EF.Configurations;
 
-internal sealed class ActivationTokenConfiguration : IEntityTypeConfiguration<ActivationToken>
+internal sealed class RecoveryTokenConfiguration : IEntityTypeConfiguration<RecoveryToken>
 {
-    public void Configure(EntityTypeBuilder<ActivationToken> builder)
+    public void Configure(EntityTypeBuilder<RecoveryToken> builder)
     {
         builder.HasKey(x => x.Token);
     }

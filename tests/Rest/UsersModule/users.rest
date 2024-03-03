@@ -1,6 +1,7 @@
 @url = https://localhost:7240/users-module/users
 @jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NTI1OTJmMC0wODVlLTQxNDktYjFhMy1hYWYzNWU5YWE4YzUiLCJ1bmlxdWVfbmFtZSI6IjQ1MjU5MmYwLTA4NWUtNDE0OS1iMWEzLWFhZjM1ZTlhYThjNSIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMTk1Nzg4NiwiZXhwIjoxNzAyMDQ0Mjg2LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.v3k2eW9JzQ774X3NgcFgUqkSo-UAoB4-BFWwauG-nGU
-@activationSecret = fc97481d-c6db-4cc1-a6e9-fe7f6c9582b7-82ead72b-d6ac-4cc0-ba7e-4f987588a6b4
+@activationToken = c70f970e-be40-4779-b2cf-d1c17ab2548e
+@recoveryToken = 7c31bb8e-504f-4952-b023-4d46d2abd92e-9cb48679-8b38-462f-bb62-b2ae688bad80
 
 
 POST {{url}}/sign-up
@@ -18,8 +19,8 @@ POST {{url}}/sign-in
 Content-Type: application/json
 
 {
-    "username": "test12345",
-    "password": "Test12345!"
+    "username": "test1d2",
+    "password": "test123!"
 }
 
 ###
@@ -29,7 +30,26 @@ Authorization: Bearer {{jwt}}
 
 ###
 
-PUT {{url}}/activate/{{activationSecret}}
+PUT {{url}}/activate/{{activationToken}}
+
+###
+
+PUT {{url}}/recover
+Content-Type: application/json
+
+{
+    "email": "test1d2@gmail.com"
+}
+
+###
+
+POST {{url}}/recover/{{recoveryToken}}
+Content-Type: application/json
+
+{
+    "email": "test1d2@gmail.com",
+    "newpassword": "test123!"
+}
 
 ###
 

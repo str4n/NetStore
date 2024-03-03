@@ -26,7 +26,9 @@ internal static class UsersEndpoints
         app.MapPost(Route + "/sign-up", SignUp);
         app.MapPost(Route + "/sign-in", SignIn);
 
-        app.MapGet(Route + "/activate/{secret}", Activate);
+        app.MapPut(Route + "/activate/{secret}", Activate);
+        app.MapPut(Route + "/recover", RequestPasswordRecovery);
+        app.MapPost(Route + "/recover/{recoveryToken}", RecoverPassword);
 
         app.MapDelete(Route + "/{id:guid}", Delete).RequireAuthorization(Policies.AtLeastAdmin);
 
@@ -72,4 +74,21 @@ internal static class UsersEndpoints
 
         return Results.NoContent();
     }
+
+    private static async Task<IResult> RequestPasswordRecovery([FromBody] RequestPasswordRecovery command,
+        [FromServices] ICommandDispatcher commandDispatcher)
+    {
+        await commandDispatcher.SendAsync(command);
+
+        return Results.Ok();
+    }
+    
+    private static async Task<IResult> RecoverPassword([FromRoute] string recoveryToken,[FromBody] RecoverPassword command,
+        [FromServices] ICommandDispatcher commandDispatcher)
+    {
+        await commandDispatcher.SendAsync(command with { RecoveryToken = recoveryToken });
+
+        return Results.Ok();
+    }
+    
 }

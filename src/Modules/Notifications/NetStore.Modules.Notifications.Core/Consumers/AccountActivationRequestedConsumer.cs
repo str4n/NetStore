@@ -4,17 +4,17 @@ using NetStore.Modules.Users.Shared.Events;
 
 namespace NetStore.Modules.Notifications.Core.Consumers;
 
-internal sealed class UserSignedUpConsumer : IConsumer<UserAccountActivationRequested>
+internal sealed class AccountActivationRequestedConsumer : IConsumer<AccountActivationRequested>
 {
     private readonly IEmailService _emailService;
 
-    public UserSignedUpConsumer(IEmailService emailService)
+    public AccountActivationRequestedConsumer(IEmailService emailService)
     {
         _emailService = emailService;
     }
     
 
-    public async Task Consume(ConsumeContext<UserAccountActivationRequested> context)
+    public async Task Consume(ConsumeContext<AccountActivationRequested> context)
     {
         var message = context.Message;
 

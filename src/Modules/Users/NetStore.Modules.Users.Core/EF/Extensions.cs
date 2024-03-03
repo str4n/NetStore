@@ -13,7 +13,8 @@ internal static class Extensions
         services.AddPostgres<UsersDbContext>(configuration);
         services
             .AddScoped<IUserRepository, UserRepository>()
-            .AddScoped<IActivationTokenRepository, ActivationTokenRepository>();
+            .AddScoped<IActivationTokenRepository, ActivationTokenRepository>()
+            .AddScoped<IRecoveryTokenRepository, RecoveryTokenRepository>();
 
         return services;
     }

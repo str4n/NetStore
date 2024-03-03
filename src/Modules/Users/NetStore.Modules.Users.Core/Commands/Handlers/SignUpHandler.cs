@@ -45,12 +45,12 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
 
         var user = new User(id, email.Value.ToLowerInvariant(), username, securedPassword, Role.User, UserState.NotActive, _clock.Now());
 
-        var activationSecret = $"{Guid.NewGuid()}-{Guid.NewGuid()}";
-        var activationToken = new ActivationToken(activationSecret, id);
+        var token = $"{Guid.NewGuid()}";
+        var activationToken = new ActivationToken(token, id);
         
         await _userRepository.AddAsync(user);
         await _tokenRepository.AddAsync(activationToken);
         await _messageBroker.PublishAsync(new UserSignedUp(user.Id, user.Email));
-        await _messageBroker.PublishAsync(new UserAccountActivationRequested(user.Email, user.Username, activationSecret));
+        await _messageBroker.PublishAsync(new AccountActivationRequested(user.Email, user.Username, token));
     }
 }

@@ -14,7 +14,7 @@ internal sealed class ActivationTokenRepository : IActivationTokenRepository
     }
 
     public Task<ActivationToken> GetAsync(string secret)
-        => _dbContext.ActivationTokens.SingleOrDefaultAsync(x => x.Secret == secret);
+        => _dbContext.ActivationTokens.SingleOrDefaultAsync(x => x.Token == secret);
 
     public async Task DeleteAsync(ActivationToken token)
     {
