@@ -18,7 +18,7 @@ internal sealed class GetCustomerInformationHandler : IModuleRequestHandler<GetC
     {
         var customer = await _customerRepository.GetAsync(request.CustomerId);
 
-        return new CustomerInformationDto(customer.FirstName, customer.LastName, customer.Address.City,
+        return new CustomerInformationDto(customer.Email,customer.FirstName, customer.LastName, customer.Address.City,
             customer.Address.Street);
     }
 }
