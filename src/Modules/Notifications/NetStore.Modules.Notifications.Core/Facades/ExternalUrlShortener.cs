@@ -3,9 +3,9 @@ using Microsoft.Extensions.Options;
 using NetStore.Modules.Notifications.Core.DTO;
 using NetStore.Modules.Notifications.Core.Requests;
 
-namespace NetStore.Modules.Notifications.Core.Services;
+namespace NetStore.Modules.Notifications.Core.Facades;
 
-internal sealed class ExternalUrlShortener : IUrlShortener
+internal sealed class ExternalUrlShortener : IUrlShortenerFacade
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ExternalUrlShortenerOptions _options;
@@ -16,7 +16,7 @@ internal sealed class ExternalUrlShortener : IUrlShortener
         _options = options.Value;
     }
     
-    public async Task<string> ShortenUrl(string url)
+    public async Task<string> Shorten(string url)
     {
         var schema = _options.Schema;
         var host = _options.Host;
@@ -29,4 +29,5 @@ internal sealed class ExternalUrlShortener : IUrlShortener
 
         return content.ShortUrl;
     }
+    
 }

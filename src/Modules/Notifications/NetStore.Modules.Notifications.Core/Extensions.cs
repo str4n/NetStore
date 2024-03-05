@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetStore.Modules.Notifications.Core.Consumers;
+using NetStore.Modules.Notifications.Core.Facades;
 using NetStore.Modules.Notifications.Core.Services;
 using NetStore.Modules.Orders.Shared.Events;
 using NetStore.Shared.Infrastructure.Messaging;
@@ -23,7 +24,10 @@ public static class Extensions
             .AddConsumer<OrderPlacedConsumer>();
         
         services.AddTransient<IEmailService, EmailService>();
-        services.AddTransient<IUrlShortener, ExternalUrlShortener>();
+
+        services
+            .AddTransient<IEmailSenderFacade, EmailSenderFacade>()
+            .AddTransient<IUrlShortenerFacade, ExternalUrlShortener>();
         
         return services;
     }

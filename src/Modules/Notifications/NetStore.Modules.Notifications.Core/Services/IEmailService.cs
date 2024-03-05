@@ -6,5 +6,5 @@ public interface IEmailService
 {
     Task SendAccountActivation(string receiverEmail, string receiverUsername, string activationToken);
     Task SendPasswordRecover(string receiverEmail, string receiverUsername, string recoveryToken);
-    Task SendOrderConfirmation(string receiverEmail, string receiverName, OrderDto order);
+    Task SendOrderConfirmation(string receiverEmail, string receiverUsername, OrderDto order);
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using NetStore.Modules.Notifications.Core.DTO;
+using NetStore.Modules.Notifications.Core.Facades;
 using NetStore.Modules.Orders.Shared.DTO;
 using NetStore.Shared.Infrastructure;
 
@@ -11,25 +12,23 @@ namespace NetStore.Modules.Notifications.Core.Services;
 
 internal sealed class EmailService : IEmailService
 {
-    private readonly IUrlShortener _urlShortener;
-    private readonly EmailSenderOptions _emailSenderOptions;
+    private readonly IEmailSenderFacade _emailSender;
+    private readonly IUrlShortenerFacade _urlShortener;
     private readonly AppOptions _appOptions;
     
-    public EmailService(IOptions<EmailSenderOptions> emailSenderOptions, IOptions<AppOptions> appOptions, IUrlShortener urlShortener)
+    public EmailService(IOptions<AppOptions> appOptions, IEmailSenderFacade emailSender, IUrlShortenerFacade urlShortener)
     {
+        _emailSender = emailSender;
         _urlShortener = urlShortener;
-        _emailSenderOptions = emailSenderOptions.Value;
         _appOptions = appOptions.Value;
     }
     
-    //TODO: Email templates
     //TODO: Move urls to higher layer
     
     public async Task SendAccountActivation(string receiverEmail, string receiverUsername, string activationToken)
     {
         var longActivationUrl = $"{_appOptions.Url}/users-module/users/activate/{activationToken}";
-        var activationUrl = await ShortenUrl(longActivationUrl);
-        
+        var activationUrl = await _urlShortener.Shorten(longActivationUrl);
         
         var emailSubject = "NetStore account activation";
         var emailBody = $@"<h2 style=""color: #333333;"">Account Activation</h2>
@@ -48,13 +47,13 @@ internal sealed class EmailService : IEmailService
 
         var emailDto = new EmailDto(receiverEmail, receiverUsername, emailSubject, emailBody);
 
-        await SendEmail(emailDto);
+        await _emailSender.Send(emailDto);
     }
 
     public async Task SendPasswordRecover(string receiverEmail, string receiverUsername, string recoveryToken)
     {
         var longRecoveryUrl = $"{_appOptions.Url}/users-module/users/recover/{recoveryToken}";
-        var recoveryUrl = await ShortenUrl(longRecoveryUrl);
+        var recoveryUrl = await _urlShortener.Shorten(longRecoveryUrl);
         
         var emailSubject = "NetStore password recovery";
         var emailBody = $@"<h2 style=""color: #333333;"">Password Recovery Assistance</h2>
@@ -74,10 +73,10 @@ internal sealed class EmailService : IEmailService
 
         var emailDto = new EmailDto(receiverEmail, receiverUsername, emailSubject, emailBody);
 
-        await SendEmail(emailDto);
+        await _emailSender.Send(emailDto);
     }
 
-    public async Task SendOrderConfirmation(string receiverEmail, string receiverName, OrderDto order)
+    public async Task SendOrderConfirmation(string receiverEmail, string receiverUsername, OrderDto order)
     {
         var emailSubject = "NetStore order confirmation";
         
@@ -96,7 +95,7 @@ internal sealed class EmailService : IEmailService
 
         var emailBody = $@"<h2 style=""color: #333333;"">Order Confirmation</h2>
 
-            <p>Dear {order.ReceiverName},</p>
+            <p>Dear {receiverUsername},</p>
 
             <p>We're excited to confirm that your order has been successfully placed!</p>
 
@@ -123,48 +122,6 @@ internal sealed class EmailService : IEmailService
 
 
         var emailDto = new EmailDto(receiverEmail, order.ReceiverName, emailSubject, emailBody);
-        await SendEmail(emailDto);
-    }
-
-    private async Task<string> ShortenUrl(string url)
-    {
-        string result;
-        
-        if (_appOptions.UseUrlShortener)
-        {
-            result = await _urlShortener.ShortenUrl(url);
-        }
-        else
-        {
-            result = url;
-        }
-
-        return result;
-    }
-
-    private async Task SendEmail(EmailDto emailData)
-    {
-        using var email = new MimeMessage();
-        var sender = new MailboxAddress(_emailSenderOptions.SenderName, _emailSenderOptions.SenderEmail);
-        email.From.Add(sender);
-
-        var receiver = new MailboxAddress(emailData.ReceiverUsername, emailData.ReceiverEmail);
-        email.To.Add(receiver);
-
-        email.Subject = emailData.EmailSubject;
-        
-        var emailBodyBuilder = new BodyBuilder
-        {
-            HtmlBody = emailData.EmailBody,
-        };
-        
-        email.Body = emailBodyBuilder.ToMessageBody();
-
-        using var smtpClient = new SmtpClient();
-            
-        await smtpClient.ConnectAsync(_emailSenderOptions.Server, _emailSenderOptions.Port, MailKit.Security.SecureSocketOptions.StartTls);
-        await smtpClient.AuthenticateAsync(_emailSenderOptions.UserName, _emailSenderOptions.Password);
-        await smtpClient.SendAsync(email);
-        await smtpClient.DisconnectAsync(true);
+        await _emailSender.Send(emailDto);
     }
 }
