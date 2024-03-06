@@ -9,13 +9,13 @@
       <ProjectReference Include="..\..\..\Shared\NetStore.Shared.Abstractions\NetStore.Shared.Abstractions.csproj" />
       <ProjectReference Include="..\..\..\Shared\NetStore.Shared.Infrastructure\NetStore.Shared.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Customers\NetStore.Modules.Customers.Shared\NetStore.Modules.Customers.Shared.csproj" />
+      <ProjectReference Include="..\..\Notifications\NetStore.Modules.Notifications.Shared\NetStore.Modules.Notifications.Shared.csproj" />
       <ProjectReference Include="..\..\Orders\NetStore.Modules.Orders.Shared\NetStore.Modules.Orders.Shared.csproj" />
       <ProjectReference Include="..\..\Users\NetStore.Modules.Users.Shared\NetStore.Modules.Users.Shared.csproj" />
-      <ProjectReference Include="..\NetStore.Modules.Notifications.Shared\NetStore.Modules.Notifications.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MailKit" Version="4.3.0" />
+      <PackageReference Include="Chronicle_" Version="3.2.1" />
     </ItemGroup>
-
+    
 </Project>

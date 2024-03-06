@@ -11,6 +11,7 @@
       <ProjectReference Include="..\..\Modules\Notifications\NetStore.Modules.Notifications.Api\NetStore.Modules.Notifications.Api.csproj" />
       <ProjectReference Include="..\..\Modules\Orders\NetStore.Modules.Orders.Api\NetStore.Modules.Orders.Api.csproj" />
       <ProjectReference Include="..\..\Modules\Payments\NetStore.Modules.Payments.Api\NetStore.Modules.Payments.Api.csproj" />
+      <ProjectReference Include="..\..\Modules\Saga\NetStore.Modules.Saga\NetStore.Modules.Saga.csproj" />
       <ProjectReference Include="..\..\Modules\Users\NetStore.Modules.Users.Api\NetStore.Modules.Users.Api.csproj" />
       <ProjectReference Include="..\..\Shared\NetStore.Shared.Infrastructure\NetStore.Shared.Infrastructure.csproj" />
     </ItemGroup>

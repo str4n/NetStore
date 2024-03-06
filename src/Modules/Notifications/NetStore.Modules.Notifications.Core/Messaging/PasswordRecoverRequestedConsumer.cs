@@ -2,7 +2,7 @@
 using NetStore.Modules.Notifications.Core.Services;
 using NetStore.Modules.Users.Shared.Events;
 
-namespace NetStore.Modules.Notifications.Core.Consumers;
+namespace NetStore.Modules.Notifications.Core.Messaging;
 
 internal sealed class PasswordRecoverRequestedConsumer : IConsumer<PasswordRecoverRequested>
 {

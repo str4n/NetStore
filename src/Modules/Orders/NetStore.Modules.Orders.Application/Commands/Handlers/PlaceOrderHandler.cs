@@ -37,7 +37,7 @@ internal sealed class PlaceOrderHandler : ICommandHandler<PlaceOrder>
         var customerId = _identityContext.Id;
 
         var isCustomerInformationCompleted = 
-            await _moduleRequestDispatcher.SendAsync<bool>(new GetIsCustomerInformationCompleted(customerId));
+            await _messageBroker.SendAsync<GetIsCustomerInformationCompleted, bool>(new GetIsCustomerInformationCompleted(customerId));
 
         if (!isCustomerInformationCompleted)
         {

@@ -18,16 +18,13 @@ internal sealed class PaymentService : IPaymentService
     private readonly PaymentValidator _paymentValidator;
     private readonly PaymentsDbContext _dbContext;
     private readonly IPaymentGatewayFacade _paymentGatewayFacade;
-    private readonly IModuleRequestDispatcher _moduleRequestDispatcher;
     private readonly IMessageBroker _messageBroker;
 
-    public PaymentService(PaymentValidator paymentValidator, PaymentsDbContext dbContext, IPaymentGatewayFacade paymentGatewayFacade,
-         IModuleRequestDispatcher moduleRequestDispatcher, IMessageBroker messageBroker)
+    public PaymentService(PaymentValidator paymentValidator, PaymentsDbContext dbContext, IPaymentGatewayFacade paymentGatewayFacade, IMessageBroker messageBroker)
     {
         _paymentValidator = paymentValidator;
         _dbContext = dbContext;
         _paymentGatewayFacade = paymentGatewayFacade;
-        _moduleRequestDispatcher = moduleRequestDispatcher;
         _messageBroker = messageBroker;
     }
     
@@ -42,7 +39,7 @@ internal sealed class PaymentService : IPaymentService
             throw new PaymentAlreadyExistsException(paymentSetup.PaymentId);
         }
 
-        var customer = await _moduleRequestDispatcher.SendAsync<CustomerInformationDto>(new GetCustomerInformation(paymentSetup.CustomerId));
+        var customer = await _messageBroker.SendAsync<GetCustomerInformation, CustomerInformationDto>(new GetCustomerInformation(paymentSetup.CustomerId));
 
         if (customer is null)
         {

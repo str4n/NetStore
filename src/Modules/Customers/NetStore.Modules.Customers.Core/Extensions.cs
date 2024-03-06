@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetStore.Modules.Customers.Core.EF;
-using NetStore.Modules.Customers.Core.Events;
+using NetStore.Modules.Customers.Core.Messaging;
 using NetStore.Shared.Infrastructure.Messaging;
 
 namespace NetStore.Modules.Customers.Core;
@@ -14,7 +14,7 @@ internal static class Extensions
         services.AddEF(configuration);
 
         services
-            .AddConsumer<UserSignedUpConsumer>()
+            .AddConsumer<CreateCustomerConsumer>()
             .AddConsumer<OrderPlacedConsumer>();
         
         return services;

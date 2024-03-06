@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NetStore.Modules.Orders.Application.Events;
+using NetStore.Modules.Orders.Application.Messaging;
 using NetStore.Modules.Orders.Application.PaymentRegistry;
 using NetStore.Modules.Orders.Application.Storage;
 using NetStore.Shared.Infrastructure.Messaging;
@@ -12,7 +13,7 @@ public static class Extensions
     {
         services
             .AddConsumer<ProductCreatedConsumer>()
-            .AddConsumer<UserSignedUpConsumer>()
+            .AddConsumer<CreateCartConsumer>()
             .AddConsumer<OrderPlacedConsumer>()
             .AddConsumer<ProductStockQuantityIncreasedConsumer>()
             .AddConsumer<ProductStockQuantityDecreasedConsumer>()

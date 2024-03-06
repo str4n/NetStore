@@ -20,17 +20,15 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
     private readonly IClock _clock;
     private readonly IMessageBroker _messageBroker;
     private readonly ISignUpCommandValidator _validator;
-    private readonly IActivationTokenRepository _tokenRepository;
 
     public SignUpHandler(IUserRepository userRepository, IPasswordManager passwordManager, IClock clock, 
-        IMessageBroker messageBroker, ISignUpCommandValidator validator, IActivationTokenRepository tokenRepository)
+        IMessageBroker messageBroker, ISignUpCommandValidator validator)
     {
         _userRepository = userRepository;
         _passwordManager = passwordManager;
         _clock = clock;
         _messageBroker = messageBroker;
         _validator = validator;
-        _tokenRepository = tokenRepository;
     }
     public async Task HandleAsync(SignUp command)
     {
@@ -44,13 +42,9 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
         var securedPassword = _passwordManager.Secure(password);
 
         var user = new User(id, email.Value.ToLowerInvariant(), username, securedPassword, Role.User, UserState.NotActive, _clock.Now());
-
-        var token = $"{Guid.NewGuid()}";
-        var activationToken = new ActivationToken(token, id);
+        
         
         await _userRepository.AddAsync(user);
-        await _tokenRepository.AddAsync(activationToken);
         await _messageBroker.PublishAsync(new UserSignedUp(user.Id, user.Email));
-        await _messageBroker.PublishAsync(new AccountActivationRequested(user.Email, user.Username, token));
     }
 }

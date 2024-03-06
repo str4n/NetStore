@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NetStore.Modules.Notifications.Core.Consumers;
 using NetStore.Modules.Notifications.Core.Facades;
+using NetStore.Modules.Notifications.Core.Messaging;
 using NetStore.Modules.Notifications.Core.Services;
 using NetStore.Modules.Orders.Shared.Events;
 using NetStore.Shared.Infrastructure.Messaging;
@@ -19,7 +19,7 @@ public static class Extensions
         services.Configure<ExternalUrlShortenerOptions>(configuration.GetSection(UrlShortenerSection));
 
         services
-            .AddConsumer<AccountActivationRequestedConsumer>()
+            .AddConsumer<SendActivationEmailConsumer>()
             .AddConsumer<PasswordRecoverRequestedConsumer>()
             .AddConsumer<OrderPlacedConsumer>();
         

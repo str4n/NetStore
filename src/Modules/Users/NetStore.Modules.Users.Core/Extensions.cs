@@ -3,8 +3,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetStore.Modules.Users.Core.Domain.User;
 using NetStore.Modules.Users.Core.EF;
+using NetStore.Modules.Users.Core.Messaging;
 using NetStore.Modules.Users.Core.Services;
 using NetStore.Modules.Users.Core.Validators;
+using NetStore.Shared.Infrastructure.Messaging;
 
 
 namespace NetStore.Modules.Users.Core;
@@ -19,6 +21,8 @@ internal static class Extensions
             .AddSingleton<IPasswordManager, PasswordManager>();
 
         services.AddTransient<ISignUpCommandValidator, SignUpCommandValidator>();
+
+        services.AddConsumer<PrepareAccountActivationConsumer>();
         
         
         return services;
