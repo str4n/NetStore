@@ -45,6 +45,6 @@ internal sealed class SignUpHandler : ICommandHandler<SignUp>
         
         
         await _userRepository.AddAsync(user);
-        await _messageBroker.PublishAsync(new UserSignedUp(user.Id, user.Email));
+        await _messageBroker.PublishAsync(new UserSignedUp(user.Id, user.Email, user.Username));
     }
 }

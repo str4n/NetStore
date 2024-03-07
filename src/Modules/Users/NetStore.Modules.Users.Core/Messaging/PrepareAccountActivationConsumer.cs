@@ -3,6 +3,7 @@ using NetStore.Modules.Notifications.Shared.Commands;
 using NetStore.Modules.Users.Core.Domain.User;
 using NetStore.Modules.Users.Core.Repositories;
 using NetStore.Modules.Users.Shared.Commands;
+using NetStore.Modules.Users.Shared.Events;
 using NetStore.Shared.Abstractions.Messaging;
 
 namespace NetStore.Modules.Users.Core.Messaging;
@@ -36,6 +37,6 @@ internal sealed class PrepareAccountActivationConsumer : IConsumer<PrepareAccoun
         var activationToken = new ActivationToken(token, id);
 
         await _tokenRepository.AddAsync(activationToken);
-        await _messageBroker.PublishAsync(new SendActivationEmail(user.Email, user.Username, activationToken.Token));
+        await _messageBroker.PublishAsync(new AccountActivationPrepared(user.Id, token));
     }
 }

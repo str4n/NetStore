@@ -2,4 +2,4 @@
 
 namespace NetStore.Modules.Users.Shared.Events;
 
-public sealed record UserSignedUp(Guid UserId, string Email, string Username) : IEvent;
+public sealed record PasswordRecoveryPrepared(Guid UserId, string Token) : IEvent;

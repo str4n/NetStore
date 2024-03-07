@@ -2,4 +2,4 @@
 
 namespace NetStore.Modules.Users.Shared.Events;
 
-public sealed record AccountActivated(Guid UserId, string Email) : IEvent;
+public sealed record AccountActivated(Guid UserId) : IEvent;

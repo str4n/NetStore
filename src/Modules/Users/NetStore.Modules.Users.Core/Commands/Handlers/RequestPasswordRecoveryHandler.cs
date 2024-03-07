@@ -11,14 +11,11 @@ internal sealed class RequestPasswordRecoveryHandler : ICommandHandler<RequestPa
 {
     private readonly IUserRepository _repository;
     private readonly IMessageBroker _messageBroker;
-    private readonly IRecoveryTokenRepository _tokenRepository;
 
-    public RequestPasswordRecoveryHandler(IUserRepository repository, IMessageBroker messageBroker, 
-        IRecoveryTokenRepository tokenRepository)
+    public RequestPasswordRecoveryHandler(IUserRepository repository, IMessageBroker messageBroker)
     {
         _repository = repository;
         _messageBroker = messageBroker;
-        _tokenRepository = tokenRepository;
     }
     
     public async Task HandleAsync(RequestPasswordRecovery command)
@@ -35,11 +32,6 @@ internal sealed class RequestPasswordRecoveryHandler : ICommandHandler<RequestPa
             throw new UserNotActiveException(user.Username);
         }
 
-        var token = $"{Guid.NewGuid()}-{Guid.NewGuid()}";
-        var recoveryToken = new RecoveryToken(token, user.Id);
-
-        await _tokenRepository.AddAsync(recoveryToken);
-
-        await _messageBroker.PublishAsync(new PasswordRecoverRequested(user.Email, user.Username, token));
+        await _messageBroker.PublishAsync(new PasswordRecoveryRequested(user.Id, user.Email, user.Username));
     }
 }

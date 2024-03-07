@@ -41,6 +41,6 @@ internal sealed class ActivateAccountHandler : ICommandHandler<ActivateAccount>
 
         await _userRepository.UpdateAsync(user);
         await _tokenRepository.DeleteAsync(token);
-        await _messageBroker.PublishAsync(new AccountActivated(user.Id, user.Email));
+        await _messageBroker.PublishAsync(new AccountActivated(user.Id));
     }
 }

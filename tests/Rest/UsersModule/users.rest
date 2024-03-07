@@ -1,7 +1,7 @@
 @url = https://localhost:7240/users-module/users
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NTI1OTJmMC0wODVlLTQxNDktYjFhMy1hYWYzNWU5YWE4YzUiLCJ1bmlxdWVfbmFtZSI6IjQ1MjU5MmYwLTA4NWUtNDE0OS1iMWEzLWFhZjM1ZTlhYThjNSIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsIm5iZiI6MTcwMTk1Nzg4NiwiZXhwIjoxNzAyMDQ0Mjg2LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.v3k2eW9JzQ774X3NgcFgUqkSo-UAoB4-BFWwauG-nGU
-@activationToken = 5a8058cb-73e7-40f4-82fa-992496d959a2
-@recoveryToken = 7c31bb8e-504f-4952-b023-4d46d2abd92e-9cb48679-8b38-462f-bb62-b2ae688bad80
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiY2ZmOTI5My05ZjY1LTQ3NDMtOTRjMS1hZTBhOTJkYWU5M2EiLCJ1bmlxdWVfbmFtZSI6ImJjZmY5MjkzLTlmNjUtNDc0My05NGMxLWFlMGE5MmRhZTkzYSIsImVtYWlsIjoidGVzdDFkMjNAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsIm5iZiI6MTcwOTc0OTg4NywiZXhwIjoxNzA5ODM2Mjg3LCJpc3MiOiJuZXRzdG9yZSIsImF1ZCI6Im5ldHN0b3JlIn0.AWjIomfA8UUtGuBaAVwY7dZ9DDSRf5KjCWB0n1ZyIe0
+@activationToken = 99a8e9d3-ef54-44df-b37b-1a4944931ac0
+@recoveryToken = 6093f837-1161-451d-99cf-172c44232f04-2f5086cb-255a-40ec-9b3b-67004d260c34
 
 
 POST {{url}}/sign-up
@@ -20,7 +20,7 @@ Content-Type: application/json
 
 {
     "username": "test1d23",
-    "password": "Test1234!"
+    "password": "test123!"
 }
 
 ###
@@ -38,7 +38,7 @@ PUT {{url}}/recover
 Content-Type: application/json
 
 {
-    "email": "test1d2@gmail.com"
+    "email": "test1d23@gmail.com"
 }
 
 ###
@@ -47,7 +47,7 @@ POST {{url}}/recover/{{recoveryToken}}
 Content-Type: application/json
 
 {
-    "email": "test1d2@gmail.com",
+    "email": "test1d23@gmail.com",
     "newpassword": "test123!"
 }
 

@@ -22,7 +22,9 @@ internal static class Extensions
 
         services.AddTransient<ISignUpCommandValidator, SignUpCommandValidator>();
 
-        services.AddConsumer<PrepareAccountActivationConsumer>();
+        services
+            .AddConsumer<PrepareAccountActivationConsumer>()
+            .AddConsumer<PreparePasswordRecoveryConsumer>();
         
         
         return services;

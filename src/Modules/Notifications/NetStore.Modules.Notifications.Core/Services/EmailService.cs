@@ -50,7 +50,7 @@ internal sealed class EmailService : IEmailService
         await _emailSender.Send(emailDto);
     }
 
-    public async Task SendPasswordRecover(string receiverEmail, string receiverUsername, string recoveryToken)
+    public async Task SendPasswordRecovery(string receiverEmail, string receiverUsername, string recoveryToken)
     {
         var longRecoveryUrl = $"{_appOptions.Url}/users-module/users/recover/{recoveryToken}";
         var recoveryUrl = await _urlShortener.Shorten(longRecoveryUrl);

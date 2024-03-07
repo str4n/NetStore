@@ -2,7 +2,9 @@
 using NetStore.Modules.Users.Core.Exceptions;
 using NetStore.Modules.Users.Core.Repositories;
 using NetStore.Modules.Users.Core.Services;
+using NetStore.Modules.Users.Shared.Events;
 using NetStore.Shared.Abstractions.Commands;
+using NetStore.Shared.Abstractions.Messaging;
 
 namespace NetStore.Modules.Users.Core.Commands.Handlers;
 
@@ -11,13 +13,15 @@ internal sealed class RecoverPasswordHandler : ICommandHandler<RecoverPassword>
     private readonly IUserRepository _userRepository;
     private readonly IRecoveryTokenRepository _tokenRepository;
     private readonly IPasswordManager _passwordManager;
+    private readonly IMessageBroker _messageBroker;
 
     public RecoverPasswordHandler(IUserRepository userRepository, IRecoveryTokenRepository tokenRepository, 
-        IPasswordManager passwordManager)
+        IPasswordManager passwordManager, IMessageBroker messageBroker)
     {
         _userRepository = userRepository;
         _tokenRepository = tokenRepository;
         _passwordManager = passwordManager;
+        _messageBroker = messageBroker;
     }
     
     public async Task HandleAsync(RecoverPassword command)
@@ -52,5 +56,6 @@ internal sealed class RecoverPasswordHandler : ICommandHandler<RecoverPassword>
         
         await _userRepository.UpdateAsync(user);
         await _tokenRepository.DeleteAsync(token);
+        await _messageBroker.PublishAsync(new PasswordRecovered(user.Id));
     }
 }
