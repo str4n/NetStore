@@ -72,17 +72,11 @@ internal sealed class ProductRepository : IProductRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task DecreaseStockAsync(Dictionary<Guid, int> dic)  // Guid = product id | int = quantity
+    public async Task DecreaseStockAsync(Guid productId, int amount)
     {
-        foreach (var pair in dic)
-        {
-            var id = pair.Key;
-            var quantity = pair.Value;
-            
-            var product = _dbContext.Products.Where(x => x.Id == (AggregateId)id);
-            
-            await product.ExecuteUpdateAsync(x => x.SetProperty(p => p.Stock, p => p.Stock - quantity));
-        }
+        var product = await _dbContext.Products.SingleOrDefaultAsync(x => x.Id == (AggregateId)productId);
+        
+        product.DecreaseStock(amount);
 
         await _dbContext.SaveChangesAsync();
     }

@@ -45,8 +45,6 @@ internal sealed class PasswordRecoverySaga : Saga<PasswordRecoveryData>, ISagaSt
     
     public async Task HandleAsync(PasswordRecovered message, ISagaContext context)
     {
-        Data.PasswordRecovered = true;
-
         await CompleteAsync();
     }
     
@@ -66,5 +64,4 @@ internal class PasswordRecoveryData
     public string Email { get; set; }
     public string Username { get; set; }
     public string RecoveryToken { get; set; }
-    public bool PasswordRecovered { get; set; }
 }

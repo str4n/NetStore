@@ -1,6 +1,6 @@
 ﻿using NetStore.Shared.Abstractions.Exceptions;
 
-namespace NetStore.Shared.Types.Exceptions;
+namespace NetStore.Shared.Abstractions.Types.Exceptions;
 
 internal sealed class InvalidEmailException : ApiException
 {

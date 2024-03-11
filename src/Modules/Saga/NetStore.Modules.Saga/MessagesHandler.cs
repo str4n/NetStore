@@ -2,13 +2,15 @@
 using MassTransit;
 using NetStore.Modules.Customers.Shared.Events;
 using NetStore.Modules.Orders.Shared.Events;
+using NetStore.Modules.Payments.Shared.Events;
 using NetStore.Modules.Users.Shared.Events;
 
 namespace NetStore.Modules.Saga;
 
 internal sealed class MessagesHandler : IConsumer<UserSignedUp>, IConsumer<CustomerCreated>, IConsumer<CartCreated>,
     IConsumer<AccountActivated>, IConsumer<AccountActivationPrepared> ,IConsumer<PasswordRecoveryRequested>, 
-    IConsumer<PasswordRecoveryPrepared>, IConsumer<PasswordRecovered>
+    IConsumer<PasswordRecoveryPrepared>, IConsumer<PasswordRecovered>, IConsumer<OrderPlaced>, IConsumer<PaymentCompleted>,
+    IConsumer<OrderCanceled>, IConsumer<OrderProcessed>, IConsumer<CheckoutCartCreated>
 {
     private readonly ISagaCoordinator _coordinator;
 
@@ -39,5 +41,20 @@ internal sealed class MessagesHandler : IConsumer<UserSignedUp>, IConsumer<Custo
         => await _coordinator.ProcessAsync(context.Message, SagaContext.Empty);
 
     public async Task Consume(ConsumeContext<PasswordRecovered> context)
+        => await _coordinator.ProcessAsync(context.Message, SagaContext.Empty);
+
+    public async Task Consume(ConsumeContext<OrderPlaced> context)
+        => await _coordinator.ProcessAsync(context.Message, SagaContext.Empty);
+
+    public async Task Consume(ConsumeContext<PaymentCompleted> context)
+        => await _coordinator.ProcessAsync(context.Message, SagaContext.Empty);
+
+    public async Task Consume(ConsumeContext<OrderCanceled> context)
+        => await _coordinator.ProcessAsync(context.Message, SagaContext.Empty);
+
+    public async Task Consume(ConsumeContext<OrderProcessed> context)
+        => await _coordinator.ProcessAsync(context.Message, SagaContext.Empty);
+
+    public async Task Consume(ConsumeContext<CheckoutCartCreated> context)
         => await _coordinator.ProcessAsync(context.Message, SagaContext.Empty);
 }

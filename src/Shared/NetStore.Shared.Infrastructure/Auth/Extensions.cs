@@ -5,9 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using NetStore.Shared.Abstractions.Auth;
+using NetStore.Shared.Abstractions.Types.ValueObjects;
 using NetStore.Shared.Infrastructure.Auth.Policies;
 using NetStore.Shared.Infrastructure.Auth.Policies.Handlers;
-using NetStore.Shared.Types.ValueObjects;
 
 namespace NetStore.Shared.Infrastructure.Auth;
 

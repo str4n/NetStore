@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using NetStore.Shared.Types.Exceptions;
+using NetStore.Shared.Abstractions.Types.Exceptions;
 
-namespace NetStore.Shared.Types.ValueObjects;
+namespace NetStore.Shared.Abstractions.Types.ValueObjects;
 
 public sealed record Email
 {

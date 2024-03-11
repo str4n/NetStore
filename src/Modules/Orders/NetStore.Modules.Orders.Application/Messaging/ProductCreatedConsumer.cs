@@ -3,7 +3,7 @@ using NetStore.Modules.Catalogs.Shared.Events;
 using NetStore.Modules.Orders.Domain.Product;
 using NetStore.Modules.Orders.Domain.Repositories;
 
-namespace NetStore.Modules.Orders.Application.Events;
+namespace NetStore.Modules.Orders.Application.Messaging;
 
 internal sealed class ProductCreatedConsumer : IConsumer<ProductCreated>
 {

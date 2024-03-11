@@ -1,6 +1,5 @@
-﻿using NetStore.Modules.Orders.Shared.DTO;
-using NetStore.Shared.Abstractions.Events;
+﻿using NetStore.Shared.Abstractions.Events;
 
 namespace NetStore.Modules.Orders.Shared.Events;
 
-public sealed record OrderPlaced(Guid CustomerId, OrderDto Order) : IEvent;
+public sealed record OrderPlaced(Guid OrderId, Guid CustomerId, Guid PaymentId, double Price) : IEvent;

@@ -9,5 +9,10 @@ internal sealed class OrderLineConfiguration : IEntityTypeConfiguration<OrderLin
     public void Configure(EntityTypeBuilder<OrderLine> builder)
     {
         builder.HasKey(x => x.Id);
+        
+        builder.Property(x => x.Quantity).IsRequired();
+        builder.Property(x => x.UnitPrice).IsRequired();
+        builder.Property(x => x.Name).IsRequired();
+        builder.Property(x => x.SKU).IsRequired();
     }
 }

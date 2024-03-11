@@ -34,10 +34,5 @@ internal sealed class PaymentValidator
         {
             throw new InvalidPaymentValueException(nameof(paymentSetup.Amount));
         }
-        
-        if (paymentSetup.DueDate <= _clock.Now())
-        {
-            throw new InvalidPaymentValueException(nameof(paymentSetup.DueDate));
-        }
     }
 }

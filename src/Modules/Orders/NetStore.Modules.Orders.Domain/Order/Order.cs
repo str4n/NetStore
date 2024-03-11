@@ -2,7 +2,6 @@
 using NetStore.Modules.Orders.Domain.Exceptions;
 using NetStore.Modules.Orders.Shared.Enums;
 using NetStore.Shared.Abstractions.Types.Aggregate;
-using NetStore.Shared.Types;
 
 namespace NetStore.Modules.Orders.Domain.Order;
 
@@ -43,6 +42,8 @@ public sealed class Order : Aggregate
 
         var order = new Order(checkoutCart.CustomerId, orderLines, checkoutCart.Shipment, checkoutCart.Payment with { Amount = orderLines.Sum(x => x.UnitPrice * x.Quantity) },
             placeDate);
+
+        order.Payment = order.Payment with { Amount = order.Lines.Sum(x => x.UnitPrice * x.Quantity) };
         
         order.ClearEvents();
         

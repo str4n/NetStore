@@ -1,6 +1,5 @@
 ﻿using NetStore.Modules.Customers.Core.Domain.Customer;
 using NetStore.Modules.Orders.Shared.Enums;
-using NetStore.Shared.Types;
 
 namespace NetStore.Modules.Customers.Core.Domain.Order;
 

@@ -18,8 +18,10 @@ internal sealed class ModuleRequestDispatcher : IModuleRequestDispatcher
         var handlerType = typeof(IModuleRequestHandler<,>).MakeGenericType(request.GetType(), typeof(TResult));
         var handler = scope.ServiceProvider.GetRequiredService(handlerType);
         
-        return await (Task<TResult>) handlerType
+        var result = await (Task<TResult>) handlerType
             .GetMethod(nameof(IModuleRequestHandler<IModuleRequest<TResult>, TResult>.HandleAsync))
             ?.Invoke(handler, new[] {request});
+
+        return result;
     }
 }

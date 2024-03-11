@@ -76,7 +76,7 @@ internal sealed class EmailService : IEmailService
         await _emailSender.Send(emailDto);
     }
 
-    public async Task SendOrderConfirmation(string receiverEmail, string receiverUsername, OrderDto order)
+    public async Task SendOrderConfirmation(string receiverEmail, OrderDto order)
     {
         var emailSubject = "NetStore order confirmation";
         
@@ -95,7 +95,7 @@ internal sealed class EmailService : IEmailService
 
         var emailBody = $@"<h2 style=""color: #333333;"">Order Confirmation</h2>
 
-            <p>Dear {receiverUsername},</p>
+            <p>Hi,</p>
 
             <p>We're excited to confirm that your order has been successfully placed!</p>
 

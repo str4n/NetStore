@@ -15,7 +15,7 @@ internal static class Extensions
 
         services
             .AddConsumer<CreateCustomerConsumer>()
-            .AddConsumer<OrderPlacedConsumer>();
+            .AddConsumer<AddOrderToHistoryConsumer>();
         
         return services;
     }

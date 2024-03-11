@@ -8,7 +8,7 @@ internal static class Extensions
 {
     public static IServiceCollection AddModuleRequests(this IServiceCollection services)
     {
-        services.AddSingleton<IModuleRequestDispatcher, ModuleRequestDispatcher>();
+        services.AddScoped<IModuleRequestDispatcher, ModuleRequestDispatcher>();
         
         var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName!.Contains("NetStore"));
         

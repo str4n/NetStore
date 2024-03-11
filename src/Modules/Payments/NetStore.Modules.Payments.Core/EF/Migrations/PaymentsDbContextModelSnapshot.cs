@@ -35,9 +35,6 @@ namespace NetStore.Modules.Payments.Core.EF.Migrations
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<bool>("Payed")
                         .HasColumnType("boolean");
 

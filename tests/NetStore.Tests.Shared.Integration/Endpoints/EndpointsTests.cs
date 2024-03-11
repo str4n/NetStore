@@ -7,10 +7,10 @@ using Xunit;
 
 namespace NetStore.Tests.Shared.Integration.Endpoints;
 
-public class EndpointsTests : WebApplicationFactory<Program> ,IClassFixture<OptionsProvider>
+public class EndpointsTests : WebApplicationFactory<Bootstrapper.Program> ,IClassFixture<OptionsProvider>
 {
     protected HttpClient Client { get; private set; }
-    private WebApplicationFactory<Program> Factory { get; }
+    private WebApplicationFactory<Bootstrapper.Program> Factory { get; }
     
     protected EndpointsTests(OptionsProvider optionsProvider)
     {

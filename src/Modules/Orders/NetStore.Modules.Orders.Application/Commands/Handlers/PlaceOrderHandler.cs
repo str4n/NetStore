@@ -1,7 +1,6 @@
 ﻿using NetStore.Modules.Customers.Shared.ModuleRequests;
 using NetStore.Modules.Orders.Application.Exceptions;
 using NetStore.Modules.Orders.Domain.Repositories;
-using NetStore.Modules.Orders.Shared.DTO;
 using NetStore.Modules.Orders.Shared.Events;
 using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Abstractions.Contexts;
@@ -54,23 +53,9 @@ internal sealed class PlaceOrderHandler : ICommandHandler<PlaceOrder>
         var order = checkout.PlaceOrder(_clock.Now());
 
         await _orderRepository.AddAsync(order);
-        
-        var tasks = new List<Task>();
-        
-        var orderPlacedEvent = new OrderPlaced(customerId,
-            new OrderDto(order.Id, order.Shipment.City, order.Shipment.Street, order.Shipment.PostalCode,
-                order.Shipment.ReceiverName, order.PlaceDate,
-                order.Lines.Select(x => new OrderLineDto(x.Id, x.ProductId, x.OrderLineNumber, x.Name, x.Quantity, x.UnitPrice))));
 
-        var orderPrice = order.Lines.Sum(x => x.UnitPrice * x.Quantity);
-
-        var dueDate = _clock.Now().AddHours(2); // TODO: Move to config
+        var orderPlacedEvent = new OrderPlaced(order.Id, customerId, order.Payment.Id, order.Payment.Amount);
         
-        var paymentRequestedEvent = new PaymentRequested(order.Payment.Id, order.Id, customerId, orderPrice, dueDate);
-        
-        tasks.Add(_messageBroker.PublishAsync(orderPlacedEvent));
-        tasks.Add(_messageBroker.PublishAsync(paymentRequestedEvent));
-
-        await Task.WhenAll(tasks);
+        await _messageBroker.PublishAsync(orderPlacedEvent);
     }
 }

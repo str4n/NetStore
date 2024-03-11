@@ -1,3 +1,7 @@
-﻿namespace NetStore.Modules.Orders.Shared.DTO;
+﻿using NetStore.Modules.Orders.Shared.Enums;
 
-public sealed record OrderDto(Guid Id, string City, string Street, string PostalCode, string ReceiverName, DateTime PlaceDate, IEnumerable<OrderLineDto> Lines);
+namespace NetStore.Modules.Orders.Shared.DTO;
+
+public sealed record OrderDto(Guid Id, Guid CustomerId ,string ReceiverName, string City, string Street, string PostalCode, double Price,
+    OrderStatus Status,
+    DateTime PlaceDate, IEnumerable<OrderLineDto> Lines);

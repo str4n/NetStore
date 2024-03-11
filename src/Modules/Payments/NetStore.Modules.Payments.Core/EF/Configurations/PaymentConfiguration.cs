@@ -10,7 +10,6 @@ internal sealed class PaymentConfiguration : IEntityTypeConfiguration<Payment>
     {
         builder.HasKey(x => x.PaymentId);
         
-        builder.Property(x => x.DueDate).IsRequired();
         builder.Property(x => x.PaymentGatewaySecret).IsRequired();
         builder.Property(x => x.Payed).IsRequired();
     }

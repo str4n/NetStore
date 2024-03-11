@@ -11,7 +11,7 @@ using NetStore.Shared.Abstractions.Messaging;
 namespace NetStore.Modules.Saga.Sagas;
 
 internal sealed class AccountSetUpSaga : Saga<AccountSetupData>, ISagaStartAction<UserSignedUp>, ISagaAction<CustomerCreated>, 
-   ISagaAction<CartCreated>, ISagaAction<AccountActivationPrepared>, ISagaAction<AccountActivated>
+   ISagaAction<CartCreated>, ISagaAction<CheckoutCartCreated>,ISagaAction<AccountActivationPrepared>, ISagaAction<AccountActivated>
 {
     private readonly IMessageBroker _messageBroker;
 
@@ -21,6 +21,7 @@ internal sealed class AccountSetUpSaga : Saga<AccountSetupData>, ISagaStartActio
             UserSignedUp m => m.UserId.ToString(),
             CustomerCreated m => m.UserId.ToString(),
             CartCreated m => m.UserId.ToString(),
+            CheckoutCartCreated m => m.UserId.ToString(),
             AccountActivationPrepared m => m.UserId.ToString(),
             AccountActivated m => m.UserId.ToString(),
             _ => base.ResolveId(message, context)
@@ -44,18 +45,18 @@ internal sealed class AccountSetUpSaga : Saga<AccountSetupData>, ISagaStartActio
     
     public async Task HandleAsync(CustomerCreated message, ISagaContext context)
     {
-        Data.CustomerCreated = true;
-
         await _messageBroker.PublishAsync(new CreateCart(Data.UserId));
     }
     
     public async Task HandleAsync(CartCreated message, ISagaContext context)
     {
-        Data.CartCreated = true;
-        
-        await _messageBroker.PublishAsync(new PrepareAccountActivation(Data.UserId));
+        await _messageBroker.PublishAsync(new CreateCheckoutCart(Data.UserId));
     }
     
+    public async Task HandleAsync(CheckoutCartCreated message, ISagaContext context)
+    {
+        await _messageBroker.PublishAsync(new PrepareAccountActivation(Data.UserId));
+    }
     public async Task HandleAsync(AccountActivationPrepared message, ISagaContext context)
     {
         Data.ActivationToken = message.Token;
@@ -65,8 +66,6 @@ internal sealed class AccountSetUpSaga : Saga<AccountSetupData>, ISagaStartActio
     
     public async Task HandleAsync(AccountActivated message, ISagaContext context)
     {
-        Data.AccountActivated = true;
-
         await CompleteAsync();
     }
     
@@ -84,6 +83,9 @@ internal sealed class AccountSetUpSaga : Saga<AccountSetupData>, ISagaStartActio
 
     public Task CompensateAsync(AccountActivated message, ISagaContext context)
         => Task.CompletedTask;
+
+    public Task CompensateAsync(CheckoutCartCreated message, ISagaContext context)
+        => Task.CompletedTask;
 }
 
 internal class AccountSetupData
@@ -92,7 +94,4 @@ internal class AccountSetupData
     public string Email { get; set; }
     public string Username { get; set; }
     public string ActivationToken { get; set; }
-    public bool CustomerCreated { get; set; }
-    public bool CartCreated { get; set; }
-    public bool AccountActivated { get; set; }
 }

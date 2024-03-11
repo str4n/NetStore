@@ -23,7 +23,7 @@ internal class FakePaymentGatewayFacade : IPaymentGatewayFacade
         var httpClient = _httpClientFactory.CreateClient("FakePaymentGateway");
         
         var result = await httpClient.PostAsJsonAsync(paymentGatewayUrl, 
-            new SetUpPaymentWithMetadata(payment.PaymentId, fullName, address, payment.Amount, payment.DueDate, paymentGatewaySecret, webhookUrl));
+            new SetUpPaymentWithMetadata(payment.PaymentId, fullName, address, payment.Amount, paymentGatewaySecret, webhookUrl));
 
         result.EnsureSuccessStatusCode();
     }

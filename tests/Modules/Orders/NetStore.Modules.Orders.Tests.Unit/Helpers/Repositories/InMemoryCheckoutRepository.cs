@@ -31,4 +31,9 @@ internal sealed class InMemoryCheckoutRepository : ICheckoutRepository
 
         return Task.CompletedTask;
     }
+
+    public Task ReplaceAsync(CheckoutCart oldCart, CheckoutCart newCart)
+    {
+        throw new NotImplementedException();
+    }
 }

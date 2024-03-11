@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using NetStore.Shared.Types.ValueObjects;
+using NetStore.Shared.Abstractions.Types.ValueObjects;
 
 namespace NetStore.Shared.Infrastructure.Auth.Policies.Handlers;
 

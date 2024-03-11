@@ -40,4 +40,7 @@ app.Run();
 
 
 
-public partial class Program { }
+namespace NetStore.Bootstrapper
+{
+    public partial class Program { }
+}

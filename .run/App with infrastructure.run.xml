@@ -16,7 +16,7 @@
       <ExecutableRowSnapshot>
         <option name="condition">
           <ConditionSnapshot>
-            <option name="type" value="immediately" />
+            <option name="type" value="afterPreviousStarted" />
           </ConditionSnapshot>
         </option>
         <option name="executable">
@@ -28,7 +28,7 @@
       <ExecutableRowSnapshot>
         <option name="condition">
           <ConditionSnapshot>
-            <option name="type" value="immediately" />
+            <option name="type" value="afterPreviousStarted" />
           </ConditionSnapshot>
         </option>
         <option name="executable">

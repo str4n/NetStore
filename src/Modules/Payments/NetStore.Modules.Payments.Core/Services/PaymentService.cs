@@ -52,7 +52,6 @@ internal sealed class PaymentService : IPaymentService
             paymentSetup.PaymentId, 
             paymentSetup.CustomerId,
             paymentSetup.Amount, 
-            paymentSetup.DueDate, 
             secret, false));
 
         var fullName = $"{customer.FirstName} {customer.LastName}";
@@ -80,9 +79,8 @@ internal sealed class PaymentService : IPaymentService
         var updatedPayment = payment with { Payed = true };
 
         _dbContext.Entry(payment).CurrentValues.SetValues(updatedPayment);
-
-        await _messageBroker.PublishAsync(new PaymentCompleted(payment.PaymentId));
-
+        
         await _dbContext.SaveChangesAsync();
+        await _messageBroker.PublishAsync(new PaymentCompleted(payment.PaymentId));
     }
 }

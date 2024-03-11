@@ -11,6 +11,12 @@ public sealed class CheckoutCart
     public Shipment.Shipment Shipment { get; private set; }
     public IEnumerable<CartProduct> Products => _products;
     private readonly List<CartProduct> _products;
+    
+    public CheckoutCart(Guid customerId)
+    {
+        Id = Guid.NewGuid();
+        CustomerId = customerId;
+    }
 
     internal CheckoutCart(Cart cart)
     {
@@ -25,7 +31,14 @@ public sealed class CheckoutCart
 
     public void SetShipment(Shipment.Shipment shipment) => Shipment = shipment;
     public void SetPayment(Payment.Payment payment) => Payment = payment;
-    public bool IsInformationCompleted() => Shipment is not null && Payment is not null && _products.Any();
+    public bool IsInformationCompleted() => Shipment is not null && Payment is not null && Products.Any();
+
+    public void Clear()
+    {
+        Payment = null;
+        Shipment = null;
+        _products.Clear();
+    }
 
     public Order.Order PlaceOrder(DateTime placeDate)
     {

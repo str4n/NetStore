@@ -4,7 +4,7 @@ using NetStore.Modules.Users.Core.Domain.Exceptions;
 using NetStore.Modules.Users.Core.Domain.User;
 using NetStore.Modules.Users.Core.Exceptions;
 using NetStore.Modules.Users.Core.Repositories;
-using NetStore.Shared.Types.ValueObjects;
+using NetStore.Shared.Abstractions.Types.ValueObjects;
 
 namespace NetStore.Modules.Users.Core.Validators;
 

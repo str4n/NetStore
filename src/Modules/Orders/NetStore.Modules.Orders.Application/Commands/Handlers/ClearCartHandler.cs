@@ -28,16 +28,8 @@ internal sealed class ClearCartHandler : ICommandHandler<ClearCart>
             throw new CartErrorException("Error occured while clearing cart.");
         }
         
-        var checkoutCart = await _checkoutRepository.GetByCustomerId(customerId);
-
-        if (checkoutCart is null)
-        {
-            return;
-        }
-        
         cart.Clear();
         
         await _cartRepository.UpdateAsync(cart);
-        await _checkoutRepository.DeleteAsync(customerId);
     }
 }

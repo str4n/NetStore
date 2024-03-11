@@ -1,11 +1,9 @@
 ﻿using MassTransit;
-using NetStore.Modules.Orders.Application.Exceptions;
 using NetStore.Modules.Orders.Application.PaymentRegistry;
-using NetStore.Modules.Orders.Domain.Repositories;
 using NetStore.Modules.Orders.Domain.Services;
 using NetStore.Modules.Payments.Shared.Events;
 
-namespace NetStore.Modules.Orders.Application.Events;
+namespace NetStore.Modules.Orders.Application.Messaging;
 
 internal sealed class PaymentCompletedConsumer : IConsumer<PaymentCompleted>
 {

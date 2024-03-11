@@ -30,14 +30,8 @@ internal sealed class CheckoutHandler : ICommandHandler<Checkout>
         }
         
         var checkoutCart = cart.Checkout();
-        
-        var previousCheckoutCart = await _checkoutRepository.GetByCustomerId(customerId);
 
-        if (previousCheckoutCart is not null)
-        {
-            return;
-        }
-
+        await _checkoutRepository.DeleteAsync(customerId);
         await _checkoutRepository.AddAsync(checkoutCart);
     }
 }

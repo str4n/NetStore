@@ -9,7 +9,7 @@ using NetStore.Modules.Users.Shared.Events;
 using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Abstractions.Messaging;
 using NetStore.Shared.Abstractions.Time;
-using NetStore.Shared.Types.ValueObjects;
+using NetStore.Shared.Abstractions.Types.ValueObjects;
 
 namespace NetStore.Modules.Users.Core.Commands.Handlers;
 

@@ -36,7 +36,7 @@ internal static class Extensions
             });
         });
         
-        services.AddTransient<IMessageBroker, RabbitMqMessageBroker>();
+        services.AddScoped<IMessageBroker, RabbitMqMessageBroker>();
 
         return services;
     }

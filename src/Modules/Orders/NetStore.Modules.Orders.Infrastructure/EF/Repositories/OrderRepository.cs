@@ -21,7 +21,9 @@ internal sealed class OrderRepository : IOrderRepository
     }
 
     public Task<Order> GetAsync(Guid id)
-        => _dbContext.Orders.SingleOrDefaultAsync(x => x.Id == (AggregateId)id);
+        => _dbContext.Orders
+            .Include(x => x.Lines)
+            .SingleOrDefaultAsync(x => x.Id == (AggregateId)id);
 
     public async Task UpdateAsync(Order order)
     {

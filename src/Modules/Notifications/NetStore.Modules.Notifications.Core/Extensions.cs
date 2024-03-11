@@ -20,8 +20,8 @@ public static class Extensions
 
         services
             .AddConsumer<SendActivationEmailConsumer>()
-            .AddConsumer<OrderPlacedConsumer>()
-            .AddConsumer<SendRecoveryEmailConsumer>();
+            .AddConsumer<SendRecoveryEmailConsumer>()
+            .AddConsumer<SendOrderConfirmationEmailConsumer>();
         
         services.AddTransient<IEmailService, EmailService>();
 

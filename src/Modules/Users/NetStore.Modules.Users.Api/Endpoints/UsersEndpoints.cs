@@ -11,7 +11,6 @@ using NetStore.Shared.Abstractions.Commands;
 using NetStore.Shared.Abstractions.Contexts;
 using NetStore.Shared.Abstractions.Queries;
 using NetStore.Shared.Infrastructure.Auth.Policies;
-using NetStore.Shared.Types.ValueObjects;
 
 namespace NetStore.Modules.Users.Api.Endpoints;
 

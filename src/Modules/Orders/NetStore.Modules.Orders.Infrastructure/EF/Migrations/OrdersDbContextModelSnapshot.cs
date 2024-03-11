@@ -116,6 +116,7 @@ namespace NetStore.Modules.Orders.Infrastructure.EF.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid?>("OrderId")
@@ -127,8 +128,15 @@ namespace NetStore.Modules.Orders.Infrastructure.EF.Migrations
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
                     b.Property<string>("SKU")
+                        .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<double>("UnitPrice")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 

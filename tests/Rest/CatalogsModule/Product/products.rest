@@ -1,6 +1,6 @@
 @url = https://localhost:7240/catalogs-module/products
-@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMzZlM2JlOC02NGE1LTQ0NzItOGYzMy1lY2M2MWMzODZiMTMiLCJ1bmlxdWVfbmFtZSI6IjIzNmUzYmU4LTY0YTUtNDQ3Mi04ZjMzLWVjYzYxYzM4NmIxMyIsImVtYWlsIjoidGVzdG93eTEyM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwibmJmIjoxNzA4MzY3NTQxLCJleHAiOjE3MDg0NTM5NDEsImlzcyI6Im5ldHN0b3JlIiwiYXVkIjoibmV0c3RvcmUifQ.BLS2-NUUixDfTfUW1xrFL9DJLsSpbmMSWK_Y8RV_ccs
-@productId = f74a5631-271d-40dc-be48-7ae5cf2dd159
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1Nzc5NzQwZC1kMDIxLTQ5ZDEtYTgzYy0yMGFlNGE0Y2Q3NTQiLCJ1bmlxdWVfbmFtZSI6IjU3Nzk3NDBkLWQwMjEtNDlkMS1hODNjLTIwYWU0YTRjZDc1NCIsImVtYWlsIjoidGVzdDFkMjNAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJuYmYiOjE3MTAxNzA2OTIsImV4cCI6MTcxMDI1NzA5MiwiaXNzIjoibmV0c3RvcmUiLCJhdWQiOiJuZXRzdG9yZSJ9.BPorsGTj2mp8R5DMZhOEZukURfklwpyhlLMdxec8fOY
+@productId = 39b8b923-98dc-4a47-81fa-ac0f6e9c0eea
 
 POST {{url}}
 Authorization: Bearer {{jwt}}
@@ -40,7 +40,7 @@ Authorization: Bearer {{jwt}}
 Content-Type: application/json
 
 {
-    "quantity": 1
+    "quantity": 10
 }
 
 ###

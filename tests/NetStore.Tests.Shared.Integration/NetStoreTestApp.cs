@@ -10,7 +10,7 @@ using Xunit;
 
 namespace NetStore.Tests.Shared.Integration;
 
-public class NetStoreTestApp : WebApplicationFactory<Program>
+public class NetStoreTestApp : WebApplicationFactory<Bootstrapper.Program>
 {
     public HttpClient Client { get; }
     

@@ -10,7 +10,7 @@ internal static class CustomerMappings
         => new CustomerDto(customer.Id, customer.FirstName, customer.LastName, customer.Email,
             customer.Address.AsDto(), 
             customer.Orders
-                .Select(x => new OrderDto(x.Id, x.Address.City, x.Address.Street, x.Address.PostalCode, x.ReceiverName, 
+                .Select(x => new OrderDto(x.Id, x.CustomerId, x.ReceiverName, x.Address.City, x.Address.Street, x.Address.PostalCode, x.Price, x.Status,
                     x.PlaceDate, 
                     x.Lines
                         .Select(l => new OrderLineDto(l.Id, l.ProductId,l.OrderLineNumber, l.Name, l.Quantity, l.UnitPrice)))));
