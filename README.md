@@ -1,6 +1,6 @@
 # NetStore
 
-NetStore is the sample fake e-commerce app built as **Modular Monolith**, written in [.NET 7.0](https://dotnet.microsoft.com/en-us/download/dotnet/7.0).
+NetStore is the sample e-commerce app built as **Modular Monolith**, written in [.NET 7.0](https://dotnet.microsoft.com/en-us/download/dotnet/7.0).
 
 Each module is an independent **vertical slice** with its custom architecture, and the overall integration between the modules is mostly based on the **event-driven** approach with **shared contracts**.
 
@@ -79,3 +79,7 @@ Sample Saga pattern implementation for transactional handling the business proce
 ## Shared
 The set of shared components for the common abstractions & cross-cutting concerns. 
 In order to achieve even better decoupling, it's split into the separate Abstractions and Infrastructure, where the former does contain public abstractions and the latter their implementation.
+
+
+# Development
+This year (2025) I plan to rewrite some features and add more modules(eg. Invoices).
